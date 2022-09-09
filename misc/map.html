@@ -1,15 +1,88 @@
-<div  id='map'  style='height:380px;' > </div>  
-<script  src="https://maps.googleapis.com/maps/api/js"></script>  <!-- <script src="https://maps.google.com/maps/api/js?key=AIzaSyCkUOdZ5y7hMm0yrcCQoCvLwzdM6M8s5qk"></script> -->
-<script  type="text/javascript"  src="map.js"></script>
-<script  type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script  type="text/javascript"  src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>  
+<!-- gmaps api -->
+<script src="https://maps.googleapis.com/maps/api/js"></script>
+<!-- jquery -->
+<script type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<!-- plotly -->
+<script src="https://cdn.plot.ly/plotly-2.14.0.min.js"></script>
+<!-- map clusterer -->
+<script src="https://unpkg.com/@googlemaps/markerclustererplus/dist/index.min.js"></script>
+<!-- bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+<!-- scripts -->
+<script type="text/javascript"  src="map.js"></script>
+<script type="text/javascript"  src="aqi_scraper.js"></script>
 
 <script>  
 
-    $(document).ready(()=>{
-        init_map();
-    });
+$(document).ready(()=>{
+    init_map();    
+    $("#startDate").change(load_index);    
+    $("#endDate").change(load_index);
+    $("#sonificate_index").change(load_index);    
+});
 
+async function load_index (){
+
+    let start_date  = $("#startDate").val();
+    let end_date    = $("#endDate").val();
+    let lat         = $("#sonificate_p").attr("data-lat");
+    let lng         = $("#sonificate_p").attr("data-lng");
+    let index       = $("#sonificate_index").val();
+
+    // check data validity
+    if(start_date == "" || end_date == "" || lat == "" || lng == "" || index == "") return;
+
+    await load_aqi_data(lat, lng, start_date, end_date);
+    let values = await get_aqi_data_by_idx(index);
     
-    
+
+
+    var x = [];
+    for (var i = 0; i < 500; i ++) {
+        x[i] = Math.random();
+    }
+
+    var trace = {
+        x: x,
+        type: 'histogram',
+    };
+    var data = [trace];
+    Plotly.newPlot('sonificate_plot', data);
+
+}
+
 </script>
+
+
+
+<div  id='map'  style='height:1080;' > </div>  
+<div class="offcanvas offcanvas-start" tabindex="-1" id="sonificate">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="sonificate_title">Offcanvas</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div>
+            <p id="sonificate_p"></p>
+            <label for="startDate">Start:</label>
+            <input id="startDate" class="form-control" type="date" /><br>
+            <label for="endDate">End:</label>
+            <input id="endDate" class="form-control" type="date" />
+            <br>
+            <label for="sonificate_index">AQI index:</label>
+            <select class="form-select" id="sonificate_index" aria-label="Default select example">                
+                <option value="pm25">pm 2.5</option>
+                <option value="pm10">pm 10</option>                
+            </select>
+            <br>
+            <div id="sonificate_plot">
+
+            </div>
+            <br>
+            <div class="text-center">
+                <button type="button" id="btn_sonify" class="btn btn-primary">Sonify</button>
+            </div>
+        </div>
+    </div>
+</div>

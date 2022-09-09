@@ -60,7 +60,8 @@ a = interpolate(data, WAVETABLE_SIZE)
 amplify(a)
 quantize(a, pollution_factor)
 
-
+"""
+ 
 # render audio
 SECONDS_PLAY = 2
 BUFF_SIZE = SAMPLE_RATE * SECONDS_PLAY
@@ -70,11 +71,11 @@ buf = []
 for i in range(BUFF_SIZE):
     buf.append(a[math.floor(i * step) % WAVETABLE_SIZE])
 
-
 sd.play(buf, SAMPLE_RATE)
+sd.wait()
+"""
 plt.plot(a)
 plt.show()
-sd.wait()
 
 
 
