@@ -29,27 +29,27 @@ async function load_index (){
     let lat         = $("#sonificate_p").attr("data-lat");
     let lng         = $("#sonificate_p").attr("data-lng");
     let index       = $("#sonificate_index").val();
-
+    
     // check data validity
     if(start_date == "" || end_date == "" || lat == "" || lng == "" || index == "") return;
-
+    
     await load_aqi_data(lat, lng, start_date, end_date);
     let values = await get_aqi_data_by_idx(index);
     
-
+    
 
     var x = [];
     for (var i = 0; i < 500; i ++) {
         x[i] = Math.random();
     }
-
+    
     var trace = {
         x: x,
         type: 'histogram',
     };
     var data = [trace];
     Plotly.newPlot('sonificate_plot', data);
-
+    
 }
 
 </script>
@@ -69,7 +69,7 @@ async function load_index (){
             <input id="startDate" class="form-control" type="date" /><br>
             <label for="endDate">End:</label>
             <input id="endDate" class="form-control" type="date" />
-            <br>
+            <br>            
             <label for="sonificate_index">AQI index:</label>
             <select class="form-select" id="sonificate_index" aria-label="Default select example">                
                 <option value="pm25">pm 2.5</option>
