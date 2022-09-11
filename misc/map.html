@@ -15,12 +15,59 @@
 
 <script>  
 
+
+/* map search
+
+map starts empty, with only some shades on most polluted areas
+user can click/drag on location to make a marker appear
+user can use geocoder to search for a location
+after a location is selected, the map will zoom in on that location
+load the makers is map bounds, a list of markers is shown on left
+
+on map click, move to nearest marker, in marker is already rendered, do not recreate
+markers are deleted when out of bounds or when new search is made
+
+OR LOAD ALL MARKERS IN BOUNDS
+
+*/
+
+
 $(document).ready(()=>{
     init_map();    
     $("#startDate").change(load_index);    
     $("#endDate").change(load_index);
-    $("#sonificate_index").change(load_index);    
+    $("#sonificate_index").change(load_index); 
+    $("#search_button").click(()=>{
+        $("#search_collapse").collapse('show');
+    });
+    $("#search_collapse_close").click(()=>{
+        $("#search_collapse").collapse('hide');
+    });
+    $("#init_search").click(search);
+
+    geocoder = new google.maps.Geocoder();
 });
+
+
+var geocoder;
+async function search(){
+    let location = $("#search_input").val();
+    let index = $("#search_index").val();
+    let min = $("#search_min").val();
+    let max = $("#search_max").val();
+
+    // move camera to location
+    geocoder.geocode({
+        'address': location
+    }, function(results, status) {
+        if (status == 'OK') {
+            map.setCenter(results[0].geometry.location);
+            map.setZoom(10);
+        }
+    });
+}
+
+
 
 async function load_index (){
 
@@ -62,7 +109,62 @@ async function load_index (){
 <div  id='map'  style='height:1080;' > </div>  
 
 
-<!-- search -->
+<!-- add a button with a search icon on top left of page -->
+<div id="search_button" class="btn btn-primary" style="position: absolute; top: 10px; left: 10px; z-index: 1000;">
+    <i class="bi bi-search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+        </svg>
+    </i>
+</div>
+
+
+
+<!-- collapsable menu from left -->
+<div class="collapse" id="search_collapse" style="position: absolute; top: 10px; left: 10px; z-index: 1000;">
+    <div class="card card-body">
+        
+        <!-- collapse close button -->
+        <div id="search_collapse_close" class="btn btn-primary" style="position: absolute; top: 10px; left: 10px; z-index: 1000;">
+            <i class="bi bi-x">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                    <path d="M14.354 14.354a.5.5 0 0 1-.708 0L8 8.707 2.354 14.354a.5.5 0 0 1-.708-.708L7.293 8 1.646 2.354a.5.5 0 0 1 .708-.708L8 7.293l5.646-5.647a.5.5 0 0 1 .708.708L8.707 8l5.647 5.646a.5.5 0 0 1 0 .708z"/>
+                </svg>
+            </i>    
+        </div>
+        <br><br><br>
+
+        <!-- location search -->
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Location</span>
+            <input type="text" class="form-control" aria-label="Location" aria-describedby="basic-addon1" id="location_text">
+        </div>
+
+        <!-- select pm2.5 or pm10 -->
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="search_index">Index</label>
+            <select class="form-select" id="search_index">
+                <option value="pm25">PM2.5</option>
+                <option value="pm10">PM10</option>
+            </select>
+        </div>
+
+        <!-- text min and max -->
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Min</span>
+            <input type="text" class="form-control" aria-label="Min" aria-describedby="basic-addon1" id="sonificate_min">
+            <span class="input-group-text" id="basic-addon1">Max</span>
+            <input type="text" class="form-control" aria-label="Max" aria-describedby="basic-addon1" id="sonificate_max">
+        </div>
+        <br>
+
+
+        <!-- search button -->
+        <button class="btn btn-primary" type="button" id="init_search">Search</button>
+
+
+    </div>
+</div>
 
 
 
