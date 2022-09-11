@@ -4,7 +4,7 @@ import math
 import scipy as sp
 import soundfile as sf
 import sounddevice as sd
-
+from wave_buffer import WaveBuffer
 
 MIN_PM = 0.0
 MAX_PM = 1000
@@ -15,53 +15,13 @@ WAVETABLE_SIZE = 8192
 
 
 
-
-def map_in_range(value, in_min, in_max, out_min, out_max):
-    if value < 0:
-        value   *= -1
-        out_max *= -1
-    return (value - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
-
-def mirror_extend(data):
-    data_len = len(data)
-    for i in range(data_len):
-        data.append(data[i] * -1)
-
-def remap(data):
-    for i in range(len(data)):
-        data[i] = map_in_range(data[i], MIN_PM, MAX_PM, MIN_VOL, MAX_VOL)
-
-def amplify(data):
-    max_item = max(data)    
-    amp = 1 / max_item
-    for i in range(len(data)):
-        data[i] *= amp # floor needed ?
-
-def interpolate(data, pps = WAVETABLE_SIZE):
-    y = [0] + data + [0]    
-    x = np.arange(len(y))
-    f = sp.interpolate.interp1d(x, y, kind='cubic')
-    newx = np.linspace(0, len(y)-1, pps)
-    return f(newx)
-
-def quantize(wave, samples):
-    for i in range(len(wave)):
-        wave[i] = wave[math.floor(i / samples) * samples]
-
     
 # build wavetable
-data = [4,8,12,15,17,18,18,17,15,12,8,4]
-# data = [120,120,120,120,120,120,120,120,120,120,120,120]
 pollution_factor = 1
-mirror_extend(data)
-remap(data)
-amplify(data)
-a = interpolate(data, WAVETABLE_SIZE)
-amplify(a)
-quantize(a, pollution_factor)
+data = [2.08, 2.13, 2.18, 2.18, 2.17, 2.17, 2.36, 2.54, 2.73, 2.77, 2.81, 2.85, 2.79, 2.73, 2.67, 2.29, 1.91, 1.53, 1.32, 1.11, 0.9, 0.96, 1.03, 1.09, 1.12, 1.15, 1.18, 1.2, 1.23, 1.26, 1.28, 1.29, 1.3, 1.35, 1.4, 1.45, 1.59, 1.74, 1.88, 2.01, 2.14, 2.27, 2.18, 2.1, 2.01, 2.13, 2.24, 2.36, 2.57, 2.78, 2.98, 2.95, 2.92, 2.89, 3.35, 3.8, 4.26, 5.06, 5.86, 6.66, 6.13, 5.6, 5.07, 7.66, 10.26, 12.85, 17, 25, 21, 22, 18, 25, 26, 28, 29, 21, 53, 37, 23, 19, 18, 8, 21, 17, 13, 16, 17, 18, 15, 13, 14, 15, 12, 14, 11, 13, 17, 11, 18, 26]
+a = WaveBuffer(data).mirror_extend().remap(MIN_PM, MAX_PM, MIN_VOL, MAX_VOL).amplify().interpolate().amplify().quantize(pollution_factor).get_buffer()
 
-"""
- 
+
 # render audio
 SECONDS_PLAY = 2
 BUFF_SIZE = SAMPLE_RATE * SECONDS_PLAY
@@ -73,7 +33,7 @@ for i in range(BUFF_SIZE):
 
 sd.play(buf, SAMPLE_RATE)
 sd.wait()
-"""
+
 plt.plot(a)
 plt.show()
 

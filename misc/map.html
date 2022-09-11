@@ -36,8 +36,9 @@ async function load_index (){
     await load_aqi_data(lat, lng, start_date, end_date);
     let values = await get_aqi_data_by_idx(index);
     
-    
+    console.log(values);
 
+    /*
     var x = [];
     for (var i = 0; i < 500; i ++) {
         x[i] = Math.random();
@@ -49,6 +50,7 @@ async function load_index (){
     };
     var data = [trace];
     Plotly.newPlot('sonificate_plot', data);
+    */
     
 }
 
@@ -56,7 +58,15 @@ async function load_index (){
 
 
 
+<!-- map -->
 <div  id='map'  style='height:1080;' > </div>  
+
+
+<!-- search -->
+
+
+
+<!-- sonificate offcanvas -->
 <div class="offcanvas offcanvas-start" tabindex="-1" id="sonificate">
     <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="sonificate_title">Offcanvas</h5>
