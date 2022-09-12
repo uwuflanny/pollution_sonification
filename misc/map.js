@@ -18,7 +18,6 @@ async function get_all_stations() {
 
 
 async function get_chunk_idx(lat, lng, chunks_per_dim) {
-    lng -= 0.0001;
     let lat_chunk = Math.floor((lat + 90) / 180 * chunks_per_dim);
     let lng_chunk = Math.floor((lng + 180) / 360 * chunks_per_dim);
     return lat_chunk * chunks_per_dim + lng_chunk;
@@ -91,19 +90,19 @@ async function init_map() {
 
 
     // on map click
-    map.addListener('click', (mouse) => {
+    map.addListener('click', async (mouse) => {
         // get click lat lang
         let lat = mouse.latLng.lat();
         let lng = mouse.latLng.lng();
         // get aqi
-        let url = `https://api.waqi.info/feed/geo:${lat};${lng}/?token=${aqicn_api_key}`;
+        let url = `https://api.weatherbit.io/v2.0/current/airquality?lat=${lat}&lon=${lng}&key=c0756c0b51cd4bdb9e98c7582b3dfc06`;
         fetch(url)
             .then(response => response.json())
-            .then(data => {
+            .then(async(data) => {
                 let pin = data.data;
-                create_marker(pin);
-                // move map to pin location with animation
-                map.panTo(new google.maps.LatLng(pin.city.geo[0], pin.city.geo[1]));
+                pin.lat = lat;
+                pin.lng = lng;
+                await create_marker(pin);                
             });
     });
 
@@ -116,23 +115,26 @@ async function set_marker_appearance(marker) {
 
 async function create_marker (pin) {
     
+    let lat = pin.lat;
+    let lng = pin.lng;
+    let aqi = pin['0'].aqi;
+
     // get color idx and text color
-    let color_idx = Math.floor(pin.aqi / 50) > colors.length - 1 ? colors.length - 1 : Math.floor(pin.aqi / 50);
+    let color_idx = Math.floor(aqi / 50) > colors.length - 1 ? colors.length - 1 : Math.floor(aqi / 50);
     let text_color = (parseInt(colors[color_idx].replace('#', ''), 16) > 0xffffff / 2) ? '#000' : '#fff';      
-    let pos = new google.maps.LatLng(pin.city.geo[0], pin.city.geo[1]);
+    let pos = new google.maps.LatLng(lat, lng);
 
     let marker = new google.maps.Marker({
 
         position:   pos,                // marker position (lat & lng)
         map:        map,                // map to add marker to
-        title:      pin.city.name,   // marker title
-        aqi:        pin.aqi,            // aqi value
-        lat:        pin.city.geo[0],            // lat
-        lng:        pin.city.geo[1],            // lng
+        aqi:        aqi,                // aqi value
+        lat:        lat,                // lat
+        lng:        lng,                // lng
 
         // custom marker label
         label: {
-            text: pin.aqi.toString(),
+            text: String(aqi),
             color: text_color,
             fontSize: "16px",
             fontWeight: "bold"
@@ -146,8 +148,7 @@ async function create_marker (pin) {
     });
 
     let contentString = 
-        `<div style="background-color: ${colors[color_idx]};">
-            <p>${pin.city.name} ${pin.aqi}</p>                        
+        `<div id="${lat}${lng}">                       
         </div>`;
 
     let info_window = new google.maps.InfoWindow({
@@ -155,10 +156,12 @@ async function create_marker (pin) {
         disableAutoPan: true,
     });
 
+    
     // mouse events
     marker.addListener('click',     marker_click);
     marker.addListener('mouseout',  () => { info_window.close(); });
-    marker.addListener('mouseover', () => {
+    marker.addListener('mouseover', async () => {
+        await today_aqi_graph(`#${lat}${lng}`, lat, lng);
         info_window.open({
             anchor: marker,
             map,
