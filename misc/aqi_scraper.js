@@ -1,41 +1,29 @@
+var weatherbit_key = 'c0756c0b51cd4bdb9e98c7582b3dfc06';
+var aqicn_key = 'c0756c0b51cd4bdb9e98c7582b3dfc06';
 
-function AqiManager(weatherbit_key = 'c0756c0b51cd4bdb9e98c7582b3dfc06') {
-    this.key = weatherbit_key;
+async function get_last_from_index(data, index){
+    let mapped = get_index_from_history(data, index);
+    return mapped[mapped.length - 1];
 }
 
-// add prototype load to aqimamager
-AqiManager.prototype.load = async function(lat, lng, start_date, end_date) {
-    if(this.lat == lat && this.lng == lng) return;
-    this.lat = lat;
-    this.lng = lng;
-    let request = `https://api.weatherbit.io/v2.0/history/airquality?lat=${lat}&lon=${lng}&start_date=${start_date}&end_date=${end_date}&tz=local&key=${this.key}`;
+async function get_index_from_history(data, index) { 
+    return data.data.map((item) => item[index]);
+}
+
+async function get_history(lat, lng, start_date, end_date) {
+    let request = `https://api.weatherbit.io/v2.0/history/airquality?lat=${lat}&lon=${lng}&start_date=${start_date}&end_date=${end_date}&tz=local&key=${weatherbit_key}`;
     let response = await fetch(request);
-    this.data = await response.json();
+    let data = await response.json();
+    return data;
 }
 
-AqiManager.prototype.get_pm10 = function() {
-    return this.data.data.map((item) => item['pm10']);
-}
-
-AqiManager.prototype.get_pm25 = function() {
-    return this.data.data.map((item) => item['pm25']);
-}
- 
-AqiManager.prototype.get_index = function(idx) {
-    return this.data.data.map((item) => item[idx]);
-}
-
-// weatherbit api key 
-var aqi_manager = new AqiManager();
-async function load_aqi_data(lat, lng, start_date, end_date) {    
-    await aqi_manager.load(
-        lat,
-        lng,
-        start_date, 
-        end_date
-    );
-}
-
-async function get_aqi_data_by_idx(idx) {
-    return await aqi_manager.get_index(idx);
+async function get_today_history(lat, lng) {
+    let today = new Date();
+    let tomorrow = new Date();
+    let yesterday = new Date();
+    tomorrow.setDate(today.getDate() + 1);
+    yesterday.setDate(today.getDate() - 1);
+    let tomorrow_str = tomorrow.toISOString().split('T')[0];
+    let yesterday_str = yesterday.toISOString().split('T')[0];
+    return await get_history(lat, lng, yesterday_str, tomorrow_str);
 }

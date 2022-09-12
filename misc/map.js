@@ -97,20 +97,15 @@ async function init_map() {
         let lat = mouse.latLng.lat();
         let lng = mouse.latLng.lng();
         // get aqi
-        // TODO CHANGE THIS TO WEATHERBIT
-        let url = `https://api.weatherbit.io/v2.0/current/airquality?lat=${lat}&lon=${lng}&key=c0756c0b51cd4bdb9e98c7582b3dfc06`;
-        fetch(url)
-            .then(response => response.json())
-            .then(async(data) => {
-                let pin = data;
-                console.log(pin);
-                await today_aqi_graph(lat, lng);
-                pin.lat = lat;
-                pin.lng = lng;
-                let marker = await create_marker(pin);                
-                marker.addListener('click', marker_click);
-                this.marker = marker;
-            });
+        let pin = {};
+        let history = await get_today_history(lat, lng);
+        pin.aqi = 69; // TODO REPLACE
+        await create_today_graph(history, 'aqi');
+        pin.lat = lat;
+        pin.lng = lng;
+        let marker = await create_marker(pin);                
+        marker.addListener('click', marker_click);
+        this.marker = marker;
     });
 
 }
@@ -124,7 +119,7 @@ async function create_marker (pin) {
     
     let lat = pin.lat;
     let lng = pin.lng;
-    let aqi = pin.data["0"].aqi;
+    let aqi = pin.aqi;
 
     // get color idx and text color
     let color_idx = Math.floor(aqi / 50) > colors.length - 1 ? colors.length - 1 : Math.floor(aqi / 50);
