@@ -1,23 +1,27 @@
-async function today_aqi_graph(container_id, lat, lng) {
+async function today_aqi_graph(lat, lng) {
 
-    // today date year-month-day
+    // TODO TEST WITH FIRST DAY OF MONTH
+    // get today and yesterday date as year-month-day
     let today = new Date();
-    let today_date = `${today.getFullYear()}-${today.getMonth()+1}-${today.getDay()}`;
-    // yesterday date year-month-day
-    let yesterday = new Date(today);
-    yesterday.setDate(yesterday.getDate() - 1);
-    let yesterday_date = `${yesterday.getFullYear()}-${yesterday.getMonth()+1}-${yesterday.getDay()}`;
+    let yesterday = new Date();
+    yesterday.setDate(today.getDate() - 1);
+    let today_str = today.toISOString().split('T')[0];
+    let yesterday_str = yesterday.toISOString().split('T')[0];
+
 
     // get history
-    let request = `https://api.weatherbit.io/v2.0/history/airquality?lat=${lat}&lon=${lng}&start_date=${yesterday_date}&end_date=${today_date}&tz=local&key=c0756c0b51cd4bdb9e98c7582b3dfc06`;
+    let request = `https://api.weatherbit.io/v2.0/history/airquality?lat=${lat}&lon=${lng}&start_date=${yesterday_str}&end_date=${today_str}&tz=local&key=c0756c0b51cd4bdb9e98c7582b3dfc06`;
     let response = await fetch(request);
-    let aqis = await response.json();    
+    let response_data = await response.json();    
+
     
-    var trace = {
-        x: aqis,
-        type: 'histogram',
-    };
-    var data = [trace];
-    Plotly.newPlot(container_id, data);
+    let time = response_data.data.map((item) => item['timestamp_local']);
+    let aqis = response_data.data.map((item) => item['aqi']);
+    
+    Plotly.newPlot("graph_plot", [{
+        x: time,
+        y: aqis,
+        type: 'stocks'
+    }]);
 
 }

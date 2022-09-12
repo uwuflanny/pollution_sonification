@@ -10,7 +10,7 @@ AqiManager.prototype.load = async function(lat, lng, start_date, end_date) {
     this.lng = lng;
     let request = `https://api.weatherbit.io/v2.0/history/airquality?lat=${lat}&lon=${lng}&start_date=${start_date}&end_date=${end_date}&tz=local&key=${this.key}`;
     let response = await fetch(request);
-    this.data = await response.json();        
+    this.data = await response.json();
 }
 
 AqiManager.prototype.get_pm10 = function() {

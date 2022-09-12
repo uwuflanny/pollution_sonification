@@ -77,7 +77,7 @@ async function init_map() {
                 strokeOpacity: 0.4,
                 strokeWeight: 2,
                 fillColor: color,
-                fillOpacity: 0.1,
+                fillOpacity: 0.075,
                 map: map,
                 center: {lat: avg_lat, lng: avg_lng},
                 radius: size * 50000,
@@ -91,18 +91,23 @@ async function init_map() {
 
     // on map click
     map.addListener('click', async (mouse) => {
+        // remove old marker
+        if(typeof this.marker != 'undefined') this.marker.setMap(null);
         // get click lat lang
         let lat = mouse.latLng.lat();
         let lng = mouse.latLng.lng();
         // get aqi
+        // TODO CHANGE THIS TO WEATHERBIT
         let url = `https://api.weatherbit.io/v2.0/current/airquality?lat=${lat}&lon=${lng}&key=c0756c0b51cd4bdb9e98c7582b3dfc06`;
         fetch(url)
             .then(response => response.json())
             .then(async(data) => {
-                let pin = data.data;
+                await today_aqi_graph(lat, lng);
                 pin.lat = lat;
                 pin.lng = lng;
-                await create_marker(pin);                
+                let marker = await create_marker(pin);                
+                marker.addListener('click', marker_click);
+                this.marker = marker;
             });
     });
 
@@ -117,7 +122,7 @@ async function create_marker (pin) {
     
     let lat = pin.lat;
     let lng = pin.lng;
-    let aqi = pin['0'].aqi;
+    let aqi = pin["0"].aqi;
 
     // get color idx and text color
     let color_idx = Math.floor(aqi / 50) > colors.length - 1 ? colors.length - 1 : Math.floor(aqi / 50);
@@ -147,27 +152,7 @@ async function create_marker (pin) {
 
     });
 
-    let contentString = 
-        `<div id="${lat}${lng}">                       
-        </div>`;
-
-    let info_window = new google.maps.InfoWindow({
-        content: contentString,
-        disableAutoPan: true,
-    });
-
-    
-    // mouse events
-    marker.addListener('click',     marker_click);
-    marker.addListener('mouseout',  () => { info_window.close(); });
-    marker.addListener('mouseover', async () => {
-        await today_aqi_graph(`#${lat}${lng}`, lat, lng);
-        info_window.open({
-            anchor: marker,
-            map,
-            shouldFocus: true,
-        });
-    });
+    marker.addListener('click', marker_click);
 
     return marker;
 }

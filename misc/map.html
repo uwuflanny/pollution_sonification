@@ -84,8 +84,6 @@ async function load_index (){
     await load_aqi_data(lat, lng, start_date, end_date);
     let values = await get_aqi_data_by_idx(index);
     
-    console.log(values);
-
     /*
     var x = [];
     for (var i = 0; i < 500; i ++) {
@@ -105,9 +103,12 @@ async function load_index (){
 </script>
 
 
+<!-- custom marker plot -->
+<div id="graph_plot" class="position-absolute top-0 end-0 w-25 h-auto" style="z-index: 100;"></div>
 
-<!-- map -->
-<div  id='map'  style='height:1080;' > </div>  
+
+<!-- div id=map, fits whole screen -->
+<div id="map" class="position-absolute top-0 start-0 w-100 h-100"></div>
 
 
 <!-- add a button with a search icon on top left of page -->
