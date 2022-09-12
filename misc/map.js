@@ -6,7 +6,7 @@ var colors = [
     '#FF7E00', // 101 - 150  UNHEALTHY FOR SENSITIVE GROUPS
     '#FF0000', // 151 - 200  UNHEALTHY
     '#8F3F97', // 201 - 300  VERY UNHEALTHY
-    '#FFFFFF'  // 301 - 500  HAZARDOUS
+    '#000000'  // 301 - 500  HAZARDOUS
 ];
 
 async function get_all_stations() {
@@ -17,12 +17,11 @@ async function get_all_stations() {
 }
 
 
-
-async function get_all_stations(){
-    let url = `https://api.waqi.info/v2/map/bounds?latlng=-90,-180,90,180&networks=all&token=${aqicn_api_key}`;
-    let response = await fetch(url);
-    let data = await response.json();
-    return data.data;
+async function get_chunk_idx(lat, lng, chunks_per_dim) {
+    lng -= 0.0001;
+    let lat_chunk = Math.floor((lat + 90) / 180 * chunks_per_dim);
+    let lng_chunk = Math.floor((lng + 180) / 360 * chunks_per_dim);
+    return lat_chunk * chunks_per_dim + lng_chunk;
 }
 
 
@@ -33,81 +32,60 @@ async function init_map() {
     map = new google.maps.Map(document.getElementById('map'),  {  
         center: new google.maps.LatLng(51.505, -0.09),  
         mapTypeId: google.maps.MapTypeId.ROADMAP,  
-        zoom: 11,
+        zoom: 3,
         disableDefaultUI: true,
+        disableDoubleClickZoom: true,        
+        minZoom: 3
     });  
 
 
-    let chunks_per_dim = 100;
-    async function get_chunk_idx(lat,lng) {
-        let lat_chunk = Math.floor((lat + 90) / 180 * chunks_per_dim);
-        let lng_chunk = Math.floor((lng + 180) / 360 * chunks_per_dim);
-        return lat_chunk * chunks_per_dim + lng_chunk;
-    }
     await get_all_stations().then(async (data) => {
-        // divide data into chunks
-        // assign each chunk a size based on number of stations and a color based on avg aqi
-
+        
         // create chunks
         let chunks = {};
+        let chunks_per_dim = 70;   
         for (let i = 0; i < chunks_per_dim * chunks_per_dim; i++) { chunks[i] = []; }
 
         // load chunks
         for(let pin of data) {
+            if(pin.aqi == '-') continue;
             let lat = pin.lat;
             let lng = pin.lon;
-            let aqi = pin.aqi;
-            let chunk_idx = await get_chunk_idx(lat,lng);
-            chunks[chunk_idx].push(aqi);
+            let chunk_idx = await get_chunk_idx(lat, lng, chunks_per_dim);
+            chunks[chunk_idx].push(pin);
         }
 
-        // for each chunk, calculate avg aqi and size
-        let chunk_sizes = {};
-        let chunk_avg_aqis = {};
-        let chunk_locations = {};
+        // for each chunk, calculate avg aqi, lat & lng -> then draw circle
         for (let i = 0; i < chunks_per_dim * chunks_per_dim; i++) {
+
+            // basic chunk info
             let chunk = chunks[i];
             let size = chunk.length;
-            let avg_aqi = chunk.reduce((a, b) => a + b, 0) / size;
+            if (size == 0) continue;
 
-            // set location to the nearest point to all the points in the chunk
-            let lat = 0;
-            let lng = 0;
-            for (let p of chunk) {
-                lat += p.lat;
-                lng += p.lng;
-            }
-            lat /= size;
-            lng /= size;
+            // calculate average aqi, lat, and lng
+            let avg_aqi = chunk.reduce((a, b) => a + Number(b.aqi), 0) / size;
+            let avg_lat = chunk.reduce((a, b) => a + Number(b.lat), 0) / size;
+            let avg_lng = chunk.reduce((a, b) => a + Number(b.lon), 0) / size;
+            
+            // calculate color
+            let color_idx = Math.floor(avg_aqi / 50) > colors.length - 1 ? colors.length - 1 : Math.floor(avg_aqi / 50);
+            let color = colors[color_idx];
 
-            chunk_locations [i] = {lat: lat, lng: lng};
-            chunk_sizes[i] = size;
-            chunk_avg_aqis[i] = avg_aqi;
+            // draw circle shape
+            new google.maps.Circle({
+                strokeColor: color,
+                strokeOpacity: 0.4,
+                strokeWeight: 2,
+                fillColor: color,
+                fillOpacity: 0.1,
+                map: map,
+                center: {lat: avg_lat, lng: avg_lng},
+                radius: size * 50000,
+                clickable: false
+            });
+
         }
-
-        for(let i = 0; i < chunks_per_dim; i++) {
-            for(let j = 0; j < chunks_per_dim; j++) {
-
-                let idx = i * chunks_per_dim + j;
-
-                let color_idx = Math.floor(chunk_avg_aqis[idx] / 50) > colors.length - 1 ? colors.length - 1 : Math.floor(chunk_avg_aqis[idx] / 50);
-                let color = colors[color_idx];
-
-                // draw circle shape
-                let circle = new google.maps.Circle({
-                    strokeColor: color,
-                    strokeOpacity: 0.8,
-                    strokeWeight: 2,
-                    fillColor: color,
-                    fillOpacity: 0.35,
-                    map: map,
-                    center: chunk_locations[idx],
-                    radius: Math.sqrt(chunk_sizes[idx]) * 100000
-                });
-
-            }
-        }
-
 
     });
 
