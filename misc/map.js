@@ -102,6 +102,8 @@ async function init_map() {
         fetch(url)
             .then(response => response.json())
             .then(async(data) => {
+                let pin = data;
+                console.log(pin);
                 await today_aqi_graph(lat, lng);
                 pin.lat = lat;
                 pin.lng = lng;
@@ -122,7 +124,7 @@ async function create_marker (pin) {
     
     let lat = pin.lat;
     let lng = pin.lng;
-    let aqi = pin["0"].aqi;
+    let aqi = pin.data["0"].aqi;
 
     // get color idx and text color
     let color_idx = Math.floor(aqi / 50) > colors.length - 1 ? colors.length - 1 : Math.floor(aqi / 50);
