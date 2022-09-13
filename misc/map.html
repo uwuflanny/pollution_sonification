@@ -80,23 +80,12 @@ async function load_index (){
     
     // check data validity
     if(start_date == "" || end_date == "" || lat == "" || lng == "" || index == "") return;
-    
-    await load_aqi_data(lat, lng, start_date, end_date);
-    let values = await get_aqi_data_by_idx(index);
-    
-    /*
-    var x = [];
-    for (var i = 0; i < 500; i ++) {
-        x[i] = Math.random();
-    }
-    
-    var trace = {
-        x: x,
-        type: 'histogram',
-    };
-    var data = [trace];
-    Plotly.newPlot('sonificate_plot', data);
-    */
+
+    get_history(lat, lng, start_date, end_date).then(async (hisyory)=>{
+        create_graph(hisyory, index, "sonificate_plot", `${index} from ${start_date} to ${end_date}`);
+        let hh = await hisyory.get_index(index);
+        console.log(JSON.stringify(hh))
+    });
     
 }
 
@@ -104,7 +93,7 @@ async function load_index (){
 
 
 <!-- custom marker plot -->
-<div id="graph_plot" class="position-absolute top-0 end-0 w-50 h-auto" style="z-index: 100;"></div>
+<div id="graph_plot" class="position-absolute top-0 end-0" style="z-index: 100;"></div>
 
 
 <!-- div id=map, fits whole screen -->
@@ -186,6 +175,7 @@ async function load_index (){
             <br>            
             <label for="sonificate_index">AQI index:</label>
             <select class="form-select" id="sonificate_index" aria-label="Default select example">                
+                <option value="aqi">AQI</option>
                 <option value="pm25">pm 2.5</option>
                 <option value="pm10">pm 10</option>                
             </select>

@@ -1,20 +1,27 @@
 var weatherbit_key = 'c0756c0b51cd4bdb9e98c7582b3dfc06';
 var aqicn_key = 'c0756c0b51cd4bdb9e98c7582b3dfc06';
 
-async function get_last_from_index(data, index){
-    let mapped = get_index_from_history(data, index);
-    return mapped[mapped.length - 1];
+function History(lat, lng, start_date, end_date) {
+    this.lat = lat;
+    this.lng = lng;
+    this.start_date = start_date;
+    this.end_date = end_date;
 }
 
-async function get_index_from_history(data, index) { 
-    return data.data.map((item) => item[index]);
-}
-
-async function get_history(lat, lng, start_date, end_date) {
-    let request = `https://api.weatherbit.io/v2.0/history/airquality?lat=${lat}&lon=${lng}&start_date=${start_date}&end_date=${end_date}&tz=local&key=${weatherbit_key}`;
+History.prototype.load = async function() {
+    let request = `https://api.weatherbit.io/v2.0/history/airquality?lat=${this.lat}&lon=${this.lng}&start_date=${this.start_date}&end_date=${this.end_date}&tz=local&key=${weatherbit_key}`;
     let response = await fetch(request);
-    let data = await response.json();
-    return data;
+    let resp_data = await response.json();
+    this.data = resp_data.data;
+}
+
+History.prototype.get_index = async function(index) {
+    return this.data.map((item) => item[index]);
+}
+
+History.prototype.get_last_index = async function(index) {
+    let mapped = this.get_index(index);
+    return mapped[mapped.length - 1];
 }
 
 async function get_today_history(lat, lng) {
@@ -25,5 +32,13 @@ async function get_today_history(lat, lng) {
     yesterday.setDate(today.getDate() - 1);
     let tomorrow_str = tomorrow.toISOString().split('T')[0];
     let yesterday_str = yesterday.toISOString().split('T')[0];
-    return await get_history(lat, lng, yesterday_str, tomorrow_str);
+    let history = new History(lat, lng, yesterday_str, tomorrow_str);
+    await history.load();
+    return history;
+}
+
+async function get_history(lat, lng, start_date, end_date) {
+    let history = new History(lat, lng, start_date, end_date);
+    await history.load();
+    return history;
 }

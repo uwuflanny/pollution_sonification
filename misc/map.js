@@ -90,22 +90,25 @@ async function init_map() {
 
 
     // on map click
-    map.addListener('click', async (mouse) => {
+    map.addListener('click', (mouse) => {
         // remove old marker
         if(typeof this.marker != 'undefined') this.marker.setMap(null);
         // get click lat lang
         let lat = mouse.latLng.lat();
         let lng = mouse.latLng.lng();
-        // get aqi
-        let pin = {};
-        let history = await get_today_history(lat, lng);
-        pin.aqi = 69; // TODO REPLACE
-        await create_today_graph(history, 'aqi');
-        pin.lat = lat;
-        pin.lng = lng;
-        let marker = await create_marker(pin);                
-        marker.addListener('click', marker_click);
-        this.marker = marker;
+        // load history
+        get_today_history(lat, lng).then((history) => {
+            // create graph
+            create_graph(history, 'aqi', 'graph_plot', 'leastest AQI trend');
+            // add marker
+            create_marker({
+                lat: lat,
+                lng: lng,
+                aqi: 69,    // TODO get aqi from history
+            }).then((marker) => {
+                this.marker = marker;
+            });
+        });                            
     });
 
 }
@@ -128,11 +131,11 @@ async function create_marker (pin) {
 
     let marker = new google.maps.Marker({
 
-        position:   pos,                // marker position (lat & lng)
-        map:        map,                // map to add marker to
-        aqi:        aqi,                // aqi value
-        lat:        lat,                // lat
-        lng:        lng,                // lng
+        position:   pos,    // marker position (lat & lng)
+        map:        map,    // map to add marker to
+        aqi:        aqi,    // aqi value
+        lat:        lat,    // lat
+        lng:        lng,    // lng
 
         // custom marker label
         label: {
@@ -145,12 +148,11 @@ async function create_marker (pin) {
         // custom marker icon
         icon: {
             url: `./img/${color_idx}-sign.png`
-        }                    
+        }
 
     });
 
     marker.addListener('click', marker_click);
-
     return marker;
 }
 
