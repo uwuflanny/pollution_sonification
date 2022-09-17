@@ -42,6 +42,11 @@ minor_chord = [0, 3, 7]
 major_arp = [0, 4, 7, 12]
 minor_arp = [0, 3, 7, 12]
 
+def get_major_arp(key):
+    return [x + key for x in major_arp]
+
+def get_minor_arp(key):
+    return [x + key for x in minor_arp]
 
 def get_scale(key, scale):
     return [x + key for x in scale]
