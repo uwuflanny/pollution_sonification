@@ -40,6 +40,14 @@ class WaveBuffer(object):
     def get_buffer(self):
         return self.buffer
 
-    
+
+def calculate_wavetable(data, pollution_factor):
+    MIN_PM = 0.0
+    MAX_PM = 1000
+    MIN_VOL = 0
+    MAX_VOL = 1
+    SAMPLE_RATE = 44100
+    WAVETABLE_SIZE = 8192
+    return WaveBuffer(data).mirror_extend().remap(MIN_PM, MAX_PM, MIN_VOL, MAX_VOL).amplify().interpolate().amplify().quantize(pollution_factor).get_buffer()
 
 

@@ -1,9 +1,16 @@
 
+from http.client import BAD_GATEWAY
 import matplotlib.pyplot as plt
 import numpy as np
 import math
 import scipy as sp
 import random
+
+DECADENCE   = 1.8
+REST        = 0
+BAD         = 50
+HAZARDOUS   = 100
+DANGEROUS   = 150
 
 def decrement(list, unit):
     return [x - unit for x in list if x - unit > 0]
@@ -12,8 +19,7 @@ def get_residue(data, res_threshold = 50):
 
     residue_data    = []
     res_history     = []
-    DECADENCE       = 1.8
-    
+      
     for pm in data:
 
         if pm > res_threshold:
@@ -30,10 +36,10 @@ def get_residue_states(data):
 
     states  = []
     levels  = [
-        0,      # REST
-        50,     # FALLING
-        100,    # HARARDOUS
-        150     # DANGEROUS
+        REST,
+        BAD,
+        HAZARDOUS,
+        DANGEROUS
     ]
 
     for residue in data:
@@ -63,67 +69,48 @@ def shullfle_arpeggio(arr, pattern, step):
 
     return notes
 
-def assign_notes(data, arp):
+def assign_notes(states, arp):
     
     last    = 0
-    levels  = [
-        0,      # REST
-        50,     # FALLING
-        100,    # HARARDOUS
-        150     # DANGEROUS
-    ]
 
     step = 0.25 # 4 notes per beat
     elapsedQuarters = 0
     note_duration = 0.25
     notes = []
+    hihats = []
 
-    for val in data:
+    for i in range(len(states)):
+
+        val = states[i]
 
         # rising, also add hihat
         if val > last:
-            for i in range(4):
-                notes.append({
-                    "note": arp[0],
-                    "time": elapsedQuarters + (step * i),
-                    "duration": note_duration
-                })
+            notes   += [{"note": arp[0],    "time": elapsedQuarters + (step * i), "duration": note_duration } for i in range(4)]
+            hihats  += [{"note": 42,        "time": elapsedQuarters + (step * i), "duration": note_duration } for i in range(4)]
 
         # not rising
         else:
 
-            # falling, random notes
-            if val == levels[1]:                
-                r = np.random.randint(0, 4)
-                notes.append({
-                    "note": arp[r],
-                    "time": elapsedQuarters,
-                    "duration": note_duration
-                })
+            # falling, single random note
+            if val == BAD:                
+                random_note = np.random.randint(0, 4)
+                notes.append({"note": arp[random_note], "time": elapsedQuarters, "duration": note_duration })
 
             # hazardous, random full arp
-            elif val == levels[2]:
-                for note, time in shullfle_arpeggio([0,1,2,3], [1,1,1,0], step):
-                    notes.append({
-                        "note": arp[note],
-                        "time": elapsedQuarters + time,
-                        "duration": note_duration
-                    })
+            elif val == HAZARDOUS:
+                notes += [{"note": arp[note], "time": elapsedQuarters + time, "duration": note_duration} for note, time in shullfle_arpeggio([0,1,2,3], [1,1,1,0], step)]
 
             # dangerous, full arp
-            elif val == levels[3]:
-                for i in range(4):
-                    notes.append({
-                        "note": arp[i],
-                        "time": elapsedQuarters + (step * i),
-                        "duration": note_duration
-                    })
-
-                
-                
-
+            elif val == DANGEROUS:
+                notes += [{"note": arp[i], "time": elapsedQuarters + (step * i), "duration": note_duration } for i in range(4)]
 
         last = val
         elapsedQuarters += 1
 
-    return notes
+    return notes, hihats
+
+
+def get_residue_arpeggio(data, arp):
+    residue = get_residue(data)
+    states = get_residue_states(residue)
+    return assign_notes(states, arp)
