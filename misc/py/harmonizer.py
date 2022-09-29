@@ -18,7 +18,7 @@ def MidiStringToInt(midstr):
 
 def get_harmonization():
 
-    voicing = ['C-1','C-2','G-2',
+    voicing = ['C-2','G-2',
             'C-3','E-3','G-3','A-3','B-3',
             'D-4','E-4','G-4','A-4','B-4',
             'D-5','E-5','G-5','A-5','B-5',

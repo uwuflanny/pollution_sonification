@@ -1,5 +1,6 @@
 
 from http.client import BAD_GATEWAY
+from ssl import ALERT_DESCRIPTION_CLOSE_NOTIFY
 import matplotlib.pyplot as plt
 import numpy as np
 import math
@@ -32,83 +33,86 @@ def get_residue(data, res_threshold = 50):
 
     return res_history
 
-def get_residue_states(data):
 
-    states  = []
-    levels  = [
-        REST,
-        BAD,
-        HAZARDOUS,
-        DANGEROUS
-    ]
+def map_value_int(value, min_value, max_value, min_result, max_result):
+    return math.floor(min_result + (value - min_value)/(max_value - min_value)*(max_result - min_result))
 
-    for residue in data:
-
-        level = levels[0]
-        for i in range(1, len(levels)):
-            if residue > levels[i]:
-                level = levels[i]
-            else:
-                break
- 
-        states.append(level)
-
-    return states
-
-def shullfle_arpeggio(arr, pattern, step):
-
-    # arr       = [0,1,2,3]
-    # pattern   = [0,1,0,1]
-
-    notes = []
-    for i in range(len(arr)):
-        if pattern[i] == 1:
-            r = random.choice(arr)
-            arr = [x for x in arr if x != r]
-            notes.append((r, step * i))
-
-    return notes
-
-def assign_notes(states, arp):
+def arpeggiate(residue, voicing, max):
     
-    last    = 0
+    def get_rising_end(start):
+        if start == len(residue) - 1:
+            return start
+        for i in range(start, len(residue)-1):
+            if residue[i+1] < residue[i]:
+                return i
+        return len(residue) - 1
 
-    step = 0.25 # 4 notes per beat
-    elapsedQuarters = 0
-    note_duration = 0.25
-    notes = []
 
-    for i in range(len(states)):
+    duration    = 0.25
+    notes       = []
+    voicing     = [x + 24 for x in voicing] # pitch shift voicing by 2 octaves
 
-        val = states[i]
+    target      = -1
+    last        = 0
+    arp_len     = 0
+    arpeggio    = []
 
-        # rising, also add hihat
-        if val > last:
-            notes   += [{"note": arp[0],    "time": elapsedQuarters + (step * i), "duration": note_duration } for i in range(4)]
+    init_start  = 0
+    init_len    = 0
+    init_ptr    = 0
+    init_done   = True
 
-        # not rising
-        else:
 
-            # falling, single random note
-            if val == BAD:                
-                random_note = np.random.randint(0, 4)
-                notes.append({"note": arp[random_note], "time": elapsedQuarters, "duration": note_duration })
+    for i in range(len(residue) * 4):
 
-            # hazardous, random full arp
-            elif val == HAZARDOUS:
-                notes += [{"note": arp[note], "time": elapsedQuarters + time, "duration": note_duration} for note, time in shullfle_arpeggio([0,1,2,3], [1,1,1,0], step)]
+        idx = i // 4
+        val = residue[idx] 
 
-            # dangerous, full arp
-            elif val == DANGEROUS:
-                notes += [{"note": arp[i], "time": elapsedQuarters + (step * i), "duration": note_duration } for i in range(4)]
+        # rising
+        if val > last and val >= 50 and idx > target:
+
+            target = get_rising_end(idx)
+            target_val = residue[target]
+            arp_len = map_value_int(target_val, 0, max, 0, len(voicing)-1) # is mapping WITH MAX correct ?
+            arpeggio = voicing[0:arp_len]
+
+            init_start = map_value_int(last, 0, max, 0, len(voicing)-1)
+            init_len = map_value_int(target_val, 0, max, 0, len(voicing)-1) - init_start
+            init_ptr = 0
+            init_done = False
 
         last = val
-        elapsedQuarters += 1
+
+        # before falling, a full complete arpeggio is always played
+        if init_done == False:
+            notes.append({"note": voicing[init_start + init_ptr], "time": duration * i, "duration": duration })
+            if init_ptr >= init_len:
+                init_done = True
+            else:
+                init_ptr += 1
+ 
+        # notes on 1,1,1,1 from first half of arpeggio
+        elif val >= DANGEROUS:
+            second_half = arpeggio[math.floor(len(arpeggio)/2):]
+            notes.append({"note": random.choice(second_half), "time": duration * i, "duration": duration })
+
+        # notes on 1,1,1,0 from middle part of arpeggio
+        elif val >= HAZARDOUS:
+            if i % 4 != 3:  
+                middle_part = arpeggio[math.floor(len(arpeggio)/4):math.floor(len(arpeggio)/4*3)]
+                notes.append({"note": random.choice(middle_part), "time": duration * i, "duration": duration })
+
+        # notes on 1,0,1,0 from second half of arpeggio
+        elif val >= BAD:
+            if i % 2 == 0:  
+                first_half = arpeggio[0:math.floor(len(arpeggio)/2)]
+                notes.append({"note": random.choice(first_half), "time": duration * i, "duration": duration })
+
 
     return notes
 
 
-def get_residue_arpeggio(data, arp):
+def get_residue_arpeggio(data, voicing):
+    max = np.max(data)
     residue = get_residue(data)
-    states = get_residue_states(residue)
-    return assign_notes(states, arp)
+    return arpeggiate(residue, voicing, max)
