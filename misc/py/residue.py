@@ -77,7 +77,6 @@ def assign_notes(states, arp):
     elapsedQuarters = 0
     note_duration = 0.25
     notes = []
-    hihats = []
 
     for i in range(len(states)):
 
@@ -86,7 +85,6 @@ def assign_notes(states, arp):
         # rising, also add hihat
         if val > last:
             notes   += [{"note": arp[0],    "time": elapsedQuarters + (step * i), "duration": note_duration } for i in range(4)]
-            hihats  += [{"note": 42,        "time": elapsedQuarters + (step * i), "duration": note_duration } for i in range(4)]
 
         # not rising
         else:
@@ -107,7 +105,7 @@ def assign_notes(states, arp):
         last = val
         elapsedQuarters += 1
 
-    return notes, hihats
+    return notes
 
 
 def get_residue_arpeggio(data, arp):
