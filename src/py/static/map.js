@@ -110,7 +110,7 @@ async function init_map() {
             create_marker({
                 lat: lat,
                 lng: lng,
-                aqi: aqis[0],
+                aqi: aqis[aqis.length - 1],
             }).then((marker) => {
                 this.marker = marker;
             });
