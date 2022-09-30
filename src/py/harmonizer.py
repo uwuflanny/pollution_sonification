@@ -1,12 +1,11 @@
 
-
-def MidiStringToInt(midstr):
-    Notes = [["C"],["C#","Db"],["D"],["D#","Eb"],["E"],["F"],["F#","Gb"],["G"],["G#","Ab"],["A"],["A#","Bb"],["B"]]
+def note_to_midi(midstr):
+    notes = [["C"],["C#","Db"],["D"],["D#","Eb"],["E"],["F"],["F#","Gb"],["G"],["G#","Ab"],["A"],["A#","Bb"],["B"]]
     answer = 0
     i = 0
     #Note
     letter = midstr.split('-')[0].upper()
-    for note in Notes:
+    for note in notes:
         for form in note:
             if letter.upper() == form:
                 answer = i
@@ -24,7 +23,7 @@ def get_harmonization():
             'D-5','E-5','G-5','A-5','B-5',
             'D-6','E-6','F#-6','G-6','A-6']
 
-    voicing_midi = [MidiStringToInt(note) for note in voicing]
+    voicing_midi = [note_to_midi(note) for note in voicing]
     leading = voicing_midi[0]
     octave_shift = 12 * 4
 

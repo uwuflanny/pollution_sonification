@@ -22,8 +22,9 @@ def randomize_progression(data, chord):
 
 def get_lead(data, voicing):
 
+    MAX_AQI = 800
     notes = []
-    data = [map_value(x, 0, max(data), 0, 1) for x in data]
+    data = [map_value(x, 0, MAX_AQI, 0, 1) for x in data]
     n_notes = len(voicing)
 
     for i in range(len(data)):

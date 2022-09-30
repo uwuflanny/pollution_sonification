@@ -6,11 +6,10 @@ from pydub import AudioSegment
 
 class TrackExporter:
 
-    def __init__(self, time, sign_num, sign_den, beats):
+    def __init__(self, time, sign_num, sign_den):
         self.bpm        = time
         self.sign_num   = sign_num
         self.sign_den   = sign_den
-        self.beats      = beats
 
     def export_track(self, track_name, instrument, notes, vsts, filename):
 

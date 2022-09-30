@@ -146,9 +146,7 @@ async function create_marker (pin) {
         },
 
         // custom marker icon
-        icon: {
-            url: `./img/${color_idx}-sign.png`
-        }
+        icon: {url: `./static/img/${color_idx}-sign.png`}
 
     });
 
@@ -166,4 +164,5 @@ async function marker_click () {
     $("#sonificate_p").text(this.aqi);
     $("#startDate").val("");
     $("#endDate").val("");
+    $("#sonificate_plot").empty();
 }
