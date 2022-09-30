@@ -97,17 +97,24 @@ async function init_map() {
         let lat = mouse.latLng.lat();
         let lng = mouse.latLng.lng();
         // load history
-        get_today_history(lat, lng).then((history) => {
+        get_today_history(lat, lng).then(async(history) => {
+
+            // get data from history
+            let aqis = await history.get_index('aqi');
+            let time = await history.get_index('timestamp_local');
+            
             // create graph
-            create_graph(history, 'aqi', 'graph_plot', 'leastest AQI trend');
+            create_graph(aqis, time, 'graph_plot', 'leastest AQI trend');
+
             // add marker
             create_marker({
                 lat: lat,
                 lng: lng,
-                aqi: 69,    // TODO get aqi from history
+                aqi: aqis[0],
             }).then((marker) => {
                 this.marker = marker;
             });
+            
         });                            
     });
 

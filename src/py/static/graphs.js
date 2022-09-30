@@ -1,11 +1,8 @@
-async function create_graph(history, index, container_id, title = 'AQI') {
-
-    let time = await history.get_index('timestamp_local');
-    let aqis = await history.get_index(index);
+async function create_graph(data,time, container_id, title = 'AQI') {
 
     Plotly.newPlot(container_id, [{
         x: time,
-        y: aqis,
+        y: data,
         type: 'stocks'
     }], 
         {

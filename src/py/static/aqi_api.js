@@ -1,5 +1,5 @@
-var weatherbit_key = 'c0756c0b51cd4bdb9e98c7582b3dfc06';
-var aqicn_key = 'c0756c0b51cd4bdb9e98c7582b3dfc06';
+var weatherbit_key  = 'c0756c0b51cd4bdb9e98c7582b3dfc06';
+var aqicn_key       = 'd7997a4e2fa35a67576fa7e7e766f6f226cf59f5';
 
 function History(lat, lng, start_date, end_date) {
     this.lat = lat;
@@ -16,12 +16,8 @@ History.prototype.load = async function() {
 }
 
 History.prototype.get_index = async function(index) {
-    return this.data.map((item) => item[index]);
-}
-
-History.prototype.get_last_index = async function(index) {
-    let mapped = this.get_index(index);
-    return mapped[mapped.length - 1];
+    let arr = this.data.map((item) => item[index]);
+    return arr.reverse();
 }
 
 async function get_today_history(lat, lng) {
@@ -32,6 +28,7 @@ async function get_today_history(lat, lng) {
     yesterday.setDate(today.getDate() - 1);
     let tomorrow_str = tomorrow.toISOString().split('T')[0];
     let yesterday_str = yesterday.toISOString().split('T')[0];
+    
     let history = new History(lat, lng, yesterday_str, tomorrow_str);
     await history.load();
     return history;
