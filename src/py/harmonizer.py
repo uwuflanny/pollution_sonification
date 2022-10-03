@@ -32,7 +32,7 @@ def get_harmonization():
     arpeggio = [0, 4, 7, 12]
     arpeggio = [x + leading + octave_shift for x in arpeggio]
 
-    return voicing_midi, leading, arpeggio, chord
+    return voicing_midi, chord
 
     
     

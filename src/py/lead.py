@@ -1,8 +1,7 @@
-import random
+import math
 
 def map_value(value, min_value, max_value, min_result, max_result):
-    result = min_result + (value - min_value)/(max_value - min_value)*(max_result - min_result)
-    return result
+    return min_result + (value - min_value)/(max_value - min_value)*(max_result - min_result)
 
 def randomize_progression(data, chord):
     # group data by averages of 4 consecutive elements
@@ -22,20 +21,14 @@ def randomize_progression(data, chord):
 
 def get_lead(data, voicing):
 
-    MAX_AQI = 800
-    notes = []
-    data = [map_value(x, 0, MAX_AQI, 0, 1) for x in data]
-    n_notes = len(voicing)
+    voicing     = voicing[3:][::-1]
+    data        = [map_value(x, 0, max(data), 0, 1) for x in data]
+    n_notes     = len(voicing)
+    notes       = []
 
     for i in range(len(data)):
-        note_index = round(map_value(data[i], 0, 1, n_notes-1, 0))
+        note_index = math.floor(map_value(data[i], 0, 1, 0, n_notes - 1))
         notes.append({"note": voicing[note_index], "time": i, "duration": 1})
 
     return notes
-
-
-
-
-
-
 

@@ -99,11 +99,11 @@ def arpeggiate(residue, voicing):
 
         # notes on 1,1,1,0 from middle part of arpeggio
         elif val >= HAZARDOUS and i % 4 != 3:
-            notes.append({"note": random.choice(middle_part), "time": duration * i, "duration": duration, "volume": 50 })
+            notes.append({"note": random.choice(middle_part), "time": duration * i, "duration": duration, "volume": 75 })
 
         # notes on 1,0,1,0 from second half of arpeggio
         elif val >= BAD and i % 2 == 0:
-            notes.append({"note": random.choice(first_half), "time": duration * i, "duration": duration, "volume": 50 })
+            notes.append({"note": random.choice(first_half), "time": duration * i, "duration": duration, "volume": 75 })
 
     return notes
 

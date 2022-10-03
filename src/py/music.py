@@ -19,15 +19,15 @@ exporter    = TrackExporter(bpm, sign_num, sign_num)
 def export(data):
 
     # midi content
-    voicing, key, arp, chord    = get_harmonization()
-    arpeggio                    = get_residue_arpeggio(data, voicing)
-    progression                 = randomize_progression(data, chord)
-    lead                        = get_lead(data, voicing)
+    voicing, chord  = get_harmonization()
+    arpeggio        = get_residue_arpeggio(data, voicing)
+    progression     = randomize_progression(data, chord)
+    lead            = get_lead(data, voicing)
 
 
     # generate tracks
-    lead        = exporter.export_track("lead",  11, lead,       [],   "lead")
-    arp         = exporter.export_track("arp",   5,  arpeggio,   [],     "arp")
+    lead        = exporter.export_track("lead",  11, lead,       [gojira_shimmer],   "lead")
+    arp         = exporter.export_track("arp",   5,  arpeggio,   [gojira_delay],     "arp")
     prog        = exporter.export_track("prog",  0,  progression,[],                 "prog")
 
 
