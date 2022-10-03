@@ -40,21 +40,25 @@ async function sonify(){
     let lng         = $("#sonificate_p").attr("data-lng");
     let index       = $("#sonificate_index").val();
 
-    get_history(lat, lng, start_date, end_date).then(async (hisyory)=>{            
+    get_history(lat, lng, start_date, end_date).then(async (history)=>{            
 
         // request file
-        let aqi = await hisyory.get_index(index);
+        let aqi = await history.get_index(index);
         let response = await fetch('/sonify', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({data: aqi})
         });
 
-        // play file
+        // download audio
         let blob = await response.blob();
-        let url = URL.createObjectURL(blob);
-        let audio = new Audio(url);
-        audio.play();
+        let url = window.URL.createObjectURL(blob);
+        let a = document.createElement('a');
+        a.href = url;
+        a.download = 'sonification.wav';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
 
     });
 

@@ -49,7 +49,7 @@ def arpeggiate(residue, voicing):
         return len(residue) - 1
 
     # find max value of residue
-    max_res     = max(residue) # 700 or max(residue)
+    max_res     = max(residue) # 700 or max(residue) # TODO IS max better than 700 ?
     duration    = 0.25
     notes       = []
     voicing     = [x + 24 for x in voicing] # pitch shift voicing by 2 octaves

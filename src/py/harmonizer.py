@@ -15,24 +15,29 @@ def note_to_midi(midstr):
     answer += (int(midstr[-1]))*12
     return answer
 
-def get_harmonization():
+def get_harmonization(data):
 
-    voicing = ['C-2','G-2',
-            'C-3','E-3','G-3','A-3','B-3',
-            'D-4','E-4','G-4','A-4','B-4',
-            'D-5','E-5','G-5','A-5','B-5',
-            'D-6','E-6','F#-6','G-6','A-6']
+    # scales
+    major           = [0, 2, 4, 5, 7, 9, 11]
+    minor           = [0, 2, 3, 5, 7, 8, 10]
+    melodic_minor   = [0, 2, 3, 5, 7, 9, 11]
+    harmonic_minor  = [0, 2, 3, 5, 7, 8, 11]
 
-    voicing_midi = [note_to_midi(note) for note in voicing]
-    leading = voicing_midi[0]
-    octave_shift = 12 * 4
+    # [0, 2, 3, 5, 7, 8, 11, 0, 2, 3, 5, 7, 8, 11, 0, 2, 3, 5, 7, 8, 11, 0, 2, 3, 5, 7, 8, 11]
+    scales = [
+        major,
+        minor,
+        melodic_minor,
+        harmonic_minor
+    ]
 
-    chord = [0, 4, 7]
-    chord = [x + leading + octave_shift for x in chord]
-    arpeggio = [0, 4, 7, 12]
-    arpeggio = [x + leading + octave_shift for x in arpeggio]
+    # get scale based on average aqi
+    avg = sum(data) / len(data)
+    scale = scales[(int)(-1 if avg // 50 > len(scales)-1 else avg // 50)]
 
-    return voicing_midi, chord
+    # voice scale and return
+    key = 36
+    return [x + key + 12 for x in scale] + [x + key + 24 for x in scale] + [x + key + 36 for x in scale]
 
     
     

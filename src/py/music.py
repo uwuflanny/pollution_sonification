@@ -1,4 +1,4 @@
-from lead import randomize_progression, get_lead
+from lead import get_chords, get_lead
 from residue import get_residue_arpeggio
 from harmonizer import get_harmonization
 from vsthost import get_vsts
@@ -19,17 +19,15 @@ exporter    = TrackExporter(bpm, sign_num, sign_num)
 def export(data):
 
     # midi content
-    voicing, chord  = get_harmonization()
-    arpeggio        = get_residue_arpeggio(data, voicing)
-    progression     = randomize_progression(data, chord)
-    lead            = get_lead(data, voicing)
-
+    voicing     = get_harmonization(data)
+    arpeggio    = get_residue_arpeggio(data, voicing)
+    progression = get_chords(data, voicing)
+    lead        = get_lead(data, voicing)
 
     # generate tracks
     lead        = exporter.export_track("lead",  11, lead,       [gojira_shimmer],   "lead")
     arp         = exporter.export_track("arp",   5,  arpeggio,   [gojira_delay],     "arp")
     prog        = exporter.export_track("prog",  0,  progression,[],                 "prog")
-
 
     # mix tracks
     lead_wav    = AudioSegment.from_wav(lead)
