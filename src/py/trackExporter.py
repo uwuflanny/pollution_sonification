@@ -1,7 +1,21 @@
 import os
+import sys
+import numpy as np
 from midiutil.MidiFile import MIDIFile
 from pedalboard.io import AudioFile
 from pydub import AudioSegment
+
+
+def merge_and_save(*tracks):
+
+    # find max number of samples, add padding and merge by sum
+    maxlen  = max([len(track[1]) for track in tracks])
+    padded  = [np.pad(track, ((0,0), (0, maxlen - len(track[0]))), 'constant', constant_values=0) for track in tracks]
+    final   = np.sum(padded, axis=0)
+
+    # export to wav
+    with AudioFile('final.wav', 'w', 44100, final.shape[0]) as f:
+        f.write(final)
 
 
 class TrackExporter:
@@ -11,7 +25,7 @@ class TrackExporter:
         self.sign_num   = sign_num
         self.sign_den   = sign_den
 
-    def export_track(self, track_name, instrument, notes, vsts, filename):
+    def create_track_samples(self, track_name, instrument, notes, vsts, filename):
 
         midi_filename   = filename + ".mid"
         wav_filename    = filename + ".wav"
@@ -39,17 +53,13 @@ class TrackExporter:
 
         # apply vsts
         with AudioFile(wav_filename, 'r') as f:
-            audio = f.read(f.frames)
+            samples = f.read(f.frames)
             samplerate = f.samplerate
 
         for vst in vsts:
-            audio = vst.render(audio, samplerate)
+            samples = vst.render(samples, samplerate)
 
-        with AudioFile(wav_filename, 'w', samplerate, audio.shape[0]) as f:
-            f.write(audio)
-
-        # return audio to merge later ?
-        return wav_filename
+        return samples
 
 
 

@@ -1,3 +1,4 @@
+import io
 import uvicorn
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -5,10 +6,8 @@ from fastapi.responses import HTMLResponse
 from pydantic import BaseModel, Field
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
-from music import export
-import io
+from sonifier import export
 from starlette.responses import StreamingResponse
-
 
 
 # run with
@@ -27,6 +26,7 @@ app.add_middleware(
 )
 
 
+# mount static and template folder
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
