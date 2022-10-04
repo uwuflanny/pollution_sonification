@@ -37,7 +37,7 @@ def get_harmonization(data):
 
     # voice scale and return
     key = 36
-    return [x + key + 12 for x in scale] + [x + key + 24 for x in scale] + [x + key + 36 for x in scale]
+    return [x + key + 12 for x in scale] + [x + key + 24 for x in scale] + [x + key + 36 for x in scale] + [x + key + 48 for x in scale]
 
     
     

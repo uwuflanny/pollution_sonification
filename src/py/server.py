@@ -43,8 +43,8 @@ class SonifyRequest(BaseModel):
 async def sonify(request: SonifyRequest):
     data = request.data
     export(data)
-    with open("final.wav", "rb") as f:
-        return StreamingResponse(io.BytesIO(f.read()), media_type="audio/wav")
+    with open("final.mp4", "rb") as f:
+        return StreamingResponse(io.BytesIO(f.read()), media_type="video/mp4")
 
 
 

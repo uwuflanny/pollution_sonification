@@ -1,10 +1,12 @@
+import sys
+from turtle import left
 from lead import get_chords, get_lead
 from residue import get_residue_arpeggio
 from harmonizer import get_harmonization
 from vsthost import get_vsts
 from trackExporter import TrackExporter
 from pydub import AudioSegment
-
+from animator import animate_data, merge_video
 
 # audio effects
 gojira_delay, gojira_shimmer = get_vsts()
@@ -19,10 +21,10 @@ exporter    = TrackExporter(bpm, sign_num, sign_num)
 def export(data):
 
     # midi content
-    voicing     = get_harmonization(data)
-    arpeggio    = get_residue_arpeggio(data, voicing)
-    progression = get_chords(data, voicing)
-    lead        = get_lead(data, voicing)
+    voicing         = get_harmonization(data)
+    arpeggio, res   = get_residue_arpeggio(data, voicing)
+    progression     = get_chords(data, voicing)
+    lead            = get_lead(data, voicing)
 
     # generate tracks
     lead        = exporter.export_track("lead",  11, lead,       [gojira_shimmer],   "lead")
@@ -36,15 +38,18 @@ def export(data):
     lead_wav    = lead_wav + 5 # make sound louder
     prog_wav    = prog_wav - 4 # make sound quiter
 
-    # cleanup
-    import os
-    os.system("del *wav")
-    os.system("del *mid")
-
     # export
     overlay = lead_wav.overlay(arp_wav, position=0)
     overlay = overlay.overlay(prog_wav, position=0)
     overlay.export("final.wav", format="wav")
 
 
+    animate_data(data, res)
+    merge_video("animation.gif", "final.wav", "final.mp4")
 
+
+    # cleanup
+    import os
+    os.system("del *wav")
+    os.system("del *mid")
+    os.system("del *gif")
