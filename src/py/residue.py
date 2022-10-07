@@ -55,6 +55,7 @@ def arpeggiate(residue, voicing):
     duration    = 0.25
     notes       = []
     voicing     = [x + 12 for x in voicing] # pitch shift voicing by 2 octaves
+    voicing     = [x + random.randint(-2, 2) for x in voicing] # add dissonance
 
     target_idx  = -1
     last_res    = 0
@@ -63,36 +64,41 @@ def arpeggiate(residue, voicing):
     init_ptr    = 0
     init_done   = True
 
+    # iterate len(residue) *4 times
+    # each value in residue is a beat, each beat has 4 notes
     for i in range(len(residue) * 4):
 
-        idx = i // 4
-        res = residue[idx] 
+        # check if a new beat has started
+        if i % 4 == 0:
 
-        # rising slope detected
-        if i % 4 == 0 and res > last_res and res >= BAD and idx > target_idx:
+            idx = i // 4                                            # beat index
+            res = residue[idx]                                      # residue value at beat index
+            last_res = residue[idx-1] if idx > 0 else 0             # previous residue value, last_res if idx = 0 is always 0
 
-            # find the end of the rising slope
-            target_idx  = get_rising_end(idx)
-            target_res  = residue[target_idx]
-            
-            # falling arpeggio
-            arpeggio    = voicing[0:map_value_int(target_res, 0, max_res, 0, len(voicing)-1)]
-            first_half  = arpeggio[0:math.floor(len(arpeggio)/2)]
-            second_half = arpeggio[math.floor(len(arpeggio)/2):]
-            middle_part = arpeggio[math.floor(len(arpeggio)/4):math.floor(len(arpeggio)/4*3)]
+            # detect rising slope
+            if res > last_res and res >= BAD and idx > target_idx:
 
-            # initial arpeggio (calculated from slope height and width)
-            init_start  = map_value_int(last_res,   0, max_res, 0, len(voicing) - 1)    # initial note index (mapped residue to len(voicing))
-            init_end    = map_value_int(target_res, 0, max_res, 0, len(voicing) - 1)    # ending note index (mapped residue to len(voicing))
-            init_notes  = math.ceil(target_idx - idx + 1) * 4                           # actual number of notes (in pows of 4)
-            init_idxs   = np.linspace(init_start, init_end, init_notes, dtype=int)      # indexes of notes (not actual notes)
-            init_arp    = [voicing[pos] for pos in init_idxs]                           # broadcasting indexes to notes
-            init_done   = False
-            init_ptr    = 0
+                # find the end of the rising slope
+                target_idx  = get_rising_end(idx)
+                target_res  = residue[target_idx]
+                
+                # falling arpeggio
+                arp_len     = map_value_int(target_res, 0, max_res, 0, len(voicing)-1)
+                arpeggio    = voicing[0 : arp_len]
+                first_half  = arpeggio[0 : arp_len // 2]
+                second_half = arpeggio[arp_len // 2 : ]
+                middle_part = arpeggio[arp_len // 4: arp_len // 4 * 3]
 
-        last_res = res
+                # initial arpeggio (calculated from slope height and width)
+                init_notes  = math.ceil(target_idx - idx + 1) * 4                           # actual number of notes (in pows of 4)
+                init_start  = map_value_int(last_res,   0, max_res, 0, len(voicing) - 1)    # initial note index (mapped residue to len(voicing))
+                init_idxs   = np.linspace(init_start, arp_len, init_notes, dtype=int)       # indexes of notes of initial arp (not actual notes)
+                init_arp    = [voicing[pos] for pos in init_idxs]                           # broadcasting indexes to notes
+                init_done   = False
+                init_ptr    = 0
 
-        # before falling, a full complete arpeggio is always played
+
+        # before falling, a full complete init arpeggio is always played
         if init_done == False:
             notes.append({"note": init_arp[init_ptr], "time": duration * i, "duration": duration })
             if init_ptr >= len(init_arp) - 1:

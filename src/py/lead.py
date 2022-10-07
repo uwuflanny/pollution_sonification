@@ -4,7 +4,7 @@ def map_value(value, min_value, max_value, min_result, max_result):
     return min_result + (value - min_value)/(max_value - min_value)*(max_result - min_result)
 
 def map_value_int(value, min_value, max_value, min_result, max_result):
-    return math.floor(min_result + (value - min_value)/(max_value - min_value)*(max_result - min_result))
+    return math.floor(map_value(value, min_value, max_value, min_result, max_result))
 
 def get_chords(data, voicing):
 

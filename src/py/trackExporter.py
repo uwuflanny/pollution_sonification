@@ -6,7 +6,7 @@ from pedalboard.io import AudioFile
 from pydub import AudioSegment
 
 
-def merge_and_save(*tracks):
+def merge_and_save(filename, *tracks):
 
     # find max number of samples, add padding and merge by sum
     maxlen  = max([len(track[1]) for track in tracks])
@@ -14,7 +14,7 @@ def merge_and_save(*tracks):
     final   = np.sum(padded, axis=0)
 
     # export to wav
-    with AudioFile('final.wav', 'w', 44100, final.shape[0]) as f:
+    with AudioFile(filename, 'w', 44100, final.shape[0]) as f:
         f.write(final)
 
 
