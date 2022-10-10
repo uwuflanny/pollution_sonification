@@ -1,5 +1,4 @@
 // colors are based by range
-var aqicn_api_key = 'd7997a4e2fa35a67576fa7e7e766f6f226cf59f5';
 var colors = [
     '#00E400', // 0 - 50     GOOD
     '#FFFF00', // 51 - 100   MODERATE
@@ -8,13 +7,6 @@ var colors = [
     '#8F3F97', // 201 - 300  VERY UNHEALTHY
     '#000000'  // 301 - 500  HAZARDOUS
 ];
-
-async function get_all_stations() {
-    let url = `https://api.waqi.info/v2/map/bounds?latlng=-90,-180,90,180&networks=all&token=${aqicn_api_key}`;
-    let response = await fetch(url);
-    let data = await response.json();
-    return data.data;
-}
 
 
 async function get_chunk_idx(lat, lng, chunks_per_dim) {
@@ -27,17 +19,25 @@ async function get_chunk_idx(lat, lng, chunks_per_dim) {
 var map;
 async function init_map() {
 
-    // init map
-    map = new google.maps.Map(document.getElementById('map'),  {  
-        center: new google.maps.LatLng(51.505, -0.09),  
-        mapTypeId: google.maps.MapTypeId.ROADMAP,  
-        zoom: 3,
-        disableDefaultUI: true,
-        disableDoubleClickZoom: true,        
-        minZoom: 3
-    });  
+    // create map, add layer
+    map = L.map('map').setView([51.505, -0.09], 3);
+    map.doubleClickZoom.disable();
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        minZoom: 3,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
 
+    // custom marker extension
+    aqiMarker = L.Marker.extend({
+        options: {
+            aqi: 0,
+            title: '',
+            lat: 0,
+            lng: 0
+        }
+    });
 
+    // fill with circles
     await get_all_stations().then(async (data) => {
         
         // create chunks
@@ -72,30 +72,24 @@ async function init_map() {
             let color = colors[color_idx];
 
             // draw circle shape
-            new google.maps.Circle({
-                strokeColor: color,
-                strokeOpacity: 0.4,
-                strokeWeight: 2,
+            L.circle([avg_lat, avg_lng], {
+                color: color,
                 fillColor: color,
-                fillOpacity: 0.075,
-                map: map,
-                center: {lat: avg_lat, lng: avg_lng},
-                radius: size * 50000,
-                clickable: false
-            });
+                opacity: 0.6,
+                fillOpacity: 0.15,
+                radius: size * 40000,
+                clickable: false,
+            }).addTo(map);
 
         }
 
     });
 
-
-    // on map click
-    map.addListener('click', (mouse) => {
-        // remove old marker
-        if(typeof this.marker != 'undefined') this.marker.setMap(null);
-        // get click lat lang
-        let lat = mouse.latLng.lat();
-        let lng = mouse.latLng.lng();
+    map.on('click', (event) => {
+        // get click lat,lng
+        let latlng = event.latlng;
+        let lat = latlng.lat
+        let lng = latlng.lng
         // load history
         get_today_history(lat, lng).then(async(history) => {
 
@@ -107,22 +101,15 @@ async function init_map() {
             create_graph(aqis, time, 'graph_plot', 'leastest AQI trend');
 
             // add marker
-            create_marker({
+            this.marker = create_marker({
                 lat: lat,
                 lng: lng,
-                aqi: aqis[aqis.length - 1],
-            }).then((marker) => {
-                this.marker = marker;
+                aqi: aqis[aqis.length - 1], // get last element
             });
             
-        });                            
+        });  
     });
 
-}
-
-
-async function set_marker_appearance(marker) {
-    // TODO set color, image, label here ...
 }
 
 async function create_marker (pin) {
@@ -134,42 +121,24 @@ async function create_marker (pin) {
     // get color idx and text color
     let color_idx = Math.floor(aqi / 50) > colors.length - 1 ? colors.length - 1 : Math.floor(aqi / 50);
     let text_color = (parseInt(colors[color_idx].replace('#', ''), 16) > 0xffffff / 2) ? '#000' : '#fff';      
-    let pos = new google.maps.LatLng(lat, lng);
 
-    let marker = new google.maps.Marker({
-
-        position:   pos,    // marker position (lat & lng)
-        map:        map,    // map to add marker to
-        aqi:        aqi,    // aqi value
-        lat:        lat,    // lat
-        lng:        lng,    // lng
+    // create leaflet marker
+    return marker = new aqiMarker([lat, lng], {
 
         // custom marker label
-        label: {
-            text: String(aqi),
-            color: text_color,
-            fontSize: "16px",
-            fontWeight: "bold"
-        },
+        icon: L.divIcon({
+            className: 'my-div-icon',
+            html:
+                `<img class="my-div-image" src="./static/img/${color_idx}-sign.png"/>
+                <span class="my-div-span" style="background-color: ${colors[color_idx]}; color: ${text_color}">${aqi}</span>`,
+        }),
 
-        // custom marker icon
-        icon: {url: `./static/img/${color_idx}-sign.png`}
-
-    });
-
-    marker.addListener('click', marker_click);
-    return marker;
-}
-
-async function marker_click () {
-    let myOffcanvas = document.getElementById('sonificate');
-    new bootstrap.Offcanvas(myOffcanvas).show();    
-    // fill offcanvas
-    $("#sonificate_p").attr("data-lat", this.lat);
-    $("#sonificate_p").attr("data-lng", this.lng);
-    $("#sonificate_title").text(this.title);
-    $("#sonificate_p").text(this.aqi);
-    $("#startDate").val("");
-    $("#endDate").val("");
-    $("#sonificate_plot").empty();
+        // additional marker info
+        aqi: aqi,
+        title: `TEST`,
+        lat: lat,
+        lng: lng,
+        
+    }).addTo(map).on('click', show_offcanvas);
+    
 }

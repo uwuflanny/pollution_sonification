@@ -1,6 +1,14 @@
 var weatherbit_key  = 'c0756c0b51cd4bdb9e98c7582b3dfc06';
 var aqicn_key       = 'd7997a4e2fa35a67576fa7e7e766f6f226cf59f5';
 
+
+async function get_all_stations() {
+    let url = `https://api.waqi.info/v2/map/bounds?latlng=-90,-180,90,180&networks=all&token=${aqicn_key}`;
+    let response = await fetch(url);
+    let data = await response.json();
+    return data.data;
+}
+
 function History(lat, lng, start_date, end_date) {
     this.lat = lat;
     this.lng = lng;
@@ -13,7 +21,6 @@ History.prototype.load = async function() {
     let response = await fetch(request);
     let resp_data = await response.json();
     this.data = resp_data.data;
-    console.log(this.data);
 }
 
 History.prototype.get_index = async function(index) {
@@ -29,7 +36,6 @@ async function get_today_history(lat, lng) {
     yesterday.setDate(today.getDate() - 1);
     let tomorrow_str = tomorrow.toISOString().split('T')[0];
     let yesterday_str = yesterday.toISOString().split('T')[0];
-    
     let history = new History(lat, lng, yesterday_str, tomorrow_str);
     await history.load();
     return history;
