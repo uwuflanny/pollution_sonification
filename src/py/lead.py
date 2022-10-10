@@ -26,13 +26,14 @@ def get_chords(data, voicing):
 def get_lead(data, voicing):
 
     voicing = voicing[::-1]
-    data    = [map_value(x, 0, max(data), 0, 1) for x in data]
     n_notes = len(voicing)
     notes   = []
 
     for i in range(len(data)):
-        note_index = math.floor(map_value(data[i], 0, 1, 0, n_notes - 1))
-        notes.append({"note": voicing[note_index], "time": i, "duration": 1})
+        aqi         = data[i]
+        vol         = 75 if aqi < 50 else map_value_int(aqi, min(data), max(data), 50, 25)
+        note_index  = math.floor(map_value(aqi, min(data), max(data), 0, n_notes - 1))
+        notes.append({"note": voicing[note_index], "time": i, "duration": 1, "volume": vol })
 
     return notes
 

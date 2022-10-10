@@ -33,6 +33,7 @@ def get_harmonization(data):
     # get scale based on average aqi
     avg = sum(data) / len(data)
     scale = scales[(int)(-1 if avg // 50 > len(scales)-1 else avg // 50)]
+    scale = major
 
     # voice scale and return, scale is multiplied in more octaves
     key = 36

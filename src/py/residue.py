@@ -51,11 +51,10 @@ def arpeggiate(residue, voicing):
         return len(residue) - 1
 
     # find max value of residue
-    max_res     = max(residue) # 700 or max(residue) # TODO IS max better than 700 ?
+    max_res     = math.ceil(max(residue) / 50) * 50 # or 700 or max(residue) # TODO IS max better than 700 ?
     duration    = 0.25
     notes       = []
     voicing     = [x + 12 for x in voicing] # pitch shift voicing by 2 octaves
-    voicing     = [x + random.randint(-2, 2) for x in voicing] # add dissonance
 
     target_idx  = -1
     last_res    = 0
@@ -73,6 +72,7 @@ def arpeggiate(residue, voicing):
 
             idx = i // 4                                            # beat index
             res = residue[idx]                                      # residue value at beat index
+            vol = map_value_int(res, 0, max_res, 0, 100)            # map residue value to volume
             last_res = residue[idx-1] if idx > 0 else 0             # previous residue value, last_res if idx = 0 is always 0
 
             # detect rising slope
@@ -85,9 +85,6 @@ def arpeggiate(residue, voicing):
                 # falling arpeggio
                 arp_len     = map_value_int(target_res, 0, max_res, 0, len(voicing)-1)
                 arpeggio    = voicing[0 : arp_len]
-                first_half  = arpeggio[0 : arp_len // 2]
-                second_half = arpeggio[arp_len // 2 : ]
-                middle_part = arpeggio[arp_len // 4: arp_len // 4 * 3]
 
                 # initial arpeggio (calculated from slope height and width)
                 init_notes  = math.ceil(target_idx - idx + 1) * 4                           # actual number of notes (in pows of 4)
@@ -97,26 +94,25 @@ def arpeggiate(residue, voicing):
                 init_done   = False
                 init_ptr    = 0
 
+        # get dissonation
+        dissonation = 0
+        ratio = map_value_int(res, 0, max_res, 5, 2)
+        value = map_value_int(res, 0, max_res, 2, 4)
+        if i % ratio == 0:
+            dissonation = random.randint(-value,value)
 
         # before falling, a full complete init arpeggio is always played
         if init_done == False:
-            notes.append({"note": init_arp[init_ptr], "time": duration * i, "duration": duration })
+            notes.append({"note": init_arp[init_ptr] + dissonation, "time": duration * i, "duration": duration, "volume": vol })
             if init_ptr >= len(init_arp) - 1:
                 init_done = True
             else:
                 init_ptr += 1
  
-        # notes on 1,1,1,1 from first half of arpeggio
-        elif res >= DANGEROUS:
-            notes.append({"note": random.choice(second_half), "time": duration * i, "duration": duration, "volume": 50 })
-
-        # notes on 1,1,1,0 from middle part of arpeggio
-        elif res >= HAZARDOUS and i % 4 != 3:
-            notes.append({"note": random.choice(middle_part), "time": duration * i, "duration": duration, "volume": 50 })
-
-        # notes on 1,0,1,0 from second half of arpeggio
+        # falling, note on 1,0,1,0
         elif res >= BAD and i % 2 == 0:
-            notes.append({"note": random.choice(first_half), "time": duration * i, "duration": duration, "volume": 50 })
+            arp_pos = map_value_int(res, 0, max_res, 0, len(arpeggio) - 1)
+            notes.append({"note": arpeggio[arp_pos] + dissonation, "time": duration * i, "duration": duration, "volume": vol })
 
     return notes
 

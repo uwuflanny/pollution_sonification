@@ -28,7 +28,7 @@ def get_vsts():
         "cab_section_active": "Inactive",
         "dly_active": "Active",
         "dly_sync_active": "Inactive",
-        "dly_dry_wet": 0.5,
+        "dly_dry_wet": 0.2,
     })
 
     # load gojira shimmer reverb

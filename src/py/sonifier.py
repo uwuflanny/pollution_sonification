@@ -33,7 +33,7 @@ def export(data, folder):
     prog        = exporter.create_track_samples("prog",  0,  prog,  [], folder + "/prog")
 
     # merge tracks, create animation, merge both
-    merge_and_save(folder + "/final.wav", lead, arp, prog)
+    merge_and_save(folder + "/final.wav", arp, lead)
     animate_data(data, res, folder + "/animation.gif")
     merge_video(folder + "/animation.gif", folder + "/final.wav", folder + "/final.mp4")
 
