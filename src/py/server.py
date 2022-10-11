@@ -12,6 +12,7 @@ from sonifier import export
 from starlette.responses import StreamingResponse
 from threading import Thread
 from starlette.concurrency import run_in_threadpool
+import subprocess
 
 
 # run with
@@ -45,10 +46,13 @@ class SonifyRequest(BaseModel):
 
 @app.post("/sonify")
 def sonify(request: SonifyRequest):
-    data = request.data
+    data = ','.join([str(x) for x in request.data])
     name = str(int(round(time.time() * 1000)))
-    file = export(data, name)
-    return StreamingResponse(io.BytesIO(file), media_type="video/mp4")
+    subprocess.run("python sonify.py " + name + " " + data, shell=True)
+    with open(name + "/final.mp4", "rb") as f:
+        data = f.read()
+    subprocess.run("rd /s /q " + name, shell=True)
+    return StreamingResponse(io.BytesIO(data), media_type="video/mp4")
 
 
 

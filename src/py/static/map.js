@@ -8,13 +8,11 @@ var colors = [
     '#000000'  // 301 - 500  HAZARDOUS
 ];
 
-
 async function get_chunk_idx(lat, lng, chunks_per_dim) {
     let lat_chunk = Math.floor((lat + 90) / 180 * chunks_per_dim);
     let lng_chunk = Math.floor((lng + 180) / 360 * chunks_per_dim);
     return lat_chunk * chunks_per_dim + lng_chunk;
 }
-
 
 var map;
 async function init_map() {
