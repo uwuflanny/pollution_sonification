@@ -14,6 +14,7 @@
 <script type="text/javascript"  src="./static/map.js"></script>
 
 <script>  
+var map;
 $(document).ready(()=>{
 
     // init map
@@ -26,80 +27,29 @@ $(document).ready(()=>{
     $("#btn_sonify").click(sonify);             // sonify button clicked
     
     // hide and show collapse events
+    $("#video_container").hide();
+    $("#close_video_button").click(()=>{ $("#video_container").hide() });
     $("#search_button").click(()=>{$("#search_collapse").collapse('show');});
     $("#search_collapse_close").click(()=>{$("#search_collapse").collapse('hide');});
-    $('#sonificate').on('hidden.bs.offcanvas', ()=>{$("#btn_sonify").prop("disabled", true);})
+    $('#sonificate').on('hidden.bs.offcanvas', ()=>{$("#btn_sonify").prop("disabled", true)});
 
 });
 </script>
+
+<!-- add div on top of everything, occupied all screen, white background, inside, all items are centred horizontally and vertically, inside, add a video tag and a close button on top left of the video -->
+<div id="video_container" class="fixed-top" style="width:100%;height:100vh;background-color: rgb(255, 255, 255, 0.7);display: flex;justify-content: center;align-items: center; z-index: 3000;">
+    <div style="position: relative">
+        <button id="close_video_button" type="button" class="btn-close" aria-label="Close" style="position: absolute; margin-top: -30px; margin-left: -30px;"></button>
+        <video id="sonificate_video" height="400px" width="700px" controls></video>
+    </div>
+</div>
 
 
 <!-- custom marker plot -->
 <div id="graph_plot" class="position-absolute top-0 end-0" style="z-index: 1000;"></div>
 
-
 <!-- div id=map, fits whole screen -->
 <div id="map" class="position-absolute top-0 start-0 w-100 h-100"></div>
-
-
-<!-- add a button with a search icon on top left of page -->
-<div id="search_button" class="btn btn-primary" style="position: absolute; top: 10px; left: 10px; z-index: 1000;">
-    <i class="bi bi-search">
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-        </svg>
-    </i>
-</div>
-
-
-
-<!-- collapsable menu from left -->
-<div class="collapse" id="search_collapse" style="position: absolute; top: 10px; left: 10px; z-index: 1000;">
-    <div class="card card-body">
-        
-        <!-- collapse close button -->
-        <div id="search_collapse_close" class="btn btn-primary" style="position: absolute; top: 10px; left: 10px; z-index: 1000;">
-            <i class="bi bi-x">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                    <path d="M14.354 14.354a.5.5 0 0 1-.708 0L8 8.707 2.354 14.354a.5.5 0 0 1-.708-.708L7.293 8 1.646 2.354a.5.5 0 0 1 .708-.708L8 7.293l5.646-5.647a.5.5 0 0 1 .708.708L8.707 8l5.647 5.646a.5.5 0 0 1 0 .708z"/>
-                </svg>
-            </i>    
-        </div>
-        <br><br><br>
-
-        <!-- location search -->
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">Location</span>
-            <input type="text" class="form-control" aria-label="Location" aria-describedby="basic-addon1" id="location_text">
-        </div>
-
-        <!-- select pm2.5 or pm10 -->
-        <div class="input-group mb-3">
-            <label class="input-group-text" for="search_index">Index</label>
-            <select class="form-select" id="search_index">
-                <option value="pm25">PM2.5</option>
-                <option value="pm10">PM10</option>
-            </select>
-        </div>
-
-        <!-- text min and max -->
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">Min</span>
-            <input type="text" class="form-control" aria-label="Min" aria-describedby="basic-addon1" id="sonificate_min">
-            <span class="input-group-text" id="basic-addon1">Max</span>
-            <input type="text" class="form-control" aria-label="Max" aria-describedby="basic-addon1" id="sonificate_max">
-        </div>
-        <br>
-
-
-        <!-- search button -->
-        <button class="btn btn-primary" type="button" id="init_search">Search</button>
-
-
-    </div>
-</div>
-
-
 
 <!-- sonificate offcanvas -->
 <div class="offcanvas offcanvas-start" tabindex="-1" id="sonificate">
@@ -108,27 +58,25 @@ $(document).ready(()=>{
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-        <div>
-            <p id="sonificate_p"></p>
-            <label for="startDate">Start:</label>
-            <input id="startDate" class="form-control" type="date" /><br>
-            <label for="endDate">End:</label>
-            <input id="endDate" class="form-control" type="date" />
-            <br>            
-            <label for="sonificate_index">AQI index:</label>
-            <select class="form-select" id="sonificate_index" aria-label="Default select example">                
-                <option value="aqi">AQI</option>
-                <option value="pm25">pm 2.5</option>
-                <option value="pm10">pm 10</option>                
-            </select>
-            <br>
-            <div id="sonificate_plot">
+        <p id="sonificate_p"></p>
+        <label for="startDate">Start:</label>
+        <input id="startDate" class="form-control" type="date" /><br>
+        <label for="endDate">End:</label>
+        <input id="endDate" class="form-control" type="date" />
+        <br>            
+        <label for="sonificate_index">AQI index:</label>
+        <select class="form-select" id="sonificate_index" aria-label="Default select example">                
+            <option value="aqi">AQI</option>
+            <option value="pm25">pm 2.5</option>
+            <option value="pm10">pm 10</option>                
+        </select>
+        <br>
+        <div id="sonificate_plot">
 
-            </div>
-            <br>
-            <div class="text-center">
-                <button type="button" id="btn_sonify" class="btn btn-primary" disabled>Sonify</button>
-            </div>
+        </div>
+        <br>
+        <div class="text-center">
+            <button type="button" id="btn_sonify" class="btn btn-primary" disabled>Sonify</button>
         </div>
     </div>
 </div>

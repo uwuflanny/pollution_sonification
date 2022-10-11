@@ -1,5 +1,5 @@
 
-// called by markers
+// this -> marker
 async function show_offcanvas() {
     let options = this.options;
     let myOffcanvas = document.getElementById('sonificate');
@@ -11,6 +11,7 @@ async function show_offcanvas() {
     $("#startDate").val("");
     $("#endDate").val("");
     $("#sonificate_plot").empty();
+    $("#sonificate_action").hide();    
 }
 
 // TODO might need refactor remove duplication
@@ -35,12 +36,10 @@ async function sonify(){
         // download audio
         let blob = await response.blob();
         let url = window.URL.createObjectURL(blob);
-        let a = document.createElement('a');
-        a.href = url;
-        a.download = 'sonification.mp4';
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
+        $("#video_container").show();
+        let video_container = $("#sonificate_video");
+        video_container.show();
+        video_container.attr("src", url);
 
     });
 

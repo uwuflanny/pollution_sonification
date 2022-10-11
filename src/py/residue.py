@@ -50,6 +50,10 @@ def arpeggiate(residue, voicing):
                 return i
         return len(residue) - 1
 
+    # guard
+    if min(residue) == 0:
+        return []
+
     # find max value of residue
     max_res     = math.ceil(max(residue) / 50) * 50 # or 700 or max(residue) # TODO IS max better than 700 ?
     duration    = 0.25
@@ -85,6 +89,8 @@ def arpeggiate(residue, voicing):
                 # falling arpeggio
                 arp_len     = map_value_int(target_res, 0, max_res, 0, len(voicing)-1)
                 arpeggio    = voicing[0 : arp_len]
+
+                # TODO test if idx == 0 -> init_done = Flase
 
                 # initial arpeggio (calculated from slope height and width)
                 init_notes  = math.ceil(target_idx - idx + 1) * 4                           # actual number of notes (in pows of 4)
