@@ -1,0 +1,93 @@
+
+.sign {
+  padding: 10px;
+  font-size: 20px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+
+/* mobile only */
+@media screen and (max-width: 500px) {
+  #graph_plot {
+    width: 80%;
+    margin-left: 2%;
+    margin-right: 2%;
+    height: auto;
+  }
+}
+
+
+/* dekstop only */
+@media screen and (min-width: 500px) {
+  #graph_plot {
+    width: 25%;
+    height: auto;
+  }
+}
+
+
+
+#close_video_button {
+  background-color: white;
+}
+
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+
+  .sidebar * {
+    text-decoration: none;
+    margin-left: 4%;
+    margin-right: 4%;
+    font-size: 25px;
+    display: block;
+  }
+
+  .sidebar label,h2,h5,button {
+    padding: 3px 3px 3px 3px;
+    color: white;
+  }
+
+  .sidebar input {
+    padding: 3px 3px 3px 3px;
+    color: black;
+  }
+
+  .sidebar button {
+    background-color: black;
+    color: white;
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+  }
+
+  
+
+  .sidebar input {
+    width: 92%;
+  }
+  
+  .sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+
+  .sidebar img {
+    position: relative;
+    margin-left: 2%;
+    margin-right: 2%;
+    width: 96%;
+    object-fit: cover;
+  }

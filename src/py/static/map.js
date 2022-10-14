@@ -9,6 +9,32 @@ var colors = [
     '#000000'  // 301 - 500  HAZARDOUS
 ];
 
+var emojis = [
+    "😍",
+    "😃",
+    "😶",
+    "🙁",
+    "😰",
+    "💀"
+];
+
+// get color id, text color
+function get_color_idx(aqi) {
+    return Math.floor(aqi / 50) > colors.length - 1 ? colors.length - 1 : Math.floor(aqi / 50);
+}
+function get_text_color(aqi) {
+    return (parseInt(colors[get_color_idx(aqi)].replace('#', ''), 16) > 0xffffff / 2) ? '#000' : '#f0f0f0'
+}
+function get_color(aqi) {
+    return colors[get_color_idx(aqi)];
+}
+function get_emoji(aqi) {
+    return emojis[get_color_idx(aqi)];
+}
+function get_sign_image(aqi) {
+    return `./static/img/${get_color_idx(aqi)}-sign.png`;
+}
+
 
 // get chunk unique index
 async function get_chunk_idx(lat, lng, chunks_per_dim) {
@@ -49,8 +75,7 @@ async function load_circles(data) {
         let avg_lng = chunk.reduce((a, b) => a + Number(b.lon), 0) / size;
         
         // calculate color
-        let color_idx = Math.floor(avg_aqi / 50) > colors.length - 1 ? colors.length - 1 : Math.floor(avg_aqi / 50);
-        let color = colors[color_idx];
+        let color = get_color(avg_aqi);
 
         // draw circle shape
         L.circle([avg_lat, avg_lng], {
@@ -69,18 +94,25 @@ async function load_circles(data) {
 async function init_map() {
 
     // create map, add layer
-    map = L.map('map').setView([51.505, -0.09], 3);
+    map = L.map('map').setView([51.505, -0.09], screen.width <= 500 ? 6 : 3);
     map.zoomControl.remove();
     map.doubleClickZoom.disable();
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    document.querySelector('.leaflet-bottom.leaflet-right').remove();
+    L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
+        maxZoom: 18,
         minZoom: 3,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' + ' <a href='
+        + '"https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © ' + '<a href="http://stadiamaps.com">Stadia Maps</a>, '
+        + '<a href="https://openmaptiles.org/">OpenMapTiles</a> &mdash; Map tiles by <a href="https://stadiamaps.com/">Stadia Maps</a>, ' +
+        '<a href="https://openmaptiles.org/">OpenMapTiles</a> &mdash; ' +
+        'Data by <a href="http://openweathermap.org">OpenWeatherMap</a>, <a href="http://aqicn.org">AQICN</a>',
     }).addTo(map);
+
     // custom marker extension
     aqiMarker = L.Marker.extend({
         options: {
             aqi: 0,
-            title: '',
+            location: '',
             lat: 0,
             lng: 0
         }
@@ -100,13 +132,14 @@ async function map_inspect(event) {
     let latlng = event.latlng;
     let lat = latlng.lat
     let lng = latlng.lng
+
     // load history
     get_today_history(lat, lng).then(async(history) => {
 
         // plot graph
         let aqis = await history.get_index('aqi');
         let time = await history.get_index('timestamp_local');
-        create_graph(aqis, time, 'graph_plot', 'leastest AQI trend');
+        create_graph_image(aqis, time, 'graph_plot', 'leastest AQI trend');
 
         // add marker
         this.marker = create_marker({
@@ -129,8 +162,9 @@ async function create_marker (pin) {
     let aqi = pin.aqi;
 
     // get color idx and text color
-    let color_idx = Math.floor(aqi / 50) > colors.length - 1 ? colors.length - 1 : Math.floor(aqi / 50);
-    let text_color = (parseInt(colors[color_idx].replace('#', ''), 16) > 0xffffff / 2) ? '#000' : '#fff';      
+    let image = get_sign_image(aqi);
+    let color = get_color(aqi);
+    let text_color = get_text_color(aqi);      
 
     // create leaflet marker
     return marker = new aqiMarker([lat, lng], {
@@ -139,13 +173,15 @@ async function create_marker (pin) {
         icon: L.divIcon({
             className: 'my-div-icon',
             html:
-                `<img class="my-div-image" src="./static/img/${color_idx}-sign.png"/>
-                <span class="my-div-span" style="background-color: ${colors[color_idx]}; color: ${text_color}">${aqi}</span>`,
+                `<div style="position:relative;">
+                    <span class="sign" style="color: ${text_color}; background-color:${color};">${aqi}</span>
+                </div>`,
+                
         }),
 
         // additional marker info
+        location: `location here`,
         aqi: aqi,
-        title: `TEST`,
         lat: lat,
         lng: lng,
         

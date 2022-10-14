@@ -6,6 +6,9 @@
 <!-- bootstrap js   --> <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 <!-- bootstrap css  --> <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 
+<!-- style -->
+<link rel="stylesheet" href="./static/sidebar.css">
+
 <!-- scripts -->
 <script type="text/javascript"  src="./static/sonify.js"></script>
 <script type="text/javascript"  src="./static/aqi_api.js"></script>
@@ -17,66 +20,63 @@
 var map;
 $(document).ready(()=>{
 
-    // init map
-    init_map();    
-
-    $("#startDate").change(load_index);         // start date changed index    
-    $("#endDate").change(load_index);           // end date changed index
-    $("#sonificate_index").change(load_index);  // sonification index changed
-    $("#init_search").click(geocoder_search);   // search button clicked
-    $("#btn_sonify").click(sonify);             // sonify button clicked
     
-    // hide and show collapse events
-    $("#video_container").hide();
+    // init map
+    init_map();
+    
+    $("#offcanvas_start_date").change(load_index);          // start date changed index    
+    $("#offcanvas_end_date").change(load_index);            // end date changed index
+    $("#offcanvas_index").change(load_index);               // sonification index changed
+    $("#init_search").click(geocoder_search);               // search button clicked
+    $("#offcanvas_btn_sonify").click(sonify);               // sonify button clicked
+    
+    // hide and show events
+    $("#offcanvas_plot").hide();
+    $("#graph_plot").hide();
+    $("#video_container").hide();                           // TODO ALSO STOP VIDEO
     $("#close_video_button").click(()=>{ $("#video_container").hide() });
-    $("#search_button").click(()=>{$("#search_collapse").collapse('show');});
-    $("#search_collapse_close").click(()=>{$("#search_collapse").collapse('hide');});
-    $('#sonificate').on('hidden.bs.offcanvas', ()=>{$("#btn_sonify").prop("disabled", true)});
+    $('#offcanvas_sonify').on('hidden.bs.offcanvas', ()=>{$("#offcanvas_btn_sonify").prop("disabled", true)}); 
 
 });
 </script>
 
+<meta content="width=device-width, initial-scale=1" name="viewport" />
+
 <!-- add div on top of everything, occupied all screen, white background, inside, all items are centred horizontally and vertically, inside, add a video tag and a close button on top left of the video -->
-<div id="video_container" class="fixed-top" style="width:100%;height:100vh;background-color: rgb(255, 255, 255, 0.7);display: flex;justify-content: center;align-items: center; z-index: 3000;">
+<div id="video_container" class="fixed-top" style="width:100%;height:100vh;background-color: rgb(0, 0, 0, 0.7);display: flex;justify-content: center;align-items: center; z-index: 900000;">
     <div style="position: relative">
         <button id="close_video_button" type="button" class="btn-close" aria-label="Close" style="position: absolute; margin-top: -30px; margin-left: -30px;"></button>
-        <video id="sonificate_video" height="400px" width="700px" controls></video>
+        <video id="sonification_video" height="400px" width="700px" controls></video>
     </div>
 </div>
 
-
 <!-- custom marker plot -->
-<div id="graph_plot" class="position-absolute top-0 end-0" style="z-index: 1000;"></div>
+<img src="" id="graph_plot" class="position-fixed top-0 end-0" style="z-index: 1000; margin:0.5%;"></div>
 
 <!-- div id=map, fits whole screen -->
 <div id="map" class="position-absolute top-0 start-0 w-100 h-100"></div>
 
-<!-- sonificate offcanvas -->
-<div class="offcanvas offcanvas-start" tabindex="-1" id="sonificate">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="sonificate_title">Offcanvas</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-        <p id="sonificate_p"></p>
-        <label for="startDate">Start:</label>
-        <input id="startDate" class="form-control" type="date" /><br>
-        <label for="endDate">End:</label>
-        <input id="endDate" class="form-control" type="date" />
-        <br>            
-        <label for="sonificate_index">AQI index:</label>
-        <select class="form-select" id="sonificate_index" aria-label="Default select example">                
-            <option value="aqi">AQI</option>
-            <option value="pm25">pm 2.5</option>
-            <option value="pm10">pm 10</option>                
-        </select>
-        <br>
-        <div id="sonificate_plot">
-
-        </div>
-        <br>
-        <div class="text-center">
-            <button type="button" id="btn_sonify" class="btn btn-primary" disabled>Sonify</button>
-        </div>
-    </div>
+<div id="mySidebar" class="sidebar" style="z-index: 8000;">
+    <a href="javascript:void(0)" class="closebtn" onclick="hide_offcanvas()">×</a>
+    <h5 id="offcanvas_location" style="text-align:center;">Offcanvas</h5>
+    <h5 id="offcanvas_aqi" style="text-align:center;"></h5><br>
+    <label for="offcanvas_start_date">Start date:</label>
+    <input id="offcanvas_start_date" type="date" class="datepicker" /><br>
+    <label for="offcanvas_end_date" class="datepicker">End date:</label>
+    <input id="offcanvas_end_date" type="date" />
+    <br>            
+    <label for="offcanvas_plot">AQI index:</label>
+    <select id="offcanvas_index" aria-label="Default select example">                
+        <option value="aqi">AQI</option>
+        <option value="pm25">pm 2.5</option>
+        <option value="pm10">pm 10</option>                
+    </select>
+    <br>
+    <img id="offcanvas_plot" src=""/>
+    <br>
+    <button type="button" id="offcanvas_btn_sonify" disabled>Sonify</button>
+    <br>
+    <br>
 </div>
+
+

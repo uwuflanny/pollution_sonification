@@ -1,4 +1,4 @@
-var weatherbit_key  = 'c0756c0b51cd4bdb9e98c7582b3dfc06';
+var weatherbit_key  = 'fc97477c45744fbfb603cc525e8f5279';
 var aqicn_key       = 'd7997a4e2fa35a67576fa7e7e766f6f226cf59f5';
 
 
