@@ -7,18 +7,12 @@ import math
 import scipy as sp
 import random
 import sys
+from measures import RES_DECADENCE, BAD, MODERATE, SEVERE, UNHEALTHY, VERY_UNHEALTHY, HAZARDOUS, THRESHOLD
 
-DECADENCE   = 1.8
-REST        = 0
-BAD         = 50
-HAZARDOUS   = 100
-DANGEROUS   = 150
-
-# decrement every element of list by unit, of <= 0, remove
 def decrement(list, unit):
     return [x - unit for x in list if x - unit > 0]
 
-def get_residue(data, res_threshold = 50):
+def get_residue(data, res_threshold = THRESHOLD):
 
     residue_data    = []
     res_history     = []
@@ -30,11 +24,10 @@ def get_residue(data, res_threshold = 50):
         
         res = max(residue_data) if len(residue_data) > 0 else 0
         res_history.append(res)
-        ln_res = math.log(res, DECADENCE) if res > 0 else 0
+        ln_res = math.log(res, RES_DECADENCE) if res > 0 else 0
         residue_data = decrement(residue_data, ln_res)
 
     return res_history
-
 
 def map_value_int(value, min_value, max_value, min_result, max_result):
     return math.floor(min_result + (value - min_value)/(max_value - min_value)*(max_result - min_result))
@@ -51,18 +44,17 @@ def arpeggiate(residue, voicing):
         return len(residue) - 1
 
     # guard
-    if min(residue) == 0:
+    if not any(res >= BAD for res in residue):
         return []
 
     # find max value of residue
-    max_res     = math.ceil(max(residue) / 50) * 50 # or 700 or max(residue) # TODO IS max better than 700 ?
+    max_res     = math.ceil(max(residue) / THRESHOLD) * THRESHOLD # or 700 or max(residue) # TODO IS max better than 700 ?
     duration    = 0.25
     notes       = []
     voicing     = [x + 12 for x in voicing] # pitch shift voicing by 2 octaves
 
     target_idx  = -1
     last_res    = 0
-    arpeggio    = []
 
     init_ptr    = 0
     init_done   = True
@@ -86,19 +78,17 @@ def arpeggiate(residue, voicing):
                 target_idx  = get_rising_end(idx)
                 target_res  = residue[target_idx]
                 
-                # falling arpeggio
-                arp_len     = map_value_int(target_res, 0, max_res, 0, len(voicing)-1)
-                arpeggio    = voicing[0 : arp_len]
-
-                # TODO test if idx == 0 -> init_done = Flase
-
-                # initial arpeggio (calculated from slope height and width)
-                init_notes  = math.ceil(target_idx - idx + 1) * 4                           # actual number of notes (in pows of 4)
-                init_start  = map_value_int(last_res,   0, max_res, 0, len(voicing) - 1)    # initial note index (mapped residue to len(voicing))
-                init_idxs   = np.linspace(init_start, arp_len, init_notes, dtype=int)       # indexes of notes of initial arp (not actual notes)
-                init_arp    = [voicing[pos] for pos in init_idxs]                           # broadcasting indexes to notes
-                init_done   = False
-                init_ptr    = 0
+                # initial arpeggio (calculated from slope height and width), do not rise if idx == 0
+                if target_idx == 0:
+                    init_done   = True
+                else:
+                    arp_len     = map_value_int(target_res, 0, max_res, 0, len(voicing)-1)      # arpeggio lenght
+                    init_start  = map_value_int(last_res,   0, max_res, 0, len(voicing) - 1)    # initial note index (mapped residue to len(voicing))
+                    init_notes  = math.ceil(target_idx - idx + 1) * 4                           # actual number of notes (in pows of 4)
+                    init_idxs   = np.linspace(init_start, arp_len, init_notes, dtype=int)       # indexes of notes of initial arp (not actual notes)
+                    init_arp    = [voicing[pos] for pos in init_idxs]                           # broadcasting indexes to notes
+                    init_done   = False
+                    init_ptr    = 0
 
         # get dissonation
         dissonation = 0
@@ -114,11 +104,11 @@ def arpeggiate(residue, voicing):
                 init_done = True
             else:
                 init_ptr += 1
- 
+
         # falling, note on 1,0,1,0
         elif res >= BAD and i % 2 == 0:
-            arp_pos = map_value_int(res, 0, max_res, 0, len(arpeggio) - 1)
-            notes.append({"note": arpeggio[arp_pos] + dissonation, "time": duration * i, "duration": duration, "volume": vol })
+            note_idx = map_value_int(res, 0, max_res, 0, len(voicing) - 1)
+            notes.append({"note": voicing[note_idx] + dissonation, "time": duration * i, "duration": duration, "volume": vol })
 
     return notes
 

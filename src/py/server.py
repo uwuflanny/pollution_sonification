@@ -8,9 +8,7 @@ from fastapi.responses import HTMLResponse
 from pydantic import BaseModel, Field
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
-from sonifier import export
 from starlette.responses import StreamingResponse
-from threading import Thread
 from starlette.concurrency import run_in_threadpool
 import subprocess
 

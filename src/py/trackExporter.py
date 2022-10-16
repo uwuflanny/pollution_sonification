@@ -8,7 +8,10 @@ from pydub import AudioSegment
 
 def merge_and_save(filename, *tracks):
 
-    # find max number of samples, add padding and merge by sum
+    # normalize tracks based on max amplitude
+    
+
+    # find max number of samples of track with max num of samples, add padding and merge by sum
     maxlen  = max([len(track[1]) for track in tracks])
     padded  = [np.pad(track, ((0,0), (0, maxlen - len(track[0]))), 'constant', constant_values=0) for track in tracks]
     final   = np.sum(padded, axis=0)

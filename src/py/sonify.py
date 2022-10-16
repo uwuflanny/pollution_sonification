@@ -7,6 +7,7 @@ from vsthost import get_vsts
 from trackExporter import TrackExporter, merge_and_save
 from animator import animate_data, merge_video
 from ast import literal_eval
+from sub import get_sub
 
 # audio file exporter
 bpm         = 120
@@ -24,7 +25,7 @@ data = literal_eval(data)
 # audio effects
 gojira_delay, gojira_shimmer = get_vsts()
 
-# midi content
+# midi content (get midi notes)
 voicing     = get_harmonization(data)
 arp, res    = get_residue_arpeggio(data, voicing)
 prog        = get_chords(data, voicing)
@@ -34,9 +35,10 @@ lead        = get_lead(data, voicing)
 lead        = exporter.create_track_samples("lead",  5, lead,  [gojira_shimmer], "lead")
 arp         = exporter.create_track_samples("arp",   11,  arp,   [gojira_delay], "arp")
 prog        = exporter.create_track_samples("prog",  0,  prog,  [], "prog")
+sub         = get_sub(data)
 
 # merge tracks, create animation, merge both
-merge_and_save("final.wav", arp, lead)
+merge_and_save("final.wav", arp, lead, prog, sub)
 animate_data(data, res, "animation.gif")
 merge_video("animation.gif", "final.wav", "final.mp4")
 

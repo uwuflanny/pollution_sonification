@@ -1,5 +1,12 @@
+from scipy.interpolate import splrep, splev
+import numpy as np
+y = [1.0, 0.26666666666666666, -1.0, -0.26666666666666666]
+x = np.arange(len(y))
+spl = splrep(x, y, per=True)
 
-from sonifier import export
+xx = np.linspace(0, len(x)-1, 100)
 
-data = [30,40,10,20,50,60,80,30,50,10,220,20,30,10,30,20,30,10,30,20,30,10,30,20,30,10,30,70,30,10,30,20,30,10,30,20,30,10,30,20,30,10,30,180,70,90,90,90,90,90,89,20,30,10,30,120,130,140,150,20,30,10,30,20,30,10,30,20,30,10,30,20,50,10,30,20,30,10,30]
-export(data,"asd")
+import matplotlib.pyplot as plt
+plt.plot(x, y, 'o')
+plt.plot(xx, splev(xx, spl))
+plt.show()

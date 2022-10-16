@@ -8,6 +8,7 @@ def merge_video(video_name, audio_name, output_name, fps=30):
     final_clip = my_clip.set_audio(audio_background)
     final_clip.write_videofile(output_name, fps)
 
+# TODO CHANGE INDEX NAME and rows
 def animate_data(data, res, filename):
 
     fig = plt.figure()
