@@ -1,19 +1,15 @@
+from code import interact
+from operator import index
 import wave
 import matplotlib.pyplot as plt
 from wave_buffer import WaveBuffer
 import math
 import numpy as np
-
-def map_value(value, min_value, max_value, min_result, max_result):
-    return min_result + (value - min_value)/(max_value - min_value)*(max_result - min_result)
-
-def map_value_int(value, min_value, max_value, min_result, max_result):
-    return math.floor(map_value(value, min_value, max_value, min_result, max_result))
+from scipy.optimize import fmin
+from utility import map_value_int, map_value
+from measures import WAVETABLE_SIZE, SAMPLE_RATE, BPM, MIN_THRESH, MAX_THRESH
 
 
-
-
-WAVETABLE_SIZE = 8192
 
 def get_intervals(data):
 
@@ -24,12 +20,12 @@ def get_intervals(data):
     for i in range(len(data)):
 
         val = data[i]
-
-        if val >= 50 and goin == False:
+        
+        if val >= MIN_THRESH and goin == False:
             goin = True
-            start   = i
+            start = i
 
-        if val < 50 and goin == True:
+        if val < MIN_THRESH and goin == True:
             goin = False
             intervals.append((start, i))
 
@@ -38,6 +34,8 @@ def get_intervals(data):
         intervals.append((start, len(data)))
 
     return intervals
+
+
 
 def get_wavetables(data, intervals):
 
@@ -50,7 +48,7 @@ def get_wavetables(data, intervals):
             interval = [interval[0], interval[0]]
 
         avg         = sum(interval) / len(interval)
-        quantize    = map_value_int(avg, 50, 500, 1, 100)
+        quantize    = map_value_int(avg, MIN_THRESH, MAX_THRESH, 1, 100)
         wavetable   = WaveBuffer(interval).mirror_extend().interpolate(WAVETABLE_SIZE).amplify().quantize(quantize).get_buffer()
         wavetables.append(wavetable)
 
@@ -72,10 +70,16 @@ def envelope_buffer(buffer):
 
     return buffer
 
+
+def compute_LFO(min, max, samp_period):
+    freq = 1 / (samp_period / SAMPLE_RATE)
+    period = SAMPLE_RATE / freq
+    half = (max - min) / 2
+    return lambda x: math.sin(2.0 * math.pi * (x) / period) * half + half + min
+
+
 def get_wav(data, intervals, wavetables, B):
 
-    BPM         = 120                       # beats per minute
-    SAMPLE_RATE = 44100                     # samples per second
     B_PER_SEC   = BPM / 60                  # beats per second
     SECONDS     = B / B_PER_SEC             # total track seconds
     SAMPLES     = SECONDS * SAMPLE_RATE     # total track samples
@@ -85,7 +89,9 @@ def get_wav(data, intervals, wavetables, B):
     STEP        = (NOTE_FREQ * WAVETABLE_SIZE) / SAMPLE_RATE    # wavetable step
     SAMPS_PER_N = int(SAMPLE_RATE / B_PER_SEC / NOTES_PER_B)    # samples per note
 
+    LFO         = compute_LFO(0.5, 1.5, SAMPLE_RATE // B_PER_SEC)
     buff        = np.zeros(int(SAMPLES))
+    lfo_ptr     = 0
 
     for interval_idx in range(len(intervals)):
 
@@ -96,20 +102,19 @@ def get_wav(data, intervals, wavetables, B):
         for data_idx in range(start, end):
 
             aqi = data[data_idx]
-            vol = map_value(aqi, 50, 500, 0, 0.05) # TODO REMOVE MAGIC NUMBERS
-            dur = map_value_int(aqi, 50, 500, SAMPS_PER_N // 4, SAMPS_PER_N)
+            vol = map_value(aqi, MIN_THRESH, MAX_THRESH, 0, 0.05) # TODO REMOVE MAGIC NUMBERS
+            dur = map_value_int(aqi, MIN_THRESH, MAX_THRESH, SAMPS_PER_N // 4, SAMPS_PER_N)
 
             for note_idx in range(NOTES_PER_B):
 
                 note_start  = math.floor((data_idx + (note_idx / NOTES_PER_B)) * (SAMPLE_RATE / B_PER_SEC))
-                note_buff   = np.array([wavetable[math.floor(i * STEP) % WAVETABLE_SIZE] * vol for i in range(dur)])
+                note_buff   = np.array([wavetable[math.floor(i * STEP) % WAVETABLE_SIZE] * vol * LFO(i + lfo_ptr) for i in range(dur)])
                 env_buffer  = envelope_buffer(note_buff)
+                lfo_ptr     += dur
                 buff[note_start:note_start + dur] += env_buffer
 
     return buff
         
-
-
 
 
 def get_sub(data):
@@ -118,20 +123,4 @@ def get_sub(data):
     wavetables  = get_wavetables(data, intervals)
     buff        = get_wav(data, intervals, wavetables, len(data))
     return np.array([buff, buff])
-
-"""
-data = [69, 70, 72, 74, 76, 76, 75, 75, 74, 73, 72, 66, 61, 56, 54, 52, 50, 52, 55, 57, 58, 59, 60, 65, 70]
-intervals   = get_intervals(data)
-wavetables  = get_wavetables(data, intervals)
-buffer      = get_wav(data, intervals, wavetables, len(data))
-from scipy.io.wavfile import write
-write("example.wav", 44100, buffer.astype(np.float32))
-"""
-
-    
-
-
-
-
-
 

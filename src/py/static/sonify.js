@@ -28,12 +28,14 @@ async function sonify(){
 
     get_history(lat, lng, start_date, end_date).then(async (history)=>{            
 
-        // request file
         let aqi = await history.get_index(index);
+        let times = await history.get_index('timestamp_local');
+        let payload = JSON.stringify({idx: index, data: aqi, days: times});
+
         let response = await fetch('/sonify', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({data: aqi})
+            body: payload
         });
 
         // download audio

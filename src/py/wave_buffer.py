@@ -2,6 +2,7 @@ import numpy as np
 import math
 import scipy as sp
 from scipy.interpolate import splev, splrep
+from measures import WAVETABLE_SIZE
 
 class WaveBuffer(object):
 
@@ -18,12 +19,11 @@ class WaveBuffer(object):
         mirrored = self.buffer + self.buffer
         return WaveBuffer([mirrored[i] if i < half_len else mirrored[i] * -1 for i in range(len(mirrored))])
 
-    # 8192 = default wavetable size
-    def interpolate(self, pps = 8192):
+    def interpolate(self, points = WAVETABLE_SIZE): # 8192 = default wavetable size
         y = self.buffer
         x = np.arange(len(y))
         spl = splrep(x, y, per=True)
-        newx = np.linspace(0, len(y)-1, pps)
+        newx = np.linspace(0, len(y)-1, points)
         return WaveBuffer(splev(newx, spl))
 
     def quantize(self, samples):

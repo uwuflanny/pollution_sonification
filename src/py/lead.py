@@ -1,11 +1,7 @@
 import math
-from measures import RES_DECADENCE, BAD, MODERATE, SEVERE, UNHEALTHY, VERY_UNHEALTHY, HAZARDOUS, THRESHOLD
+from measures import MIN_THRESH
+from utility import map_value_int, map_value
 
-def map_value(value, min_value, max_value, min_result, max_result):
-    return min_result + (value - min_value)/(max_value - min_value)*(max_result - min_result)
-
-def map_value_int(value, min_value, max_value, min_result, max_result):
-    return math.floor(map_value(value, min_value, max_value, min_result, max_result))
 
 def get_chords(data, voicing):
 
@@ -34,7 +30,7 @@ def get_lead(data, voicing):
 
     for i in range(len(data)):
         aqi         = data[i]
-        vol         = 75 if aqi < THRESHOLD else map_value_int(aqi, best, worst, 50, 25)
+        vol         = 75 if aqi < MIN_THRESH else map_value_int(aqi, best, worst, 50, 25)
         note_index  = math.floor(map_value(aqi, best, worst, 0, n_notes - 1))
         notes.append({"note": voicing[note_index], "time": i, "duration": 1, "volume": vol })
 

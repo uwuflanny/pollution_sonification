@@ -95,7 +95,7 @@ async function init_map() {
 
     // create map, add layer
     map = L.map('map').setView([51.505, -0.09], screen.width <= 500 ? 6 : 3);
-    map.zoomControl.remove();
+    // map.zoomControl.remove();
     map.doubleClickZoom.disable();
     document.querySelector('.leaflet-bottom.leaflet-right').remove();
     L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
@@ -118,6 +118,31 @@ async function init_map() {
         }
     });
     
+    var searchControl = L.esri.Geocoding.geosearch({
+        placeholder: 'Enter an address or place e.g. 1 York St',
+        useMapBounds: false,
+        providers: [L.esri.Geocoding.arcgisOnlineProvider({
+          apikey: "AAPK150e6843de69411582a2fb7010285854YRNW0bRLWXXr9R5W35IlgRQAuGpVWg3jVIXeg1vOm3SUViRtqj5AeCNpe-qMQXS4", // replace with your api key - https://developers.arcgis.com
+          nearby: {
+            lat: -33.8688,
+            lng: 151.2093
+          }
+        })]
+      }).addTo(map);
+    var results = L.layerGroup().addTo(map);
+    searchControl.on('results', function(data){
+        results.clearLayers();
+        for (var i = data.results.length - 1; i >= 0; i--) {
+            // add marker to map
+            map_inspect(data.results[i]);
+        }
+    });
+
+    // reverse geocode
+    geocodeService = L.esri.Geocoding.geocodeService({
+        apikey: "AAPK150e6843de69411582a2fb7010285854YRNW0bRLWXXr9R5W35IlgRQAuGpVWg3jVIXeg1vOm3SUViRtqj5AeCNpe-qMQXS4"
+    });
+
     // actions
     map.on('click', map_inspect);
     await get_all_stations().then(load_circles);
@@ -132,22 +157,32 @@ async function map_inspect(event) {
     let latlng = event.latlng;
     let lat = latlng.lat
     let lng = latlng.lng
-
+    
     // load history
     get_today_history(lat, lng).then(async(history) => {
 
-        // plot graph
-        let aqis = await history.get_index('aqi');
-        let time = await history.get_index('timestamp_local');
-        create_graph_image(aqis, time, 'graph_plot', 'leastest AQI trend');
+        // reverse geocoding
+        await geocodeService.reverse().latlng(event.latlng).run(async function (error, result) {
 
-        // add marker
-        this.marker = create_marker({
-            lat: lat,
-            lng: lng,
-            aqi: aqis[aqis.length - 1], // get last element
+            // get address
+            let add = result.address;
+            let location = add.City || add.LongLabel;
+            
+            // plot graph
+            let aqis = await history.get_index('aqi');
+            let time = await history.get_index('timestamp_local');
+            create_graph_image(aqis, time, 'graph_plot', 'leastest AQI trend - ' + location);
+
+            // add marker
+            create_marker({
+                lat: lat,
+                lng: lng,
+                location: location,
+                aqi: aqis[aqis.length - 1], // get last element
+            });
+
         });
-        
+
     }); 
 
 }
@@ -161,30 +196,31 @@ async function create_marker (pin) {
     let lng = pin.lng;
     let aqi = pin.aqi;
 
-    // get color idx and text color
-    let image = get_sign_image(aqi);
-    let color = get_color(aqi);
-    let text_color = get_text_color(aqi);      
-
     // create leaflet marker
-    return marker = new aqiMarker([lat, lng], {
+    let marker = new aqiMarker([lat, lng], {
 
         // custom marker label
         icon: L.divIcon({
             className: 'my-div-icon',
             html:
-                `<div style="position:relative;">
-                    <span class="sign" style="color: ${text_color}; background-color:${color};">${aqi}</span>
+                `<div class="speech-bubble" onclick="console.log('asd')">
+                    ${pin.location} AQI: ${aqi} ${get_emoji(aqi)}
                 </div>`,
-                
         }),
 
         // additional marker info
-        location: `location here`,
+        location: pin.location,
         aqi: aqi,
         lat: lat,
         lng: lng,
-        
-    }).addTo(map).on('click', show_offcanvas);
+
+    }).addTo(map);
+
+    marker.on('click', show_offcanvas);
+    marker.on('contextmenu', function (e) {
+        map.removeLayer(marker);
+    });
+
+    return marker;
     
 }

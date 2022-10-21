@@ -1,29 +1,34 @@
 import os
 import sys
+import json
 from lead import get_chords, get_lead
 from residue import get_residue_arpeggio
 from harmonizer import get_harmonization
 from vsthost import get_vsts
 from trackExporter import TrackExporter, merge_and_save
 from animator import animate_data, merge_video
-from ast import literal_eval
 from sub import get_sub
+from measures import convert, BPM, SIGN_DEN, SIGN_NUM
 
-# audio file exporter
-bpm         = 120
-sign_num    = 4
-sign_den    = 4
-exporter    = TrackExporter(bpm, sign_num, sign_num)
 
-dir = sys.argv[1]
+# load payload as json from arg
+payload = json.loads(sys.argv[1])
+dir     = payload["dir"]
+index   = payload["index"]
+data    = payload["data"]
+days    = payload["days"]
+
 os.mkdir(dir)
 os.chdir(dir)
 
-data = sys.argv[2]
-data = literal_eval(data)
+# audio file exporter
+exporter    = TrackExporter(BPM, SIGN_NUM, SIGN_DEN)
 
-# audio effects
+# load audio effects
 gojira_delay, gojira_shimmer = get_vsts()
+
+# convert index values
+convert(index)
 
 # midi content (get midi notes)
 voicing     = get_harmonization(data)
@@ -39,11 +44,6 @@ sub         = get_sub(data)
 
 # merge tracks, create animation, merge both
 merge_and_save("final.wav", arp, lead, prog, sub)
-animate_data(data, res, "animation.gif")
+animate_data(index, data, days, res, "animation.gif")
 merge_video("animation.gif", "final.wav", "final.mp4")
-
-with open("final.mp4", "rb") as f:
-    data = f.read()
-
-    
 
