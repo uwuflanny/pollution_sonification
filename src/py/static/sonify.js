@@ -1,15 +1,19 @@
 
-// this -> marker
-function show_offcanvas() {
+async function show_offcanvas() {
+    // this -> marker
     document.getElementById("mySidebar").style.width = screen.width <= 500 ? "100%" : "25%";
     let options = this.options;
     $("#offcanvas_location").text(options.location);
     $("#offcanvas_aqi").attr("data-lat", options.lat);
     $("#offcanvas_aqi").attr("data-lng", options.lng);
     $("#offcanvas_aqi").text("AQI - " + options.aqi + "     " + get_emoji(options.aqi));
-    $("#offcanvas_start_date").val("");
-    $("#offcanvas_end_date").val("");
     $("#offcanvas_plot").hide();
+
+    let dates = await get_nearest_dates();
+    $("#offcanvas_start_date").val(dates[0]);
+    $("#offcanvas_end_date").val(dates[1]);
+
+    load_index();
 }
 
 function hide_offcanvas() {
@@ -38,13 +42,10 @@ async function sonify(){
             body: payload
         });
 
-        // download audio
+        // get video
         let blob = await response.blob();
-        let url = window.URL.createObjectURL(blob);
-        $("#video_container").show();
-        let video_container = $("#sonification_video");
-        video_container.show();
-        video_container.attr("src", url);
+        let url = await window.URL.createObjectURL(blob);
+        window.open(url)
 
     });
 

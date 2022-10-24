@@ -94,7 +94,7 @@ async function load_circles(data) {
 async function init_map() {
 
     // create map, add layer
-    map = L.map('map').setView([51.505, -0.09], screen.width <= 500 ? 6 : 3);
+    map = L.map('map').setView([51.505, -0.09], 3);
     // map.zoomControl.remove();
     map.doubleClickZoom.disable();
     document.querySelector('.leaflet-bottom.leaflet-right').remove();
@@ -171,10 +171,9 @@ async function map_inspect(event) {
             // plot graph
             let aqis = await history.get_index('aqi');
             let time = await history.get_index('timestamp_local');
-            create_graph_image(aqis, time, 'graph_plot', 'leastest AQI trend - ' + location);
 
             // add marker
-            create_marker({
+            create_marker(aqis, time, {
                 lat: lat,
                 lng: lng,
                 location: location,
@@ -189,12 +188,14 @@ async function map_inspect(event) {
 
 
 // marker click action: show offcanvas
-async function create_marker (pin) {
+async function create_marker (aqis, time, pin) {
     
     // get coords
     let lat = pin.lat;
     let lng = pin.lng;
     let aqi = pin.aqi;
+
+    let id = String(Date.now());
 
     // create leaflet marker
     let marker = new aqiMarker([lat, lng], {
@@ -203,8 +204,9 @@ async function create_marker (pin) {
         icon: L.divIcon({
             className: 'my-div-icon',
             html:
-                `<div class="speech-bubble" onclick="console.log('asd')">
+                `<div class="speech-bubble">
                     ${pin.location} AQI: ${aqi} ${get_emoji(aqi)}
+                    <img class="aqi_preview" id="${id}"></img>
                 </div>`,
         }),
 
@@ -215,6 +217,8 @@ async function create_marker (pin) {
         lng: lng,
 
     }).addTo(map);
+
+    create_small_graph(aqis, time, id);
 
     marker.on('click', show_offcanvas);
     marker.on('contextmenu', function (e) {

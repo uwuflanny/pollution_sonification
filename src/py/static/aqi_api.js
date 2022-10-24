@@ -28,7 +28,7 @@ History.prototype.get_index = async function(index) {
     return arr.reverse();
 }
 
-async function get_today_history(lat, lng) {
+async function get_nearest_dates() {
     let today = new Date();
     let tomorrow = new Date();
     let yesterday = new Date();
@@ -36,7 +36,12 @@ async function get_today_history(lat, lng) {
     yesterday.setDate(today.getDate() - 1);
     let tomorrow_str = tomorrow.toISOString().split('T')[0];
     let yesterday_str = yesterday.toISOString().split('T')[0];
-    let history = new History(lat, lng, yesterday_str, tomorrow_str);
+    return [yesterday_str, tomorrow_str];
+}
+
+async function get_today_history(lat, lng) {
+    let dates = await get_nearest_dates();
+    let history = new History(lat, lng, dates[0], dates[1]);    
     await history.load();
     return history;
 }
