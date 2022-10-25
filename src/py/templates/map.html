@@ -17,12 +17,12 @@
 <script type="text/javascript"  src="./static/sonify.js"></script>
 <script type="text/javascript"  src="./static/aqi_api.js"></script>
 <script type="text/javascript"  src="./static/graphs.js"></script>
-<script type="text/javascript"  src="./static/geocoder.js"></script>
 <script type="text/javascript"  src="./static/map.js"></script>
 
 <script>  
 var map;
 var geocodeService;
+var sonification_data;
 $(document).ready(()=>{
 
     // init map
@@ -31,7 +31,6 @@ $(document).ready(()=>{
     $("#offcanvas_start_date").change(load_index);          // start date changed index    
     $("#offcanvas_end_date").change(load_index);            // end date changed index
     $("#offcanvas_index").change(load_index);               // sonification index changed
-    $("#init_search").click(geocoder_search);               // search button clicked
     $("#offcanvas_btn_sonify").click(sonify);               // sonify button clicked
     
 });
@@ -39,7 +38,6 @@ $(document).ready(()=>{
 
 <meta content="width=device-width, initial-scale=1" name="viewport" />
 
-<!-- div id=map, fits whole screen -->
 <div id="map" class="position-absolute top-0 start-0 w-100 h-100"></div>
 
 <div id="mySidebar" class="sidebar" style="z-index: 8000;">

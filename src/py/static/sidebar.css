@@ -18,6 +18,7 @@
 	text-align: center;
   min-width: 7em;
   margin-left: 1.3em;
+  border: 2px solid black;
 }
 .speech-bubble:after {
 	border: 1em solid transparent;

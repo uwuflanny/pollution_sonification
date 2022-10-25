@@ -22,35 +22,28 @@ var emojis = [
 function get_color_idx(aqi) {
     return Math.floor(aqi / 50) > colors.length - 1 ? colors.length - 1 : Math.floor(aqi / 50);
 }
-function get_text_color(aqi) {
-    return (parseInt(colors[get_color_idx(aqi)].replace('#', ''), 16) > 0xffffff / 2) ? '#000' : '#f0f0f0'
-}
 function get_color(aqi) {
     return colors[get_color_idx(aqi)];
 }
 function get_emoji(aqi) {
     return emojis[get_color_idx(aqi)];
 }
-function get_sign_image(aqi) {
-    return `./static/img/${get_color_idx(aqi)}-sign.png`;
-}
-
-
-// get chunk unique index
-async function get_chunk_idx(lat, lng, chunks_per_dim) {
-    let lat_chunk = Math.floor((lat + 90) / 180 * chunks_per_dim);
-    let lng_chunk = Math.floor((lng + 180) / 360 * chunks_per_dim);
-    return lat_chunk * chunks_per_dim + lng_chunk;
-}
 
 
 // loads circles on map. data: all stations data
 async function load_circles(data) {
 
+    // get chunk unique index
+    async function get_chunk_idx(lat, lng, chunks_per_dim) {
+        let lat_chunk = Math.floor((lat + 90) / 180 * chunks_per_dim);
+        let lng_chunk = Math.floor((lng + 180) / 360 * chunks_per_dim);
+        return lat_chunk * chunks_per_dim + lng_chunk;
+    }
+
     // create chunks
     let chunks = {};
     let chunks_per_dim = 70;   
-    for (let i = 0; i < chunks_per_dim * chunks_per_dim; i++) { chunks[i] = []; }
+    for (let i = 0; i < chunks_per_dim * chunks_per_dim; i++) chunks[i] = [];
 
     // load chunks
     for(let pin of data) {
@@ -64,7 +57,7 @@ async function load_circles(data) {
     // for each chunk, calculate avg aqi, lat & lng -> then draw circle
     for (let i = 0; i < chunks_per_dim * chunks_per_dim; i++) {
 
-        // basic chunk info
+        // skip empty chunks
         let chunk = chunks[i];
         let size = chunk.length;
         if (size == 0) continue;
@@ -74,7 +67,7 @@ async function load_circles(data) {
         let avg_lat = chunk.reduce((a, b) => a + Number(b.lat), 0) / size;
         let avg_lng = chunk.reduce((a, b) => a + Number(b.lon), 0) / size;
         
-        // calculate color
+        // get color
         let color = get_color(avg_aqi);
 
         // draw circle shape
@@ -93,9 +86,8 @@ async function load_circles(data) {
 
 async function init_map() {
 
-    // create map, add layer
+    // load map and layout
     map = L.map('map').setView([51.505, -0.09], 3);
-    // map.zoomControl.remove();
     map.doubleClickZoom.disable();
     document.querySelector('.leaflet-bottom.leaflet-right').remove();
     L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
@@ -118,22 +110,18 @@ async function init_map() {
         }
     });
     
+    // geocoder
     var searchControl = L.esri.Geocoding.geosearch({
         placeholder: 'Enter an address or place e.g. 1 York St',
         useMapBounds: false,
-        providers: [L.esri.Geocoding.arcgisOnlineProvider({
-          apikey: "AAPK150e6843de69411582a2fb7010285854YRNW0bRLWXXr9R5W35IlgRQAuGpVWg3jVIXeg1vOm3SUViRtqj5AeCNpe-qMQXS4", // replace with your api key - https://developers.arcgis.com
-          nearby: {
-            lat: -33.8688,
-            lng: 151.2093
-          }
-        })]
-      }).addTo(map);
+        providers: [L.esri.Geocoding.arcgisOnlineProvider({apikey: "AAPK150e6843de69411582a2fb7010285854YRNW0bRLWXXr9R5W35IlgRQAuGpVWg3jVIXeg1vOm3SUViRtqj5AeCNpe-qMQXS4", nearby: {lat: -33.8688, lng: 151.2093}})]
+    }).addTo(map);
+
+    // geocoder action
     var results = L.layerGroup().addTo(map);
     searchControl.on('results', function(data){
         results.clearLayers();
         for (var i = data.results.length - 1; i >= 0; i--) {
-            // add marker to map
             map_inspect(data.results[i]);
         }
     });
@@ -158,73 +146,53 @@ async function map_inspect(event) {
     let lat = latlng.lat
     let lng = latlng.lng
     
-    // load history
-    get_today_history(lat, lng).then(async(history) => {
+    await geocodeService.reverse().latlng(event.latlng).run(async function (error, result) {
 
-        // reverse geocoding
-        await geocodeService.reverse().latlng(event.latlng).run(async function (error, result) {
+        // get address
+        let add = result.address;
+        let location = add.City || add.LongLabel;
 
-            // get address
-            let add = result.address;
-            let location = add.City || add.LongLabel;
-            
-            // plot graph
-            let aqis = await history.get_index('aqi');
-            let time = await history.get_index('timestamp_local');
+        // add marker
+        create_marker(lat, lng, location);
 
-            // add marker
-            create_marker(aqis, time, {
-                lat: lat,
-                lng: lng,
-                location: location,
-                aqi: aqis[aqis.length - 1], // get last element
-            });
-
-        });
-
-    }); 
+    });
 
 }
 
 
 // marker click action: show offcanvas
-async function create_marker (aqis, time, pin) {
+async function create_marker(lat, lng, location) {
     
-    // get coords
-    let lat = pin.lat;
-    let lng = pin.lng;
-    let aqi = pin.aqi;
+    // load history
+    get_today_history(lat, lng).then(async(history) => {
 
-    let id = String(Date.now());
+        let id = String(Date.now());
+        let aqis = await history.get_index('aqi');
+        let time = await history.get_index('timestamp_local');
+        let aqi = aqis[aqis.length - 1];
 
-    // create leaflet marker
-    let marker = new aqiMarker([lat, lng], {
+        new aqiMarker([lat, lng], {
 
-        // custom marker label
-        icon: L.divIcon({
-            className: 'my-div-icon',
-            html:
-                `<div class="speech-bubble">
-                    ${pin.location} AQI: ${aqi} ${get_emoji(aqi)}
-                    <img class="aqi_preview" id="${id}"></img>
-                </div>`,
-        }),
+            // custom marker label
+            icon: L.divIcon({
+                className: 'my-div-icon',
+                html:
+                    `<div class="speech-bubble">
+                        ${location} AQI: ${aqi} ${get_emoji(aqi)}
+                        <img class="aqi_preview" id="${id}"></img>
+                    </div>`,
+            }),
+    
+            // additional marker info
+            location: location,
+            aqi: aqi,
+            lat: lat,
+            lng: lng,
+    
+        }).addTo(map).on('click', load_offcanvas).on('contextmenu', function(e) { map.removeLayer(this); });
+    
+        create_small_graph(aqis, time, id);
 
-        // additional marker info
-        location: pin.location,
-        aqi: aqi,
-        lat: lat,
-        lng: lng,
-
-    }).addTo(map);
-
-    create_small_graph(aqis, time, id);
-
-    marker.on('click', show_offcanvas);
-    marker.on('contextmenu', function (e) {
-        map.removeLayer(marker);
     });
-
-    return marker;
     
 }
