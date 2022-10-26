@@ -1,0 +1,177 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%12pt: grandezza carattere
+                                        %a4paper: formato a4
+                                        %openright: apre i capitoli a destra
+                                        %twoside: serve per fare un
+                                        %   documento fronteretro
+                                        %report: stile tesi (oppure book)
+\documentclass[12pt,a4paper,openright,twoside]{report}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%libreria per scrivere in italiano
+\usepackage[italian]{babel}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%libreria per accettare i caratteri
+                                        %   digitati da tastiera come è à
+                                        %   si può usare anche
+                                        %   \usepackage[T1]{fontenc}
+                                        %   però con questa libreria
+                                        %   il tempo di compilazione
+                                        %   aumenta
+\usepackage[utf8]{inputenc}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%libreria per impostare il documento
+\usepackage{fancyhdr}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%libreria per avere l'indentazione
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   all'inizio dei capitoli, ...
+\usepackage{indentfirst}
+%
+%%%%%%%%%libreria per mostrare le etichette
+%\usepackage{showkeys}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%libreria per inserire grafici
+\usepackage{float}
+
+\usepackage{graphicx}
+\usepackage{color, colortbl}
+
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%libreria per utilizzare font
+                                        %   particolari ad esempio
+                                        %   \textsc{}
+\usepackage{newlfont}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%librerie matematiche
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{amsthm}
+\usepackage{cite}
+\usepackage{listings}
+\usepackage{hyperref} 
+\usepackage[square,numbers,sort]{natbib} 
+\usepackage{xcolor}
+%\bibliographystyle{unsrt}
+%\bibliographystyle{unsrtnat}
+
+\lstset{
+	frame=single,
+	breaklines=true
+}
+
+
+%
+\oddsidemargin=30pt \evensidemargin=20pt%impostano i margini
+\hyphenation{sil-la-ba-zio-ne pa-ren-te-si}%serve per la sillabazione: tra parentesi 
+					   %vanno inserite come nell'esempio le parole 
+%					   %che latex non riesce a tagliare nel modo giusto andando a capo.
+
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%comandi per l'impostazione
+                                        %   della pagina, vedi il manuale
+                                        %   della libreria fancyhdr
+                                        %   per ulteriori delucidazioni
+\pagestyle{fancy}\addtolength{\headwidth}{20pt}
+\renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection \ #1}{}}
+\rhead[\fancyplain{}{\bfseries\leftmark}]{\fancyplain{}{\bfseries\thepage}}
+\cfoot{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\linespread{1.3}                        %comando per impostare l'interlinea
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%definisce nuovi comandi
+%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Comandi Custom %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\xstudent}{Nome dello studente}
+\newcommand{\xsupervisor}{Nome del relatore}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Fine Preambolo %
+% Inizio documento%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% Scelta delle dimensioni della pagina %
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	%\setlength{\textwidth}{13.5cm}
+	%\setlength{\textheight}{19cm}
+	%\setlength{\footskip}{3cm}
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%
+	% inizio prefazione
+	%
+	% pagina del titolo, indice, sommario
+	%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	\input{frontMatter/frontespizio.tex}
+	\input{frontMatter/00-dedication.tex}
+    
+    \input{frontMatter/00-introduction.tex}
+
+\tableofcontents                        %crea l'indice
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%imposta l'intestazione di pagina
+\rhead[\fancyplain{}{\bfseries\leftmark}]{\fancyplain{}{\bfseries\thepage}}
+\lhead[\fancyplain{}{\bfseries\thepage}]{\fancyplain{}{\bfseries
+INDICE}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%non numera l'ultima pagina sinistra
+\clearpage{\pagestyle{empty}\cleardoublepage}
+\listoffigures                          %crea l'elenco delle figure
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%non numera l'ultima pagina sinistra
+\clearpage{\pagestyle{empty}\cleardoublepage}
+\listoftables                           %crea l'elenco delle tabelle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%non numera l'ultima pagina sinistra
+    
+    
+
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%
+	% inizio corpo del documento
+	%
+	% sequenze delle varie sezioni
+	% è consigliato mantenere una struttura logica ben definita per separare le sezioni
+	% si consiglia di reificare tale struttura fisicamente sul file system
+	%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+
+	
+	% inclusione delle sezioni
+	\input{mainMatter/01-cap.tex}
+	\input{mainMatter/02-cap.tex}
+	\input{mainMatter/03-cap.tex}
+	
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%
+	% inizio parte finale del documento
+	%
+	% eventuali appendici, bibliografia obbligatoria,
+	% eventuale lista delle tabelle e delle figure (nel caso decommentare 
+	% la riga con i comandi \listoffigures e \listoftables)
+	%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+    \input{backMatter/conclusioni.tex}
+    \input{backMatter/bibliografia.tex}
+    \input{backMatter/ringraziamenti.tex}
+	
+		
+	%\input{./Appendice/appendice.tex}
+	%\input{./Bibliografia/bibliografia.tex}
+	
+	\nocite{*}
+
+	%\cleardoublepage
+	%\addcontentsline{toc}{chapter}{Bibliografia}
+
+
+	
+	%\listoffigures
+	%\listoftables
+
+
+\end{document}

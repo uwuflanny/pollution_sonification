@@ -1,0 +1,93 @@
+This is BibTeX, Version 0.99d (TeX Live 2022)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: tesi.aux
+The style file: plain.bst
+Database file #1: backMatter/biblio.bib
+Warning--entry type for "latex" isn't style-file defined
+--line 11 of file backMatter/biblio.bib
+Warning--entry type for "population_and_enviroment" isn't style-file defined
+--line 19 of file backMatter/biblio.bib
+Warning--entry type for "la_mincrometrologia" isn't style-file defined
+--line 27 of file backMatter/biblio.bib
+Warning--entry type for "arpa_veneto" isn't style-file defined
+--line 35 of file backMatter/biblio.bib
+Warning--entry type for "data_visualization" isn't style-file defined
+--line 43 of file backMatter/biblio.bib
+Warning--entry type for "color_symbolism" isn't style-file defined
+--line 51 of file backMatter/biblio.bib
+Warning--entry type for "hermann" isn't style-file defined
+--line 59 of file backMatter/biblio.bib
+Warning--entry type for "audiovideo" isn't style-file defined
+--line 67 of file backMatter/biblio.bib
+Warning--entry type for "accessibility" isn't style-file defined
+--line 75 of file backMatter/biblio.bib
+Warning--entry type for "sonification_model" isn't style-file defined
+--line 83 of file backMatter/biblio.bib
+Warning--entry type for "bitcoin" isn't style-file defined
+--line 91 of file backMatter/biblio.bib
+Warning--entry type for "nasa" isn't style-file defined
+--line 99 of file backMatter/biblio.bib
+Warning--entry type for "serum" isn't style-file defined
+--line 107 of file backMatter/biblio.bib
+Warning--entry type for "aqibasics" isn't style-file defined
+--line 115 of file backMatter/biblio.bib
+Warning--entry type for "polluter_pays" isn't style-file defined
+--line 123 of file backMatter/biblio.bib
+Warning--I didn't find a database entry for ""
+Warning--to sort, need author or key in la_mincrometrologia
+Warning--to sort, need author or key in population_and_enviroment
+Warning--to sort, need author or key in arpa_veneto
+Warning--to sort, need author or key in polluter_pays
+Warning--to sort, need author or key in aqibasics
+Warning--to sort, need author or key in data_visualization
+Warning--to sort, need author or key in color_symbolism
+Warning--to sort, need author or key in hermann
+Warning--to sort, need author or key in audiovideo
+Warning--to sort, need author or key in accessibility
+Warning--to sort, need author or key in sonification_model
+Warning--to sort, need author or key in bitcoin
+Warning--to sort, need author or key in serum
+Warning--to sort, need author or key in nasa
+Warning--to sort, need author or key in latex
+You've used 15 entries,
+            2118 wiz_defined-function locations,
+            527 strings with 4721 characters,
+and the built_in function-call counts, 2244 in all, are:
+= -- 180
+> -- 15
+< -- 0
++ -- 16
+- -- 0
+* -- 77
+:= -- 221
+add.period$ -- 15
+call.type$ -- 15
+change.case$ -- 45
+chr.to.int$ -- 0
+cite$ -- 30
+duplicate$ -- 105
+empty$ -- 346
+format.name$ -- 0
+if$ -- 556
+int.to.chr$ -- 0
+int.to.str$ -- 15
+missing$ -- 0
+newline$ -- 48
+num.names$ -- 0
+pop$ -- 120
+preamble$ -- 1
+purify$ -- 30
+quote$ -- 0
+skip$ -- 149
+stack$ -- 0
+substring$ -- 76
+swap$ -- 15
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 60
+warning$ -- 15
+while$ -- 0
+width$ -- 17
+write$ -- 77
+(There were 31 warnings)
