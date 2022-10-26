@@ -20,7 +20,12 @@ var emojis = [
 
 // get color id, text color
 function get_color_idx(aqi) {
-    return Math.floor(aqi / 50) > colors.length - 1 ? colors.length - 1 : Math.floor(aqi / 50);
+    if (aqi <= 50) return 0;
+    else if (aqi <= 100) return 1;
+    else if (aqi <= 150) return 2;
+    else if (aqi <= 200) return 3;
+    else if (aqi <= 300) return 4;
+    else return 5;
 }
 function get_color(aqi) {
     return colors[get_color_idx(aqi)];

@@ -1,7 +1,8 @@
 import matplotlib.animation as animation
 import matplotlib.pyplot as plt
 import moviepy.editor as mpe
-from measures import BAD, MODERATE, SEVERE, UNHEALTHY, VERY_UNHEALTHY, HAZARDOUS
+import math
+from measures import BAD, MODERATE, SEVERE, UNHEALTHY, VERY_UNHEALTHY, HAZARDOUS, MIN_THRESH
 
 def merge_video(video_name, audio_name, output_name, fps=30):
     my_clip = mpe.VideoFileClip(video_name)
@@ -14,6 +15,20 @@ def animate_data(index, data, days, res, filename):
     fig = plt.figure()
     ax1 = fig.add_subplot(1,1,1)
 
+    def get_color(aqi):
+        if aqi >= VERY_UNHEALTHY:
+            return 'black'
+        elif aqi >= UNHEALTHY:
+            return 'purple'
+        elif aqi >= SEVERE:
+            return 'red'
+        elif aqi >= MODERATE:
+            return 'orange'
+        elif aqi >= BAD:
+            return 'yellow'
+        else:
+            return 'green'
+
     def animate(i):
 
         # prepare plot
@@ -22,37 +37,40 @@ def animate_data(index, data, days, res, filename):
         ax1.set_xlabel('Time')
         ax1.set_ylabel('AQI')
 
-        # plot residue
-        ax1.plot(res[0:i+1], color='blue')
-        if res[i] > 0:
-            ax1.plot(i, res[i], '-', color='blue')
+        # color zones
+        plt.axhspan(0, BAD, facecolor='lightgreen', alpha=0.5)
+        plt.axhspan(BAD, MODERATE, facecolor='yellow', alpha=0.5)
+        plt.axhspan(MODERATE, SEVERE, facecolor='orange', alpha=0.5)
+        plt.axhspan(SEVERE, UNHEALTHY, facecolor='red', alpha=0.5)
+        plt.axhspan(UNHEALTHY, VERY_UNHEALTHY, facecolor='purple', alpha=0.5)
+        plt.axhspan(VERY_UNHEALTHY, HAZARDOUS, facecolor='black', alpha=0.5)   
 
-        # plot aqi
-        ax1.plot(data[0:i+1])
-        ax1.plot(data, 'bo', markersize=0.1, markerfacecolor='none', markeredgecolor='none')
-        ax1.plot(i, data[i], 'bo')
+        # plot residue
+        ax1.plot(res[0:i+1], color='black')
+
+        # add data to as bar graph
+        sub = data[0:i+1]
+        for i in range(len(sub)):
+            ax1.bar(i, sub[i], color=get_color(sub[i]))
 
         # set plot limits
-        plt.ylim(bottom=0)
-        plt.xlim(left=0)
+        top_y = 500 if max(data) > 450 else math.ceil(max(data) / MIN_THRESH) * MIN_THRESH
+        plt.ylim(bottom=0, top=top_y)
+        plt.xlim(left=-0.5, right=len(data)-0.5)
 
-        # orange line at 50 named 'bad'
-        plt.axhline(y=BAD, color='orange', linestyle='-', label='bad')
-        plt.text(1, BAD+1, 'bad', color='orange')
+        # add a lgend with colors
+        plt.legend(bbox_to_anchor=(1, 1), handles=[
+            plt.Line2D([0], [0], color='black', lw=1, label='Residue'),
+            plt.Rectangle((0,0),1,1, color='lightgreen', label='Good'),
+            plt.Rectangle((0,0),1,1, color='yellow', label='Moderate'),
+            plt.Rectangle((0,0),1,1, color='orange', label='Severe'),
+            plt.Rectangle((0,0),1,1, color='red', label='Unhealthy'),
+            plt.Rectangle((0,0),1,1, color='purple', label='Very Unhealthy'),
+            plt.Rectangle((0,0),1,1, color='black', label='Hazardous')
+        ])
 
-        # red line at 100 named 'hazardous'
-        plt.axhline(y=MODERATE, color='red', linestyle='-', label='moderate')
-        plt.text(1, MODERATE+1, 'moderate', color='red')
-
-        # purple line at 150 named 'dangerous'
-        plt.axhline(y=SEVERE, color='magenta', linestyle='-', label='severe')
-        plt.text(1, SEVERE+1, 'severe', color='magenta')
-
-        # color zones
-        plt.axhspan(0, BAD, facecolor='green', alpha=0.2)
-        plt.axhspan(BAD, MODERATE, facecolor='orange', alpha=0.2)
-        plt.axhspan(MODERATE, SEVERE, facecolor='red', alpha=0.2)
-        plt.axhspan(SEVERE, HAZARDOUS, facecolor='purple', alpha=0.2)
+        # extend plot to show legend
+        plt.tight_layout()
 
     ani = animation.FuncAnimation(fig, animate, interval=500, frames=len(data))
     ani.save(filename, fps=2, dpi=200)
