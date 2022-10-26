@@ -33,6 +33,14 @@ function get_color(aqi) {
 function get_emoji(aqi) {
     return emojis[get_color_idx(aqi)];
 }
+function get_text_color(aqi){
+    let color = get_color(aqi);
+    let r = parseInt(color.substring(1, 3), 16);
+    let g = parseInt(color.substring(3, 5), 16);
+    let b = parseInt(color.substring(5, 7), 16);
+    let brightness = (r * 299 + g * 587 + b * 114) / 1000;
+    return brightness > 125 ? 'black' : 'white';
+}
 
 
 // loads circles on map. data: all stations data
@@ -92,7 +100,7 @@ async function load_circles(data) {
 async function init_map() {
 
     // load map and layout
-    map = L.map('map').setView([51.505, -0.09], 3);
+    map = L.map('map').setView([15, 21], 3);
     map.doubleClickZoom.disable();
     document.querySelector('.leaflet-bottom.leaflet-right').remove();
     L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {

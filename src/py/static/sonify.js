@@ -42,7 +42,8 @@ async function load_index(){
         sonification_data = {
             idx: index,
             data: aqis,
-            days: time
+            days: time,
+            location: $("#offcanvas_location").text()
         }
 
     });
@@ -52,7 +53,9 @@ async function load_index(){
 async function sonify(){
 
     let payload = JSON.stringify(sonification_data);
+    let leastest_aqi = sonification_data.data[sonification_data.data.length - 1];
 
+    /*
     let response = await fetch('/sonify', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -63,5 +66,21 @@ async function sonify(){
     let blob = await response.blob();
     let url = await window.URL.createObjectURL(blob);
     window.open(url)
+    */
+
+    Toastify({
+        text: sonification_data.location + " - Sonification done!",
+        duration: -1,
+        destination: "https://github.com/apvarun/toastify-js",
+        newWindow: true,
+        close: true,
+        gravity: "bottom",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+          background: get_color(leastest_aqi),
+          color: get_text_color(leastest_aqi)
+        }
+    }).showToast();
 
 }
