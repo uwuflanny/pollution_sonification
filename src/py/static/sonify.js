@@ -1,5 +1,5 @@
 
-function show_offcanvas() { document.getElementById("mySidebar").style.width = screen.width <= 500 ? "100%" : "25%"; }
+function show_offcanvas() { document.getElementById("mySidebar").style.width = screen.width <= 500 ? "100%" : (screen.width <= 1000 ? "50%" : "25%"); }
 function hide_offcanvas() { document.getElementById("mySidebar").style.width = "0"; }
 
 async function load_offcanvas() {
@@ -8,7 +8,7 @@ async function load_offcanvas() {
     $("#offcanvas_location").text(options.location);
     $("#offcanvas_aqi").attr("data-lat", options.lat);
     $("#offcanvas_aqi").attr("data-lng", options.lng);
-    $("#offcanvas_aqi").text("AQI - " + options.aqi + "     " + get_emoji(options.aqi));
+    $("#offcanvas_aqi").text("AQI - " + options.aqi + "\t" + get_emoji(options.aqi));
     $("#offcanvas_plot").hide();
 
     let dates = await get_nearest_dates();
@@ -54,8 +54,21 @@ async function sonify(){
 
     let payload = JSON.stringify(sonification_data);
     let leastest_aqi = sonification_data.data[sonification_data.data.length - 1];
+    let location = sonification_data.location;
 
-    /*
+    let toast = Toastify({
+        text: location + " - Sonification started!",
+        duration: -1,
+        close: true,
+        gravity: "bottom",
+        position: "right",
+        style: {
+            background: get_color(leastest_aqi),
+            color: get_text_color(leastest_aqi)
+        }
+    });
+    toast.showToast();
+
     let response = await fetch('/sonify', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -65,21 +78,19 @@ async function sonify(){
     // get video
     let blob = await response.blob();
     let url = await window.URL.createObjectURL(blob);
-    window.open(url)
-    */
-
+    
+    toast.hideToast();
     Toastify({
-        text: sonification_data.location + " - Sonification done!",
+        text: location + " - Sonification done!",
+        destination: url,
         duration: -1,
-        destination: "https://github.com/apvarun/toastify-js",
         newWindow: true,
         close: true,
         gravity: "bottom",
         position: "right",
-        stopOnFocus: true,
         style: {
-          background: get_color(leastest_aqi),
-          color: get_text_color(leastest_aqi)
+            background: get_color(leastest_aqi),
+            color: get_text_color(leastest_aqi)
         }
     }).showToast();
 

@@ -46,7 +46,6 @@ async function get_today_history(lat, lng) {
     return history;
 }
 
-// TODO FIX SELECTING TODAY VALUE, MUST GET ALL DATA
 async function get_history(lat, lng, start_date, end_date) {
     let history = new History(lat, lng, start_date, end_date);
     await history.load();

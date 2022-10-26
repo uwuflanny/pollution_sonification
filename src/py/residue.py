@@ -92,7 +92,7 @@ def arpeggiate(residue, voicing):
         ratio = map_value_int(res, 0, max_res, 5, 2)
         value = map_value_int(res, 0, max_res, 2, 4)
         if i % ratio == 0:
-            dissonation = random.randint(-value,value)
+            dissonation = random.randint(-value,value)  # TODO remove randomness
 
         # before falling, a full complete init arpeggio is always played
         if init_done == False:

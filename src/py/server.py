@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from starlette.responses import StreamingResponse
+from fastapi.responses import FileResponse
 from starlette.concurrency import run_in_threadpool
 import subprocess
 
@@ -34,6 +35,10 @@ app.add_middleware(
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
+@app.get('/favicon.ico', include_in_schema=False)
+async def favicon():
+    return FileResponse('favicon.ico')
+
 
 @app.get("/", response_class=HTMLResponse)
 async def read_items(request: Request):
@@ -44,7 +49,7 @@ async def read_items(request: Request):
 
 # /sonify, accepts an int array as request body
 class SonifyRequest(BaseModel):
-    data:   list = Field(..., example=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]),
+    data:   list = Field(..., example=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
     days:   list = Field(..., example=["2021-01-01T00:00:00", "2021-01-01T00:00:01", "2021-01-01T00:00:02"])
     idx:    str
 

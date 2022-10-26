@@ -12,11 +12,11 @@ from measures import convert, BPM, SIGN_DEN, SIGN_NUM
 
 
 # load payload as json from arg
-payload = json.loads(sys.argv[1])
-dir     = payload["dir"]
-index   = payload["index"]
-data    = payload["data"]
-days    = payload["days"]
+payload     = json.loads(sys.argv[1])
+dir         = payload["dir"]
+index       = payload["index"]
+data        = payload["data"]
+days        = payload["days"]
 
 os.mkdir(dir)
 os.chdir(dir)
