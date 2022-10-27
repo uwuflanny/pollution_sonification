@@ -56,7 +56,6 @@ async function load_circles(data) {
     // create chunks
     let chunks = {};
     let chunks_per_dim = 70;   
-    for (let i = 0; i < chunks_per_dim * chunks_per_dim; i++) chunks[i] = [];
 
     // load chunks
     for(let pin of data) {
@@ -64,16 +63,18 @@ async function load_circles(data) {
         let lat = pin.lat;
         let lng = pin.lon;
         let chunk_idx = await get_chunk_idx(lat, lng, chunks_per_dim);
-        chunks[chunk_idx].push(pin);
+        if (chunk_idx in chunks) {
+            chunks[chunk_idx].push(pin);
+        } else {
+            chunks[chunk_idx] = [pin];
+        }
     }
 
     // for each chunk, calculate avg aqi, lat & lng -> then draw circle
-    for (let i = 0; i < chunks_per_dim * chunks_per_dim; i++) {
+    for (let chunk_idx in chunks) {
 
-        // skip empty chunks
-        let chunk = chunks[i];
+        let chunk = chunks[chunk_idx];
         let size = chunk.length;
-        if (size == 0) continue;
 
         // calculate average aqi, lat, and lng
         let avg_aqi = chunk.reduce((a, b) => a + Number(b.aqi), 0) / size;
