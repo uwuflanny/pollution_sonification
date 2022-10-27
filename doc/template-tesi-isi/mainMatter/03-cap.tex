@@ -2,6 +2,103 @@
 \chapter{Terzo capitolo}                %crea il capitolo
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%imposta l'intestazione di pagina
 
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]",
+  xleftmargin=-25pt,
+  xrightmargin=-50pt,
+  basicstyle=\scriptsize\sffamily
+}
+
+\section{Implementazione della Mappa}
+\subsection{Differenze con i mockup}
+Durante lo sviluppo del progetto, ho apportato delle migliorie rispetto ai mockup.
+Il cambiamento più significativo è stato quello di rimuovere i pin rappresentanti le varie stazioni a favore di una suddivisione in zone, ognuna delle quali delimitata da un cerchio colorato.
+Il colore di ogni zona è definito dall'AQI medio mentre la grandezza dal numero di stazioni raggruppate.
+Il centro di ogni cerchio è calcolato come punto medio da ogni stazione raggruppata.
+Cliccando su un qualsiasi punto della mappa comparirà un pin con il nome della località, il valore AQI attuale e un grafico che mostra l'andamento della qualità dell'aria nelle ultime ore.
+I pin possono essere aggiunti e rimossi in qualsiasi momento.
+Premendo su un pin viene mostrato il menù a scomparsa per personalizzare la sonificazione.
+Tralasciando qualche dettaglio grafico e di scelta dei colori, il menù è simile a quello presente nel mockup; una differenza volta a migliorare l'esperienza utente è stata quella di pre-impostare l'intervallo di tempo per la sonificazione a quello mostrato nel pin.
+Al fine di permettere all'utente di effettuare più sonificazioni contemporaneamente, il player video è stato rimosso dalla pagina.
+Ad ogni richiesta di sonificazione, viene mostrata in basso a destra una notifica cliccabile, che permette di aprire la simulazione in una nuova scheda del browser.
+I colori utilizzati per i grafici, i cerchi e le notifiche riprendono quelli stabiliti dallo standard AQI.
+\begin{figure}[h]
+  \includegraphics[width=\linewidth]{img/schermata.png}
+  \caption{La schermata e le varie componenti}
+  \label{fig:schermata}
+\end{figure}
+\subsection{Dettagli implementativi}
+\subsubsection{La generazione dei cerchi}
+La preparazione della mappa avviene in diverse fase consecutive.
+Per prima cosa, tramite la libreria Leaflet, la mappa viene creata e visualizzata nella pagina.
+Immediatamente dopo, tramite una chiamata all'API di AQIcn, vengono scaricati i dati relativi a tutte le stazioni di rilevazione presenti.
+La visualizzazione delle zone circolari è affidata alla funzione load circles, che prende come unico parametro un oggetto JSON, contenente i dati delle stazioni.
+La funzione divide il mondo in un totale di 4900 zone, 70 in altezza e 70 in larghezza, ognuna identificata da un indice univoco.
+Per ogni stazione di ricerca, viene calcolato l'indice della zona a cui appartiene e viene inserita in un'apposita struttura dati.
+\lstset{caption={Suddivisione in zone delle stazioni.}}
+\begin{lstlisting}[language=Javascript]
+// get chunk unique index based on lat, lng
+function get_chunk_idx(lat, lng, chunks_per_dim) {
+    let lat_chunk = Math.floor((lat + 90) / 180 * chunks_per_dim);
+    let lng_chunk = Math.floor((lng + 180) / 360 * chunks_per_dim);
+    return lat_chunk * chunks_per_dim + lng_chunk;
+}
+
+// define chunk size
+let chunks = {};
+let chunks_per_dim = 70;   
+
+// load chunks
+for(let pin of data) {
+    if(pin.aqi == '-') continue;
+    let lat = pin.lat;
+    let lng = pin.lon;
+    let chunk_idx = get_chunk_idx(lat, lng, chunks_per_dim);
+    if(!(chunk_idx in chunks)) 
+        chunks[chunk_idx] = [pin];
+    else 
+        chunks[chunk_idx].push(pin);
+}
+\end{lstlisting}
+In seguito alla suddivisione in zone, per ognuna di queste viene calcolato il valore AQI e il punto medio delle stazioni raggruppate; 
+in base a queste informazioni, viene disegnato un cerchio di colore e grandezza appropriati. Eventuali zone vuote vengono ignorate.
+
+
+\subsubsection{Implementazione dei marker personalizzati}
+Cliccando sulla mappa, viene eseguita la funzione map inspect.
+Per prima cosa la funzione ottiene la latitudine e la longitudine del punto cliccato e, tramite reverse geocoding, ottiene il nome della località.
+L'esecuzione passa in seguito alla funzione create marker che, da un set di coordinate e un nome, crea un marker personalizzato.
+La funzione si occupa, inoltre, di ottenere lo storico delle ultime rilevazioni aqi della zona, eseguendo una chiamata all'API di weatherbit.io, questi dati
+vengono utilizzati in seguito per creare il grafico che compare nel pin.
+Per rimuovere un pin, è sufficiente cliccare con il tasto destro del mouse, o effettuare una pressione prolungata se da mobile.
+La struttura di un marker è un'estensione di quella default offerta da leaflet, sono state aggiunte le informazioni relative alla posizione geografica e all'ultima rilevazione AQI avvenuta, al fine di semplificare la gestione dei dati.
+\lstset{caption={La struttura di un marker personalizzato.}}
+\begin{lstlisting}[language=Javascript]
+// custom marker extension
+myAqiMarker = L.Marker.extend({
+    options: {
+        aqi: 0,       // last aqi value detected
+        location: '', // location name
+        lat: 0,       // latitude
+        lng: 0        // longitude
+    }
+});
+\end{lstlisting}
+
 \lstloadlanguages{Python}
 \lstset{
   language=Python,
@@ -20,10 +117,8 @@
   xrightmargin=-50pt,
 }
 
-Questo \`e il terzo capitolo.
-
 \section{Creazione del suono}
-\subsection{Generazione Sub Bass}                 %crea la sezione
+\subsection{Generazione Sub Bass} 
 La traccia di sub-bass viene generata tramite un procedimento procedurale implementato nei file sub e wave buffer.
 L'unico parametro di cui il processo ha bisogno è l'array di dati relativi alle varie rilevazioni, l'oggetto prodotto è un array di campioni audio stereo.
 \subsubsection{Scopo della traccia}
@@ -137,13 +232,6 @@ def get_lead(data, voicing):
 
   return notes
 \end{lstlisting}
-
-
-
-
-
-
-
 
 \subsection{Creazione del residuo}
 Il procsso relativo alla creazione della traccia di residuo è implementato nel file residue.py.

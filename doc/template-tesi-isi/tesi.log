@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.10.10)  27 OCT 2022 13:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.10.10)  27 OCT 2022 15:43
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -540,7 +540,7 @@ l.21 \subsubsection
                    {Relazione tra inquinamento e territorio} [1
 
 ]
-<img/livelli.png, id=373, 538.1706pt x 343.0416pt>
+<img/livelli.png, id=390, 538.1706pt x 343.0416pt>
 File: img/livelli.png Graphic file (type png)
 <use img/livelli.png>
 Package pdftex.def Info: img/livelli.png  used on input line 40.
@@ -606,7 +606,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [6]
-<img/mappapm.png, id=410, 702.625pt x 439.6425pt>
+<img/mappapm.png, id=427, 702.625pt x 439.6425pt>
 File: img/mappapm.png Graphic file (type png)
 <use img/mappapm.png>
 Package pdftex.def Info: img/mappapm.png  used on input line 134.
@@ -631,7 +631,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [8 <./img/mappapm.png>]
-<img/schema.png, id=421, 239.09325pt x 133.09724pt>
+<img/schema.png, id=438, 239.09325pt x 133.09724pt>
 File: img/schema.png Graphic file (type png)
 <use img/schema.png>
 Package pdftex.def Info: img/schema.png  used on input line 170.
@@ -676,7 +676,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [12]
-<img/image.png, id=446, 1284.8pt x 481.8pt>
+<img/image.png, id=464, 1284.8pt x 481.8pt>
 File: img/image.png Graphic file (type png)
 <use img/image.png>
 Package pdftex.def Info: img/image.png  used on input line 231.
@@ -713,7 +713,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [15]
-<img/btc.PNG, id=466, 540.21825pt x 305.943pt>
+<img/btc.PNG, id=483, 540.21825pt x 305.943pt>
 File: img/btc.PNG Graphic file (type png)
 <use img/btc.PNG>
 Package pdftex.def Info: img/btc.PNG  used on input line 266.
@@ -736,7 +736,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [16 <./img/btc.PNG>]
-<img/wavetable_emoji.jpg, id=475, 286.671pt x 172.84575pt>
+<img/wavetable_emoji.jpg, id=492, 286.671pt x 172.84575pt>
 File: img/wavetable_emoji.jpg Graphic file (type jpg)
 <use img/wavetable_emoji.jpg>
 Package pdftex.def Info: img/wavetable_emoji.jpg  used on input line 283.
@@ -764,7 +764,7 @@ Capitolo 2.
 
 
 ]
-<img/mockup.png, id=497, 457.10776pt x 233.673pt>
+<img/mockup.png, id=514, 457.10776pt x 233.673pt>
 File: img/mockup.png Graphic file (type png)
 <use img/mockup.png>
 Package pdftex.def Info: img/mockup.png  used on input line 40.
@@ -781,7 +781,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [20]
-<img/desktopmockup.PNG, id=503, 374.5995pt x 224.037pt>
+<img/desktopmockup.PNG, id=520, 374.5995pt x 224.037pt>
 File: img/desktopmockup.PNG Graphic file (type png)
 <use img/desktopmockup.PNG>
 Package pdftex.def Info: img/desktopmockup.PNG  used on input line 56.
@@ -857,7 +857,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [28]
-<img/pianoroll.png, id=544, 597.73312pt x 338.76563pt>
+<img/pianoroll.png, id=561, 597.73312pt x 338.76563pt>
 File: img/pianoroll.png Graphic file (type png)
 <use img/pianoroll.png>
 Package pdftex.def Info: img/pianoroll.png  used on input line 195.
@@ -887,7 +887,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [31]
-<img/lfo.png, id=561, 365.56575pt x 418.56375pt>
+<img/lfo.png, id=579, 365.56575pt x 418.56375pt>
 File: img/lfo.png Graphic file (type png)
 <use img/lfo.png>
 Package pdftex.def Info: img/lfo.png  used on input line 238.
@@ -912,7 +912,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [33 <./img/lfo.png>]
-<img/adsr.PNG, id=575, 632.96475pt x 319.1925pt>
+<img/adsr.PNG, id=592, 632.96475pt x 319.1925pt>
 File: img/adsr.PNG Graphic file (type png)
 <use img/adsr.PNG>
 Package pdftex.def Info: img/adsr.PNG  used on input line 258.
@@ -948,7 +948,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [36]
-<img/uml.png, id=595, 663.47874pt x 603.25375pt>
+<img/uml.png, id=612, 663.47874pt x 603.25375pt>
 File: img/uml.png Graphic file (type png)
 <use img/uml.png>
 Package pdftex.def Info: img/uml.png  used on input line 294.
@@ -966,24 +966,17 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 ]
 Capitolo 3.
-(d:/texlive/2022/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2020/03/24 1.8d listings language file
-)
-Underfull \vbox (badness 1389) has occurred while \output is active []
+<img/schermata.png, id=622, 1156.32pt x 650.43pt>
+File: img/schermata.png Graphic file (type png)
+<use img/schermata.png>
+Package pdftex.def Info: img/schermata.png  used on input line 40.
+(pdftex.def)             Requested size: 390.0pt x 219.36674pt.
+
+Underfull \vbox (badness 1867) has occurred while \output is active []
 
  [39
 
 ]
-<img/waves.png, id=610, 1284.8pt x 963.6pt>
-File: img/waves.png Graphic file (type png)
-<use img/waves.png>
-Package pdftex.def Info: img/waves.png  used on input line 46.
-(pdftex.def)             Requested size: 390.0pt x 292.49341pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 58.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -991,9 +984,18 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[40]
-LaTeX Font Info:    Trying to load font information for TS1+cmss on input line 63.
- (d:/texlive/2022/texmf-dist/tex/latex/base/ts1cmss.fd
+[40 <./img/schermata.png>]
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 53.
+LaTeX Font Info:    Trying to load font information for OMS+cmss on input line 55.
+LaTeX Font Info:    No file OMScmss.fd. on input line 55.
+
+
+LaTeX Font Warning: Font shape `OMS/cmss/m/n' undefined
+(Font)              using `OMS/cmsy/m/n' instead
+(Font)              for symbol `textbraceleft' on input line 55.
+
+LaTeX Font Info:    Trying to load font information for TS1+cmss on input line 56.
+(d:/texlive/2022/texmf-dist/tex/latex/base/ts1cmss.fd
 File: ts1cmss.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 
@@ -1003,15 +1005,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[41 <./img/waves.png>]
-LaTeX Font Info:    Trying to load font information for OMS+cmss on input line 94.
-LaTeX Font Info:    No file OMScmss.fd. on input line 94.
-
-
-LaTeX Font Warning: Font shape `OMS/cmss/m/n' undefined
-(Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textbraceleft' on input line 94.
-
+[41] (d:/texlive/2022/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2020/03/24 1.8d listings language file
+)
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1020,6 +1016,15 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [42]
+<img/waves.png, id=681, 1284.8pt x 963.6pt>
+File: img/waves.png Graphic file (type png)
+<use img/waves.png>
+Package pdftex.def Info: img/waves.png  used on input line 141.
+(pdftex.def)             Requested size: 390.0pt x 292.49341pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1028,18 +1033,42 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [43]
-LaTeX Font Info:    Trying to load font information for OML+cmss on input line 134.
-LaTeX Font Info:    No file OMLcmss.fd. on input line 134.
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[44 <./img/waves.png>]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[45]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[46]
+LaTeX Font Info:    Trying to load font information for OML+cmss on input line 229.
+LaTeX Font Info:    No file OMLcmss.fd. on input line 229.
 
 
 LaTeX Font Warning: Font shape `OML/cmss/m/n' undefined
 (Font)              using `OML/cmm/m/it' instead
-(Font)              for symbol `textless' on input line 134.
+(Font)              for symbol `textless' on input line 229.
 
-<img/residue.png, id=670, 462.528pt x 346.896pt>
+<img/residue.png, id=737, 462.528pt x 346.896pt>
 File: img/residue.png Graphic file (type png)
 <use img/residue.png>
-Package pdftex.def Info: img/residue.png  used on input line 164.
+Package pdftex.def Info: img/residue.png  used on input line 252.
 (pdftex.def)             Requested size: 390.0pt x 292.5128pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1048,7 +1077,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[44]) (./backMatter/conclusioni.tex
+[47]) (./backMatter/conclusioni.tex
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1056,10 +1085,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[45 <./img/residue.png>] [46
-
-
-]
+[48 <./img/residue.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 12--14
 
  []
@@ -1067,7 +1093,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 12--14
 
 Underfull \vbox (badness 2452) has occurred while \output is active []
 
- [47
+ [49
+
+
 
 ]
 Underfull \vbox (badness 4752) has occurred while \output is active []
@@ -1080,7 +1108,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[48]) (./backMatter/bibliografia.tex
+[50]) (./backMatter/bibliografia.tex
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1088,7 +1116,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[49] [50
+[51] [52
 
 
 ] (./tesi.bbl
@@ -1096,12 +1124,12 @@ Underfull \hbox (badness 2980) in paragraph at lines 19--20
 []\OT1/cmr/m/n/12 Data vi-sua-li-za-tion me-ta-mor-fo-si dei da-ti tra soft-ware e si-ti di
  []
 
-)) (./backMatter/ringraziamenti.tex [51
+)) (./backMatter/ringraziamenti.tex [53
 
-] [52
+] [54
 
 
-]) [53
+]) [55
 
 ] (./tesi.aux)
 
@@ -1111,21 +1139,21 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `tesi.out' has not changed.
-(rerunfilecheck)             Checksum: AFCCB8677D26150A5A9FBABACCFE980F;8365.
+(rerunfilecheck)             Checksum: 3EF461D700DAF06F3AF8AFB40A0414E2;8927.
  ) 
 Here is how much of TeX's memory you used:
- 14728 strings out of 475071
- 223278 string characters out of 5782907
- 903715 words of memory out of 5000000
- 35626 multiletter control sequences out of 15000+600000
- 480987 words of font info for 73 fonts, out of 8000000 for 9000
+ 14836 strings out of 475071
+ 224662 string characters out of 5782907
+ 906637 words of memory out of 5000000
+ 35691 multiletter control sequences out of 15000+600000
+ 481155 words of font info for 74 fonts, out of 8000000 for 9000
  1143 hyphenation exceptions out of 8191
- 72i,12n,77p,783b,2161s stack positions out of 10000i,1000n,20000p,200000b,200000s
-{d:/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfss0800.pfb>
-Output written on tesi.pdf (67 pages, 1577951 bytes).
+ 72i,12n,77p,783b,2153s stack positions out of 10000i,1000n,20000p,200000b,200000s
+{d:/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb><d:/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfss0800.pfb>
+Output written on tesi.pdf (69 pages, 2221254 bytes).
 PDF statistics:
- 838 PDF objects out of 1000 (max. 8388607)
- 710 compressed objects within 8 object streams
- 220 named destinations out of 1000 (max. 500000)
- 487 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 912 PDF objects out of 1000 (max. 8388607)
+ 779 compressed objects within 8 object streams
+ 261 named destinations out of 1000 (max. 500000)
+ 516 words of extra memory for PDF output out of 10000 (max. 10000000)
 
