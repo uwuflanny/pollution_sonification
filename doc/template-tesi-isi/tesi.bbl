@@ -2,47 +2,141 @@
 
 \bibitem{aqibasics}
 Air quality basics.
+\newblock \url{https://www.airnow.gov/aqi/aqi-basics/}.
 
 \bibitem{accessibility}
 Benefits of sonification for users who are blind or low vision.
+\newblock
+  \url{https://www.perkins.org/resource/sonification-summary-page/#:~:text=Sonification%20is%20the%20use%20of,low%20vision%2C%20particularly%20for%20math.}
 
 \bibitem{audiovideo}
 Can interactive audio improve videoconferencing?
+\newblock
+  \url{https://www.highfidelity.com/blog/can-interactive-audio-improve-videoconferencing#:~:text=Sound%20is%20critical.%E2%80%9D,comprehend%20than%20ones%20with%20video.}
 
 \bibitem{color_symbolism}
 Color symbolism.
+\newblock
+  \url{https://www.milanartinstitute.com/blog/symbolism-of-color#:~:text=Colors%20have%20an%20emotional%20effect,discover%20the%20meaning%20of%20colors.}
 
 \bibitem{arpa_veneto}
 Cosa dice la normativa sulla qualità dell'aria?
+\newblock
+  \url{https://www.arpa.veneto.it/temi-ambientali/aria/cosa-dice-la-normativa#:~:text=con%20il%20D.-,Lgs.,e%20inferiore%20a%2050%20MW%22.}
 
 \bibitem{data_visualization}
 Data visualization metamorfosi dei dati tra software e siti di visualizzazione.
+\newblock
+  \url{https://www.tesionline.it/tesi/preview/data-visualization-metamorfosi-dei-dati-tra-software-e-siti-di-visualizzazione/35910}.
 
 \bibitem{nasa}
 Explore - from space to sound.
+\newblock \url{https://www.nasa.gov/content/explore-from-space-to-sound}.
 
 \bibitem{bitcoin}
 I created music from data using python!
+\newblock
+  \url{https://towardsdatascience.com/i-created-music-from-data-using-python-adfc349f55f1}.
 
 \bibitem{la_mincrometrologia}
 La minicrometrologia e la dispersione degli inquinanti in aria.
-
-\bibitem{latex}
-Latex.
+\newblock
+  \url{https://www.isprambiente.gov.it/files/aria/micrometeorologiadispersioneinquinanti.pdf}.
 
 \bibitem{polluter_pays}
 Polluter pays principle.
+\newblock
+  \url{https://www.oecd.org/officialdocuments/publicdisplaydocumentpdf/?cote=OCDE/GD(92)81&docLanguage=En}.
 
 \bibitem{population_and_enviroment}
 Population and enviroment.
+\newblock \url{https://www.rand.org/pubs/research_briefs/RB5045.html}.
 
 \bibitem{serum}
 Serum.
+\newblock \url{https://xferrecords.com/products/serum/}.
 
 \bibitem{sonification_model}
 The sonification handbook.
+\newblock
+  \url{https://sonification.de/handbook/download/TheSonificationHandbook-chapter16.pdf}.
 
 \bibitem{hermann}
 Taxonomy and definitions for sonification and auditory display.
+\newblock \url{https://www.icad.org/Proceedings/2008/Hermann2008.pdf}.
+
+\bibitem{dissonance}
+Mastercalss Authors.
+\newblock Dissonance in music explained: Consonance vs. dissonance, June 2021.
+\newblock
+  \url{https://www.masterclass.com/articles/dissonance-music-explained}.
+
+\bibitem{vst3}
+Alessandro~La Cava.
+\newblock Plugin audio: Formati e differenze, January 2021.
+\newblock \url{https://alexlacava.com/plugin-audio-formati-e-differenze/}.
+
+\bibitem{subbass}
+Wikipedia contributors.
+\newblock Sub-bass, April 2022.
+\newblock \url{https://en.wikipedia.org/wiki/Sub-bass}.
+
+\bibitem{izotope}
+Daniel Dixon.
+\newblock The beginner's guide to synths for music production, July 2018.
+\newblock
+  \url{https://www.izotope.com/en/learn/the-beginners-guide-to-synths-for-music-production.html}.
+
+\bibitem{residue}
+Brian Foo.
+\newblock Air play, February 2015.
+\newblock \url{https://datadrivendj.com/tracks/smog/}.
+
+\bibitem{api}
+Red Hat.
+\newblock What is an api?, June 2022.
+\newblock
+  \url{https://www.redhat.com/en/topics/api/what-are-application-programming-interfaces}.
+
+\bibitem{env_img}
+Apple Inc.
+\newblock Attack, decay, sustain und release.
+\newblock
+  \url{https://support.apple.com/it-it/guide/logicpro/lgsife419620/mac}.
+
+\bibitem{midi}
+Future~Music Magazine.
+\newblock 30 years of midi: a brief history, December 2012.
+\newblock
+  \url{https://www.musicradar.com/news/tech/30-years-of-midi-a-brief-history-568009}.
+
+\bibitem{requisiti}
+Roger Morrison.
+\newblock Differenza tra requisiti funzionali e non funzionali, September 2021.
+\newblock
+  \url{https://www.izotope.com/en/learn/the-beginners-guide-to-synths-for-music-production.html}.
+
+\bibitem{appdiffs}
+portalpirate GeeksforGeeks.
+\newblock Difference between native apps and web apps, March 2021.
+\newblock
+  \url{https://www.geeksforgeeks.org/difference-between-native-apps-and-web-apps/#:~:text=Web%20apps%20function%20in%2Dbrowser,build%20than%20native%20mobile%20apps.}
+
+\bibitem{enveloper}
+Martin Russ.
+\newblock {\em Sound Synthesis and Sampling}.
+\newblock Focal Press, Waltham, Massachusetts, USA, 2008.
+
+\bibitem{lfo_img}
+Asif Shaik.
+\newblock Amplitude modulation.
+\newblock
+  \url{https://www.physics-and-radio-electronics.com/blog/amplitude-modulation/}.
+
+\bibitem{pianoroll_img}
+Image-Line Software.
+\newblock Fl studio reference manual, July 2018.
+\newblock
+  \url{https://www.image-line.com/fl-studio-learning/fl-studio-online-manual/html/pianoroll.htm}.
 
 \end{thebibliography}

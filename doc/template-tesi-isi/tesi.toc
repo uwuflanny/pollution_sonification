@@ -1,90 +1,72 @@
 \babel@toc {italian}{}\relax 
 \babel@toc {italian}{}\relax 
 \contentsline {chapter}{Introduzione}{i}{chapter*.1}%
-\contentsline {chapter}{\numberline {1}Primo Capitolo}{1}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Introduzione}{1}{section.1.1}%
-\contentsline {subsection}{\numberline {1.1.1}L'inquinamento dell'aria}{1}{subsection.1.1.1}%
+\contentsline {chapter}{\numberline {1}Background e Contesto}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}L'inquinamento dell'aria}{1}{section.1.1}%
 \contentsline {subsubsection}{Relazione tra inquinamento e territorio}{2}{section*.5}%
-\contentsline {subsection}{\numberline {1.1.2}Riferimenti legislativi}{3}{subsection.1.1.2}%
-\contentsline {subsection}{\numberline {1.1.3}Misurare l'inquinamento}{4}{subsection.1.1.3}%
+\contentsline {subsection}{\numberline {1.1.1}Riferimenti legislativi}{3}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Misurare l'inquinamento}{3}{subsection.1.1.2}%
 \contentsline {subsubsection}{Approfondimento sull'AQI}{5}{section*.6}%
-\contentsline {section}{\numberline {1.2}Visualizzazione dei dati}{5}{section.1.2}%
-\contentsline {subsection}{\numberline {1.2.1}La data visualization}{6}{subsection.1.2.1}%
+\contentsline {section}{\numberline {1.2}Visualizzazione dei dati}{6}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}La data visualization}{7}{subsection.1.2.1}%
 \contentsline {subsection}{\numberline {1.2.2}Rappresentare l'inquinamento}{7}{subsection.1.2.2}%
-\contentsline {subsection}{\numberline {1.2.3}I problemi della rappresentazione grafica}{8}{subsection.1.2.3}%
-\contentsline {section}{\numberline {1.3}Sonificazione}{9}{section.1.3}%
-\contentsline {subsection}{\numberline {1.3.1}Definizione di Sonificazione}{9}{subsection.1.3.1}%
-\contentsline {subsection}{\numberline {1.3.2}L'utilizzo della sonificazione}{10}{subsection.1.3.2}%
-\contentsline {subsubsection}{Rappresentare dei dati multidimensionali}{11}{section*.7}%
-\contentsline {subsubsection}{La musica generativa}{11}{section*.8}%
-\contentsline {subsection}{\numberline {1.3.3}Sonificazione ed accessibilità}{12}{subsection.1.3.3}%
-\contentsline {subsection}{\numberline {1.3.4}Adattare un dato ad un formato sonoro}{12}{subsection.1.3.4}%
-\contentsline {subsubsection}{La sintesi sonora}{13}{section*.9}%
-\contentsline {subsubsection}{Design sonoro}{14}{section*.10}%
-\contentsline {subsubsection}{Model Based Sonification}{15}{section*.11}%
-\contentsline {subsection}{\numberline {1.3.5}Esempi spiegati}{15}{subsection.1.3.5}%
-\contentsline {subsubsection}{Sonificare il prezzo di Bitcoin}{16}{section*.12}%
-\contentsline {subsubsection}{Trasformare un'immagine in campioni audio}{17}{section*.13}%
-\contentsline {subsubsection}{Sonificare la volta celeste}{18}{section*.14}%
-\contentsline {chapter}{\numberline {2}Secondo capitolo}{19}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Definizione dei Requisiti}{19}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}Requisiti funzionali}{19}{subsection.2.1.1}%
-\contentsline {subsection}{\numberline {2.1.2}Requisiti non funzionali}{20}{subsection.2.1.2}%
-\contentsline {section}{\numberline {2.2}Progettazione grafica}{20}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}mockup}{20}{subsection.2.2.1}%
-\contentsline {section}{\numberline {2.3}Tecnologie web utilizzate}{22}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}HTML}{22}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}CSS}{23}{subsection.2.3.2}%
-\contentsline {subsection}{\numberline {2.3.3}JavaScript}{23}{subsection.2.3.3}%
-\contentsline {subsection}{\numberline {2.3.4}Jquery}{23}{subsection.2.3.4}%
-\contentsline {subsection}{\numberline {2.3.5}Bootstrap}{24}{subsection.2.3.5}%
-\contentsline {subsection}{\numberline {2.3.6}Plotly}{24}{subsection.2.3.6}%
-\contentsline {subsection}{\numberline {2.3.7}Leaflet - OpenStreetMap}{24}{subsection.2.3.7}%
-\contentsline {subsection}{\numberline {2.3.8}Esri leaflet}{25}{subsection.2.3.8}%
-\contentsline {subsection}{\numberline {2.3.9}AQIcn API}{25}{subsection.2.3.9}%
-\contentsline {subsection}{\numberline {2.3.10}Weatherbit.io}{25}{subsection.2.3.10}%
-\contentsline {subsection}{\numberline {2.3.11}Javascript Fetch API}{25}{subsection.2.3.11}%
-\contentsline {subsection}{\numberline {2.3.12}Python FASTapi}{26}{subsection.2.3.12}%
-\contentsline {section}{\numberline {2.4}Tecnologie utilizzate per la sonificazione}{26}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}Strategia di sonificazione}{27}{subsection.2.4.1}%
-\contentsline {subsubsection}{L'andamento dell'inquinamento}{27}{section*.15}%
-\contentsline {subsubsection}{L'inquinamento residuo}{27}{section*.16}%
-\contentsline {subsubsection}{Gestire il volume}{28}{section*.17}%
-\contentsline {subsubsection}{L'applicazione della teoria musicale}{28}{section*.18}%
-\contentsline {subsection}{\numberline {2.4.2}Design audio}{28}{subsection.2.4.2}%
-\contentsline {subsubsection}{I file MIDI}{28}{section*.19}%
-\contentsline {subsubsection}{Effetti audio VST3}{30}{section*.20}%
-\contentsline {subsubsection}{Archetype Gojira}{31}{section*.21}%
-\contentsline {subsection}{\numberline {2.4.3}Sintesi audio}{31}{subsection.2.4.3}%
-\contentsline {subsubsection}{Librerie utilizzate}{32}{section*.22}%
-\contentsline {subsubsection}{LFO}{32}{section*.23}%
-\contentsline {subsubsection}{Enveloper}{33}{section*.24}%
-\contentsline {subsection}{\numberline {2.4.4}Creazione del video}{35}{subsection.2.4.4}%
-\contentsline {subsection}{\numberline {2.4.5}Unire Audio e Video}{35}{subsection.2.4.5}%
-\contentsline {subsection}{\numberline {2.4.6}Altri software e hardware utilizzati}{36}{subsection.2.4.6}%
-\contentsline {subsubsection}{Ableton Live 10 Lite}{36}{section*.25}%
-\contentsline {subsubsection}{Audacity}{36}{section*.26}%
-\contentsline {subsubsection}{Visual Studio Code}{36}{section*.27}%
-\contentsline {subsubsection}{Insomnia}{36}{section*.28}%
-\contentsline {section}{\numberline {2.5}Architettura del sistema schematizzata}{37}{section.2.5}%
-\contentsline {chapter}{\numberline {3}Terzo capitolo}{39}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Implementazione della Mappa}{39}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}Differenze con i mockup}{39}{subsection.3.1.1}%
-\contentsline {subsection}{\numberline {3.1.2}Dettagli implementativi}{40}{subsection.3.1.2}%
-\contentsline {subsubsection}{La generazione dei cerchi}{40}{section*.29}%
-\contentsline {subsubsection}{Implementazione dei marker personalizzati}{41}{section*.30}%
-\contentsline {section}{\numberline {3.2}Creazione del suono}{42}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Generazione Sub Bass}{42}{subsection.3.2.1}%
-\contentsline {subsubsection}{Scopo della traccia}{42}{section*.31}%
-\contentsline {subsubsection}{Suddivisione dei dati in intervalli}{43}{section*.32}%
-\contentsline {subsubsection}{Generazione delle WaveTable}{43}{section*.33}%
-\contentsline {subsubsection}{Preparazione dei modificatori di volume - LFO}{43}{section*.34}%
-\contentsline {subsubsection}{Sintesi}{44}{section*.35}%
-\contentsline {subsection}{\numberline {3.2.2}Esportare una traccia audio}{45}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3}Traccia principale e accordi - Lead}{46}{subsection.3.2.3}%
-\contentsline {subsection}{\numberline {3.2.4}Creazione del residuo}{47}{subsection.3.2.4}%
-\contentsline {subsubsection}{Individuare i picchi di residuo}{47}{section*.36}%
-\contentsline {subsubsection}{Generazione delle note}{47}{section*.37}%
-\contentsline {chapter}{Conclusioni}{49}{chapter*.38}%
-\contentsline {chapter}{Bibliografia}{53}{chapter*.38}%
-\contentsline {chapter}{Ringraziamenti}{53}{chapter*.39}%
+\contentsline {subsection}{\numberline {1.2.3}I problemi della rappresentazione grafica}{9}{subsection.1.2.3}%
+\contentsline {section}{\numberline {1.3}Sonificazione}{10}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Definizione di Sonificazione}{10}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}L'utilizzo della sonificazione}{11}{subsection.1.3.2}%
+\contentsline {subsubsection}{Rappresentare dei dati multidimensionali}{12}{section*.7}%
+\contentsline {subsubsection}{La musica generativa}{12}{section*.8}%
+\contentsline {subsection}{\numberline {1.3.3}Sonificazione ed accessibilità}{13}{subsection.1.3.3}%
+\contentsline {subsection}{\numberline {1.3.4}Adattare un dato ad un formato sonoro}{13}{subsection.1.3.4}%
+\contentsline {subsubsection}{La sintesi sonora}{14}{section*.9}%
+\contentsline {subsubsection}{Design sonoro}{15}{section*.10}%
+\contentsline {subsubsection}{Model Based Sonification}{16}{section*.11}%
+\contentsline {subsection}{\numberline {1.3.5}Esempi spiegati}{16}{subsection.1.3.5}%
+\contentsline {subsubsection}{Sonificare il prezzo di Bitcoin}{17}{section*.12}%
+\contentsline {subsubsection}{Trasformare un'immagine in campioni audio}{18}{section*.13}%
+\contentsline {subsubsection}{Sonificare la volta celeste}{19}{section*.14}%
+\contentsline {chapter}{\numberline {2}Design e Tecnologie}{21}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Definizione dei Requisiti}{21}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Requisiti funzionali}{21}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Requisiti non funzionali}{22}{subsection.2.1.2}%
+\contentsline {section}{\numberline {2.2}Progettazione grafica}{22}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Mockup}{22}{subsection.2.2.1}%
+\contentsline {section}{\numberline {2.3}Tecnologie web utilizzate}{24}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}HTML}{25}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}CSS}{25}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}JavaScript}{25}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}Jquery}{25}{subsection.2.3.4}%
+\contentsline {subsection}{\numberline {2.3.5}Bootstrap}{26}{subsection.2.3.5}%
+\contentsline {subsection}{\numberline {2.3.6}Plotly}{26}{subsection.2.3.6}%
+\contentsline {subsection}{\numberline {2.3.7}Leaflet - OpenStreetMap}{26}{subsection.2.3.7}%
+\contentsline {subsection}{\numberline {2.3.8}Esri Leaflet}{27}{subsection.2.3.8}%
+\contentsline {subsection}{\numberline {2.3.9}AQIcn API}{27}{subsection.2.3.9}%
+\contentsline {subsection}{\numberline {2.3.10}Weatherbit.io}{27}{subsection.2.3.10}%
+\contentsline {subsection}{\numberline {2.3.11}Javascript Fetch API}{28}{subsection.2.3.11}%
+\contentsline {subsection}{\numberline {2.3.12}Python FastAPI}{28}{subsection.2.3.12}%
+\contentsline {section}{\numberline {2.4}Tecnologie utilizzate per la sonificazione}{28}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Strategia di sonificazione}{29}{subsection.2.4.1}%
+\contentsline {subsubsection}{L'andamento dell'inquinamento}{29}{section*.15}%
+\contentsline {subsubsection}{L'inquinamento residuo}{29}{section*.16}%
+\contentsline {subsubsection}{Gestire il volume}{30}{section*.17}%
+\contentsline {subsubsection}{L'applicazione della teoria musicale}{30}{section*.18}%
+\contentsline {subsection}{\numberline {2.4.2}Design audio}{30}{subsection.2.4.2}%
+\contentsline {subsubsection}{I file MIDI}{30}{section*.19}%
+\contentsline {subsubsection}{Effetti audio VST3}{32}{section*.20}%
+\contentsline {subsubsection}{Archetype Gojira}{33}{section*.21}%
+\contentsline {subsection}{\numberline {2.4.3}Sintesi audio}{34}{subsection.2.4.3}%
+\contentsline {subsubsection}{Librerie utilizzate}{34}{section*.22}%
+\contentsline {subsubsection}{LFO}{34}{section*.23}%
+\contentsline {subsubsection}{Enveloper}{36}{section*.24}%
+\contentsline {subsection}{\numberline {2.4.4}Creazione del video}{37}{subsection.2.4.4}%
+\contentsline {subsection}{\numberline {2.4.5}Unire Audio e Video}{37}{subsection.2.4.5}%
+\contentsline {subsection}{\numberline {2.4.6}Altri software e hardware utilizzati}{38}{subsection.2.4.6}%
+\contentsline {subsubsection}{Ableton Live 10 Lite}{38}{section*.25}%
+\contentsline {subsubsection}{Audacity}{38}{section*.26}%
+\contentsline {subsubsection}{Visual Studio Code}{38}{section*.27}%
+\contentsline {subsubsection}{Insomnia}{38}{section*.28}%
+\contentsline {section}{\numberline {2.5}Architettura del sistema schematizzata}{39}{section.2.5}%
+\contentsline {chapter}{\numberline {3}Terzo capitolo}{41}{chapter.3}%
+\contentsline {chapter}{Conclusioni}{43}{chapter*.29}%
+\contentsline {chapter}{Bibliografia}{47}{chapter*.29}%
+\contentsline {chapter}{Ringraziamenti}{50}{chapter*.30}%
