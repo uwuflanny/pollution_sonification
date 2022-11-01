@@ -66,7 +66,27 @@
 \contentsline {subsubsection}{Visual Studio Code}{38}{section*.27}%
 \contentsline {subsubsection}{Insomnia}{38}{section*.28}%
 \contentsline {section}{\numberline {2.5}Architettura del sistema schematizzata}{39}{section.2.5}%
-\contentsline {chapter}{\numberline {3}Terzo capitolo}{41}{chapter.3}%
-\contentsline {chapter}{Conclusioni}{43}{chapter*.29}%
-\contentsline {chapter}{Bibliografia}{47}{chapter*.29}%
-\contentsline {chapter}{Ringraziamenti}{50}{chapter*.30}%
+\contentsline {chapter}{\numberline {3}Implementazione}{41}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Realizzazione della Mappa}{41}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Differenze con i mockup}{41}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Dettagli implementativi}{42}{subsection.3.1.2}%
+\contentsline {subsubsection}{La generazione dei cerchi}{42}{section*.29}%
+\contentsline {subsubsection}{Implementazione dei marker personalizzati}{43}{section*.30}%
+\contentsline {subsubsection}{Personalizzare la sonificazione}{44}{section*.31}%
+\contentsline {subsubsection}{Gestire lo storico}{45}{section*.32}%
+\contentsline {section}{\numberline {3.2}Realizzazione del server}{46}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Creazione del suono}{46}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Generazione Sub Bass}{46}{subsection.3.3.1}%
+\contentsline {subsubsection}{Scopo della traccia}{46}{section*.33}%
+\contentsline {subsubsection}{Suddivisione dei dati in intervalli}{47}{section*.34}%
+\contentsline {subsubsection}{Generazione delle WaveTable}{47}{section*.35}%
+\contentsline {subsubsection}{Preparazione dei modificatori di volume - LFO}{47}{section*.36}%
+\contentsline {subsubsection}{Sintesi}{48}{section*.37}%
+\contentsline {subsection}{\numberline {3.3.2}Esportare una traccia audio}{49}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Traccia principale e accordi - Lead}{50}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.4}Creazione del residuo}{51}{subsection.3.3.4}%
+\contentsline {subsubsection}{Individuare i picchi di residuo}{51}{section*.38}%
+\contentsline {subsubsection}{Generazione delle note}{51}{section*.39}%
+\contentsline {chapter}{Conclusioni}{53}{chapter*.40}%
+\contentsline {chapter}{Bibliografia}{57}{chapter*.40}%
+\contentsline {chapter}{Ringraziamenti}{61}{chapter*.41}%

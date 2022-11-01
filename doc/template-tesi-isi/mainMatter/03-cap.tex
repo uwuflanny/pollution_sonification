@@ -1,2 +1,329 @@
 \clearpage{\pagestyle{empty}\cleardoublepage}
-\chapter{Terzo capitolo}                %crea il capitolo
+\chapter{Implementazione}                %crea il capitolo
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%imposta l'intestazione di pagina
+
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]",
+  xleftmargin=-25pt,
+  xrightmargin=-50pt,
+  basicstyle=\scriptsize\sffamily
+}
+
+\section{Realizzazione della Mappa}
+\subsection{Differenze con i mockup}
+Durante lo sviluppo del progetto, ho apportato delle migliorie rispetto ai mockup.
+Il cambiamento più significativo è stato quello di rimuovere i pin rappresentanti le varie stazioni a favore di una suddivisione in zone, ognuna delle quali delimitata da un cerchio colorato.
+Il colore di ogni zona è definito dall'AQI medio mentre la grandezza dal numero di stazioni raggruppate.
+Il centro di ogni cerchio è calcolato come punto medio da ogni stazione raggruppata.
+Cliccando su un qualsiasi punto della mappa comparirà un pin con il nome della località, il valore AQI attuale e un grafico che mostra l'andamento della qualità dell'aria nelle ultime ore.
+I pin possono essere aggiunti e rimossi in qualsiasi momento.
+Premendo su un pin viene mostrato il menù a scomparsa per personalizzare la sonificazione.
+Tralasciando qualche dettaglio grafico e di scelta dei colori, il menù è simile a quello presente nel mockup; una differenza volta a migliorare l'esperienza utente è stata quella di pre-impostare l'intervallo di tempo per la sonificazione a quello mostrato nel pin.
+Al fine di permettere all'utente di effettuare più sonificazioni contemporaneamente, il player video è stato rimosso dalla pagina.
+Ad ogni richiesta di sonificazione, viene mostrata in basso a destra una notifica cliccabile, che permette di aprire la simulazione in una nuova scheda del browser.
+I colori utilizzati per i grafici, i cerchi e le notifiche riprendono quelli stabiliti dallo standard AQI.
+\begin{figure}[h]
+  \includegraphics[width=\linewidth]{img/schermata.png}
+  \caption{La schermata e le varie componenti}
+  \label{fig:schermata}
+\end{figure}
+\subsection{Dettagli implementativi}
+\subsubsection{La generazione dei cerchi}
+La preparazione della mappa avviene in diverse fase consecutive.
+Per prima cosa, tramite la libreria Leaflet, la mappa viene creata e visualizzata nella pagina.
+Immediatamente dopo, tramite una chiamata all'API di AQIcn, vengono scaricati i dati relativi a tutte le stazioni di rilevazione presenti.
+La visualizzazione delle zone circolari è affidata alla funzione load circles, che prende come unico parametro un oggetto JSON, contenente i dati delle stazioni.
+La funzione divide il mondo in un totale di 4900 zone, 70 in altezza e 70 in larghezza, ognuna identificata da un indice univoco.
+Per ogni stazione di ricerca, viene calcolato l'indice della zona a cui appartiene e viene inserita in un'apposita struttura dati.
+\lstset{caption={Suddivisione in zone delle stazioni.}}
+\begin{lstlisting}[language=Javascript]
+// get chunk unique index based on lat, lng
+function get_chunk_idx(lat, lng, chunks_per_dim) {
+    let lat_chunk = Math.floor((lat + 90) / 180 * chunks_per_dim);
+    let lng_chunk = Math.floor((lng + 180) / 360 * chunks_per_dim);
+    return lat_chunk * chunks_per_dim + lng_chunk;
+}
+
+// define chunk size
+let chunks = {};
+let chunks_per_dim = 70;   
+
+// load chunks
+for(let pin of data) {
+    if(pin.aqi == '-') continue;
+    let lat = pin.lat;
+    let lng = pin.lon;
+    let chunk_idx = get_chunk_idx(lat, lng, chunks_per_dim);
+    if(!(chunk_idx in chunks)) 
+        chunks[chunk_idx] = [pin];
+    else 
+        chunks[chunk_idx].push(pin);
+}
+\end{lstlisting}
+In seguito alla suddivisione in zone, per ognuna di queste viene calcolato il valore AQI e il punto medio delle stazioni raggruppate; 
+in base a queste informazioni, viene disegnato un cerchio di colore e grandezza appropriati. Eventuali zone vuote vengono ignorate.
+
+
+\subsubsection{Implementazione dei marker personalizzati}
+Cliccando sulla mappa, viene eseguita la funzione map inspect.
+Per prima cosa la funzione ottiene la latitudine e la longitudine del punto cliccato e, tramite reverse geocoding, ottiene il nome della località.
+L'esecuzione passa in seguito alla funzione create marker che, da un set di coordinate e un nome, crea un marker personalizzato.
+La funzione si occupa, inoltre, di ottenere lo storico delle ultime rilevazioni aqi della zona, eseguendo una chiamata all'API di weatherbit.io, questi dati
+vengono utilizzati in seguito per creare il grafico che compare nel pin.
+Per rimuovere un pin, è sufficiente cliccare con il tasto destro del mouse, o effettuare una pressione prolungata se da mobile.
+La struttura di un marker è un'estensione di quella default offerta da leaflet, sono state aggiunte le informazioni relative alla posizione geografica e all'ultima rilevazione AQI avvenuta, al fine di semplificare la gestione dei dati.
+\lstset{caption={La struttura di un marker personalizzato.}}
+\begin{lstlisting}[language=Javascript]
+// custom marker extension
+myAqiMarker = L.Marker.extend({
+    options: {
+        aqi: 0,       // last aqi value detected
+        location: '', // location name
+        lat: 0,       // latitude
+        lng: 0        // longitude
+    }
+});
+\end{lstlisting}
+
+\lstloadlanguages{Python}
+\lstset{
+  language=Python,
+  basicstyle=\scriptsize\sffamily,
+  numberstyle=\color{gray},
+  stringstyle=\color[HTML]{933797},
+  commentstyle=\color[HTML]{228B22}\sffamily,
+  emph={[2]from,import,pass,return}, emphstyle={[2]\color[HTML]{DD52F0}},
+  emph={[3]range}, emphstyle={[3]\color[HTML]{D17032}},
+  emph={[4]for,in,def}, emphstyle={[4]\color{blue}},
+  showstringspaces=false,
+  breaklines=true,
+  prebreak=\mbox{{\color{gray}\tiny$\searrow$}},
+  numbers=left,
+  xleftmargin=-25pt,
+  xrightmargin=-50pt,
+}
+
+\subsubsection{Personalizzare la sonificazione}
+Al click, del marker, viene mostrato un menù a scomparsa che permette di personalizzare la sonificazione.
+I dati, quale il nome della località, l'intervallo di date iniziale e l'ultima rilevazione AQI effettuata, sono caricati direttamente a partire dal marker che ha chiamato la funzione.
+Al cambiamento di ogni elemento presente nel form di personalizzazione è associato una funzione che valida i dati inseriti e, in caso di successo abilita il pulsante di conferma e aggiorna il grafico di anteprima.
+In aggiunta, in caso di dati validi, le informazioni riguardanti la sonificazione vengono caricati in una struttura dati denominata sonification data, che verrà usata come payload della richiesta di sonificazione.
+\lstset{caption={La funzione che gestisce il cambiamento di un elemento del form.}}
+\begin{lstlisting}[language=Javascript]
+async function load_index(){
+
+  // load data
+  let start_date  = $("#offcanvas_start_date").val();
+  let end_date    = $("#offcanvas_end_date").val();
+  let lat         = $("#offcanvas_aqi").attr("data-lat");
+  let lng         = $("#offcanvas_aqi").attr("data-lng");
+  let index       = $("#offcanvas_index").val();
+  
+  // check data validity
+  let check = start_date == "" || end_date == "" || lat == "" || lng == "" || index == "" || start_date >= end_date;
+  $("#offcanvas_btn_sonify").prop("disabled", check);
+  if(check) return;
+
+  // fetch aqi history
+  get_history(lat, lng, start_date, end_date).then(async (history) => {
+
+      let aqis = await history.get_index(index);
+      let time = await history.get_index('timestamp_local');
+      create_graph_image(aqis, time, "offcanvas_plot", `${index} from ${start_date} to ${end_date}`);
+
+      // update sonification data
+      sonification_data = {
+          idx: index,
+          data: aqis,
+          days: time,
+          location: $("#offcanvas_location").text()
+      }
+
+  });
+}
+\end{lstlisting}
+
+\subsubsection{Gestire lo storico}
+Lo storico delle rilevazioni AQI è gestito nel file aqi api.js.
+Per ottenere lo storico, è necessario creare una nuova istanza della classe History, passando come parametri la latitudine e la longitudine della zona di interesse e l'intervallo di date.
+Una volta ottenuto l'oggetto, tramite la funzione get index, è possibile ottenere un array contenente i valori di un indice di interesse, quali il PM10, il PM2.5, l'O3, ecc.
+\lstset{caption={La classe History.}}
+\begin{lstlisting}[language=Javascript]
+function History(lat, lng, start_date, end_date) {
+    this.lat = lat;
+    this.lng = lng;
+    this.start_date = start_date;
+    this.end_date = end_date;
+}
+
+History.prototype.load = async function() {
+    let request = `https://api.weatherbit.io/v2.0/history/airquality?lat=${this.lat}&lon=${this.lng}&start_date=${this.start_date}&end_date=${this.end_date}&tz=local&key=${weatherbit_key}`;
+    let response = await fetch(request);
+    let resp_data = await response.json();
+    this.data = resp_data.data;
+}
+
+History.prototype.get_index = async function(index) {
+    let arr = this.data.map((item) => item[index]);
+    return arr.reverse();
+}
+\end{lstlisting}
+
+
+
+
+\section{Realizzazione del server}
+
+
+
+\section{Creazione del suono}
+\subsection{Generazione Sub Bass} 
+La traccia di sub-bass viene generata tramite un procedimento procedurale implementato nei file sub e wave buffer.
+L'unico parametro di cui il processo ha bisogno è l'array di dati relativi alle varie rilevazioni, l'oggetto prodotto è un array di campioni audio stereo.
+\subsubsection{Scopo della traccia}
+L'aggiunta della traccia di sub bass mira ad aggiungere spessore alla sonificazione durante le rilevazioni particolarmente negative.
+Questa traccia è composta da frequenze molto basse, difficilmente udibili se non negli intervalli di condizioni atmosferiche critiche.
+Al fine di non rendere la traccia monotona, per ogni intervallo di AQI non ottimale viene sintetizzato un suono diverso.
+\subsubsection{Suddivisione dei dati in intervalli}
+Il primo passo che questo sottosistema svolge è quello di dividere tutte le rilevazioni in sottointervalli di AQI consecutivi non ottimali.
+Per ogni sottointervallo, ne viene indicato l'indice di inizio e quello di fine.
+\subsubsection{Generazione delle WaveTable}
+In seguito alla suddivisione, per ogni intervallo viene generata una WaveTable.
+Per prima cosa viene prelevato il sub-array di dati relativo all'intervallo, in segutio, tramite la classe specificata in wavebuffer.py, viene creato l'array di campioni wavetable.
+Partendo dai dati grezzi, ovvero le sole rilevazioni aqi, il primo passo che la classe svolge è quello di aggiungere all'array una sua copia negativa, in modo da rispettare l'ampiezza massima e minima di un segnale audio.
+In seguito vengono aggiunti, tramite interpolazione periodica, tanti punti quanti sono i campioni che la WaveTable deve contenere, nel mio caso, 8192.
+Ho scelto l'interpolazione periodica per fare combaciare sempre il primo campione con l'ultimo, rendendo l'onda effettivamente periodica.
+A seguito dell'interpolazione, ogni campione viene attenuato, ogni valore nella wavetable viene quindi mappato in un valore compreso tra 1 e -1.
+Infine, al segnale viene applicato un filtro "Sample n Hold": un circuito che, preso come input un segnale, ne diminuisce la frequenza di campionamento.
+L'intervallo di campionamento per il Sample n Hold è stabilito dall'AQI medio, più è alto, più l'onda perde di segnale e risulta invasiva.
+\begin{figure}[h]
+  \includegraphics[width=\linewidth]{img/waves.png}
+  \caption{Le fasi della generazione di una WaveTable.}
+  \label{fig:wave_sub}
+\end{figure}
+
+
+\subsubsection{Preparazione dei modificatori di volume - LFO}
+Prima di passare alla sintesi vera e propria, il sottosistema definisce gli elementi necessari per l'andamento dinamico del volume.
+L'unico elemento utilizzato è l'LFO.
+In questa sonificazione, l'LFO appare come una funzione sinusoidale che varia tra 0.5 e 1.5, i valori che andranno a moltiplicarsi al volume.
+L'LFO viene creato restituito da una funzione sotto forma di lambda.
+\lstset{caption={Generazione dell'LFO.}}
+\begin{lstlisting}[language=Python]
+def compute_LFO(min, max, samp_period): 
+    # samp_period = distanza in campioni tra i picchi della funzione
+    freq = 1 / (samp_period / SAMPLE_RATE)
+    period = SAMPLE_RATE / freq
+    half = (max - min) / 2
+    return lambda x: math.sin(2.0 * math.pi * (x) / period) * half + half + min
+\end{lstlisting}
+
+\subsubsection{Sintesi}
+Ora che tutte le componenti sono pronte, si può passare alla sintesi dell'audio.
+La prima cosa che la funzione fa è definire le metriche della traccia, quali il tempo, il numero di note per intervallo, la frequenza di campionamento e la tonalità che si vuole rappresentare.
+Per ogni intervallo viene generato un buffer audio, questi verranno poi concatenati in un unico array.
+Ogni intervallo è composto da più rilevazioni, ognuna delle quali verrà sonificata con quattro note; il volume e la durata di ogni nota è definita dalla gravità dell'aqi della rilevazione.
+I campioni inseriti nel buffer vengono presi dalla WaveTable relativa all'intervallo.
+Siccome una WaveTable è composta da abbastanza campioni per suonare ogni frequenza udibile dall'orecchio umano, per rappresentare una certa tonalità, questi vengono selezionati in base alla frequenza di questa.
+Il valore di ogni campione viene moltiplicato per il volume, e dalla funzione LFO.
+Al fine nascondere le discontinuità delle onde nelle note suonate, ai buffer di ogni nota viene processato da una fuzione "enveloper", che attenua i primi e gli ultimi campioni.
+
+\lstset{caption={Generazione del buffer relativo ad una nota.}}
+\begin{lstlisting}[language=Python]
+# dur = durata della nota
+# step = intervallo di selezione dei campioni per suonare una tonalita
+# lfo_ptr = indice globale utilizzato per l'LFO, in modo da non creare oscillazioni di volume discontinue
+note_buff = np.array([wavetable[math.floor(i * STEP) % WAVETABLE_SIZE] * vol * LFO(i + lfo_ptr) for i in range(dur)])
+\end{lstlisting}
+
+
+
+\subsection{Esportare una traccia audio}
+L'esportazione e la sintesi delle traccie audio non sintetizzate avviene tramite la classe AudioExporter.
+La classe prende come parametri di costruzione le metriche di pentagramma per la traccia, quali il bpm e la suddivisione del tempo.
+La funzione di classe volta alla sintesi vera e propria accetta come argomenti una lista di note, un nome per la traccia, l'indice di uno strumento General MIDI e una lista di effetti audio VST3 da applicare.
+Le note sono delle strutture dati che contengono le informazioni necessarie per descrivere una nota, sono così composte:
+\lstset{caption={Composizione di una nota.}}
+\begin{lstlisting}[language=Python]
+note = {"note": 44,           # indice della nota
+        "time": start_time,   # il tempo di inizio, in battiti 
+        "duration": duration, # la durata, in quarti di battito
+        "volume": vol}        # il volume 0 - 100, valore facoltativo
+\end{lstlisting}
+A partire da una lista di note, viene generato un file MIDI .mid, questo viene sintetizzato un un file .wav da timidity++, tramite una chiamata di sistema.
+In seguito, il file sintetizzato viene caricato sotto forma di array di campioni stereo, al quale vengono applicati gli effetti audio.
+\\
+Una volta pronti gli array di tutte le traccie audio, questi vengono uniti in un'unica lista, che viene salvata su un file .wav.
+Pevitare errori, ad ogni array viene aggiunto un padding di tanti campioni nulli per rendere tutti gli array della stessa lunghezza.
+\lstset{caption={Aggiunta del padding.}}
+\begin{lstlisting}[language=Python]
+def merge_and_save(*tracks):
+  # find max number of samples of track with max num of samples
+  # then add padding and merge by sum
+  maxlen  = max([len(track[1]) for track in tracks])
+  padded  = [np.pad(track, ((0,0), (0, maxlen - len(track[0]))), 'constant', constant_values=0) for track in tracks]
+  final   = np.sum(padded, axis=0)
+\end{lstlisting}
+
+
+\subsection{Traccia principale e accordi - Lead}
+La traccia principale volte a sonificare l'indice di qualità dell'aria.
+Questa traccia si basa su una scala maggiore ed è composta da una nota per rilevazione, presenta un timbro dolce.
+La traccia è principalemente presente negli istanti nei quali la qualità dell'aria è ottimale, quando questa peggiora,
+il suo volume tende ad abbassarsi lasciando spazio alla traccia di residuo.
+Ogni nota è caratterizzata da una tonalità ed un volume che dipendono dalla gravità dell'aqi rispetto al valore maggiore e minore registrato.
+Alle note del Lead vengono affiancati degli accordi ripetuti ad ogni battuta, l'ottava di ognuno di questi è determinata dalla media di quattro rilevazioni consecutive.
+\lstset{caption={Generazione della traccia principale.}}
+\begin{lstlisting}[language=Python]
+def get_lead(data, voicing):
+
+  voicing = voicing[::-1]
+  n_notes = len(voicing)
+  best    = min(data)
+  worst   = max(data)
+  notes   = []
+
+  for i in range(len(data)):
+      aqi       = data[i]
+      vol       = 75 if aqi < MIN_THRESH else map_value_int(aqi, best, worst, 50, 25)
+      note_idx  = map_value_int(aqi, best, worst, 0, n_notes - 1)
+      notes.append({"note": voicing[note_idx], "time": i, "duration": 1, "volume": vol })
+
+  return notes
+\end{lstlisting}
+
+\subsection{Creazione del residuo}
+Il procsso relativo alla creazione della traccia di residuo è implementato nel file residue.py.
+La funzione prende come parametro l'array di rilevazioni AQI, e restituisce una lista di note MIDI.
+\subsubsection{Individuare i picchi di residuo}
+La prima cosa svolta in questo procedimento è individuare l'andamento del residuo.
+Per raggiungere questo scopo, all'array di rilevazioni viene affiancato un array di residuo riempito con il seguente criterio:
+Quando viene rilevato un valore AQI non ottimale, il residuo raggiunge tale valore, altrimenti, il residuo viene diminuito di un valore costante.
+\subsubsection{Generazione delle note}
+Le note sono generate in base agli intervalli di crescita e diminuzione del residuo.
+La sonificazione segue questo criterio: appena viene rilevata una fase di crescita, viene creato un arpeggio di note di tonalità ascendenti, che si protrae fino alla fine dell'intervallo.
+La frequenza è di quattro note per rilevazione, e le tonalità sono uniformemente distribuite tra le note della scala selezionata; il volume è ascendente.
+Alla fase di crescita segue un'eventuale fase di diminuzione, caratterizzata da un arpeggio di note di tonalità e volume discendenti con frequenza di due note a rilevazione. La fase
+di discesa si protrae fino alla completa risanazione dell'aria o fino all'inizio di un nuovo intervallo di crescita.
+Tramite questa strategia, sono riuscito a differenziare gli arpeggi tra le crescite improvvise di inquinamento e quelle più progressive.
+Durante le fasi di crescita e diminuzione del residuo, sono posizionate delle dissonanze in base al valore del residuo.
+\begin{figure}[h]
+  \includegraphics[width=\linewidth]{img/residue.png}
+  \caption{L'andamento del residuo con delle possibili rilevazioni.  TODO FIX SALIBRITA'}
+  \label{fig:residue}
+\end{figure}
+

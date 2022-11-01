@@ -1,126 +1,164 @@
 \begin{thebibliography}{10}
 
 \bibitem{aqibasics}
-Air quality basics.
-\newblock \url{https://www.airnow.gov/aqi/aqi-basics/}.
-
-\bibitem{accessibility}
-Benefits of sonification for users who are blind or low vision.
-\newblock
-  \url{https://www.perkins.org/resource/sonification-summary-page/#:~:text=Sonification%20is%20the%20use%20of,low%20vision%2C%20particularly%20for%20math.}
-
-\bibitem{audiovideo}
-Can interactive audio improve videoconferencing?
-\newblock
-  \url{https://www.highfidelity.com/blog/can-interactive-audio-improve-videoconferencing#:~:text=Sound%20is%20critical.%E2%80%9D,comprehend%20than%20ones%20with%20video.}
-
-\bibitem{color_symbolism}
-Color symbolism.
-\newblock
-  \url{https://www.milanartinstitute.com/blog/symbolism-of-color#:~:text=Colors%20have%20an%20emotional%20effect,discover%20the%20meaning%20of%20colors.}
-
-\bibitem{arpa_veneto}
-Cosa dice la normativa sulla qualità dell'aria?
-\newblock
-  \url{https://www.arpa.veneto.it/temi-ambientali/aria/cosa-dice-la-normativa#:~:text=con%20il%20D.-,Lgs.,e%20inferiore%20a%2050%20MW%22.}
+AirNow.
+\newblock Air quality basics.
+\newblock \newline\url{https://www.airnow.gov/aqi/aqi-basics/}.
 
 \bibitem{data_visualization}
-Data visualization metamorfosi dei dati tra software e siti di visualizzazione.
+Giuseppina Attianse.
+\newblock Data visualization metamorfosi dei dati tra software e siti di
+  visualizzazione.
+\newblock Master's thesis, Università degli studi di Salerno, 2008.
 \newblock
-  \url{https://www.tesionline.it/tesi/preview/data-visualization-metamorfosi-dei-dati-tra-software-e-siti-di-visualizzazione/35910}.
-
-\bibitem{nasa}
-Explore - from space to sound.
-\newblock \url{https://www.nasa.gov/content/explore-from-space-to-sound}.
-
-\bibitem{bitcoin}
-I created music from data using python!
-\newblock
-  \url{https://towardsdatascience.com/i-created-music-from-data-using-python-adfc349f55f1}.
-
-\bibitem{la_mincrometrologia}
-La minicrometrologia e la dispersione degli inquinanti in aria.
-\newblock
-  \url{https://www.isprambiente.gov.it/files/aria/micrometeorologiadispersioneinquinanti.pdf}.
-
-\bibitem{polluter_pays}
-Polluter pays principle.
-\newblock
-  \url{https://www.oecd.org/officialdocuments/publicdisplaydocumentpdf/?cote=OCDE/GD(92)81&docLanguage=En}.
-
-\bibitem{population_and_enviroment}
-Population and enviroment.
-\newblock \url{https://www.rand.org/pubs/research_briefs/RB5045.html}.
-
-\bibitem{serum}
-Serum.
-\newblock \url{https://xferrecords.com/products/serum/}.
-
-\bibitem{sonification_model}
-The sonification handbook.
-\newblock
-  \url{https://sonification.de/handbook/download/TheSonificationHandbook-chapter16.pdf}.
-
-\bibitem{hermann}
-Taxonomy and definitions for sonification and auditory display.
-\newblock \url{https://www.icad.org/Proceedings/2008/Hermann2008.pdf}.
+  \newline\url{https://www.tesionline.it/tesi/preview/data-visualization-metamorfosi-dei-dati-tra-software-e-siti-di-visualizzazione/35910}.
 
 \bibitem{dissonance}
 Mastercalss Authors.
 \newblock Dissonance in music explained: Consonance vs. dissonance, June 2021.
 \newblock
-  \url{https://www.masterclass.com/articles/dissonance-music-explained}.
+  \newline\url{https://www.masterclass.com/articles/dissonance-music-explained}.
+
+\bibitem{multidimensional}
+Natasha Barrett.
+\newblock Interactive spatial sonification of multidimensional data for
+  composition and auditory display.
+\newblock {\em Computer Music Journal}, 2016.
+
+\bibitem{generative_music}
+Ian Baxter.
+\newblock Sonification as a means to generative music.
+\newblock Master's thesis, The University of Sheffield, january 2020.
+\newblock
+  \newline\url{https://etheses.whiterose.ac.uk/27591/1/ian_baxter_sonification_as_a_means_to_generative_music.pdf}.
+
+\bibitem{accessibility}
+Diane Brauner.
+\newblock Benefits of sonification for users who are blind or low vision.
+\newblock
+  \newline\url{https://www.perkins.org/resource/sonification-summary-page/#:~:text=Sonification%20is%20the%20use%20of,low%20vision%2C%20particularly%20for%20math.}
 
 \bibitem{vst3}
 Alessandro~La Cava.
 \newblock Plugin audio: Formati e differenze, January 2021.
-\newblock \url{https://alexlacava.com/plugin-audio-formati-e-differenze/}.
+\newblock
+  \newline\url{https://alexlacava.com/plugin-audio-formati-e-differenze/}.
+
+\bibitem{pmrisk}
+Supat Chamnanchanunt.
+\newblock Particulate matter 2.5 and hematological disorders from dust to
+  diseases: A systematic review of available evidence, 2021.
+\newblock \newline\url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8316685/}.
+
+\bibitem{soni_temporal}
+Wikipedia contributors.
+\newblock Sonification, August 2022.
+\newblock \newline\url{https://en.wikipedia.org/wiki/Sonification}.
 
 \bibitem{subbass}
 Wikipedia contributors.
 \newblock Sub-bass, April 2022.
-\newblock \url{https://en.wikipedia.org/wiki/Sub-bass}.
+\newblock \newline\url{https://en.wikipedia.org/wiki/Sub-bass}.
+
+\bibitem{aqimap}
+Luca Damasco.
+\newblock Interactive art and computational design, spring 2016, january 2016.
+\newblock
+  \newline\url{http://golancourses.net/2016/luca/01/18/looking-outwards-2-interactive-air-pollution-map/}.
+
+\bibitem{polluter_pays}
+Enviroment Directorate.
+\newblock Polluter pays principle, june 1992.
+\newblock
+  \newline\url{https://www.oecd.org/officialdocuments/publicdisplaydocumentpdf/?cote=OCDE/GD(92)81&docLanguage=En}.
 
 \bibitem{izotope}
 Daniel Dixon.
 \newblock The beginner's guide to synths for music production, July 2018.
 \newblock
-  \url{https://www.izotope.com/en/learn/the-beginners-guide-to-synths-for-music-production.html}.
+  \newline\url{https://www.izotope.com/en/learn/the-beginners-guide-to-synths-for-music-production.html}.
 
 \bibitem{residue}
 Brian Foo.
 \newblock Air play, February 2015.
-\newblock \url{https://datadrivendj.com/tracks/smog/}.
+\newblock \newline\url{https://datadrivendj.com/tracks/smog/}.
 
 \bibitem{api}
 Red Hat.
 \newblock What is an api?, June 2022.
 \newblock
-  \url{https://www.redhat.com/en/topics/api/what-are-application-programming-interfaces}.
+  \newline\url{https://www.redhat.com/en/topics/api/what-are-application-programming-interfaces}.
+
+\bibitem{hermann}
+Thomas Hermann.
+\newblock Taxonomy and definitions for sonification and auditory display.
+\newblock In {\em Proceedings of the 14th International Conference on Auditory
+  Display}, june 2008.
+\newblock \newline\url{https://www.icad.org/Proceedings/2008/Hermann2008.pdf}.
+
+\bibitem{disadvantages}
+Jason Hoffman.
+\newblock Pros and cons of data visualization.
+\newblock
+  \newline\url{https://wisdomplexus.com/blogs/pros-cons-data-visualization/}.
+
+\bibitem{population_and_enviroment}
+Lori~M. Hunter.
+\newblock Population and enviroment, january 2000.
+\newblock \newline\url{https://www.rand.org/pubs/research_briefs/RB5045.html}.
 
 \bibitem{env_img}
 Apple Inc.
 \newblock Attack, decay, sustain und release.
 \newblock
-  \url{https://support.apple.com/it-it/guide/logicpro/lgsife419620/mac}.
+  \newline\url{https://support.apple.com/it-it/guide/logicpro/lgsife419620/mac}.
+
+\bibitem{color_symbolism}
+Milan~Art Institute.
+\newblock 5 facts artists should know about symbolism of color, july 2020.
+\newblock
+  \newline\url{https://www.milanartinstitute.com/blog/symbolism-of-color#:~:text=Colors%20have%20an%20emotional%20effect,discover%20the%20meaning%20of%20colors.}
+
+\bibitem{audiovideo}
+Emily Iwankovitsch.
+\newblock Can interactive audio improve videoconferencing?, july 2021.
+\newblock
+  \newline\url{https://www.highfidelity.com/blog/can-interactive-audio-improve-videoconferencing#:~:text=Sound%20is%20critical.%E2%80%9D,comprehend%20than%20ones%20with%20video.}
 
 \bibitem{midi}
 Future~Music Magazine.
 \newblock 30 years of midi: a brief history, December 2012.
 \newblock
-  \url{https://www.musicradar.com/news/tech/30-years-of-midi-a-brief-history-568009}.
+  \newline\url{https://www.musicradar.com/news/tech/30-years-of-midi-a-brief-history-568009}.
 
 \bibitem{requisiti}
 Roger Morrison.
 \newblock Differenza tra requisiti funzionali e non funzionali, September 2021.
 \newblock
-  \url{https://www.izotope.com/en/learn/the-beginners-guide-to-synths-for-music-production.html}.
+  \newline\url{https://www.izotope.com/en/learn/the-beginners-guide-to-synths-for-music-production.html}.
+
+\bibitem{aqitable}
+Council of~European~Union.
+\newblock Normativa di riferimento - xi d.lgs. 155/2010, 2008.
+\newblock
+  \newline\url{http://www.osservatoriovaldagri.it/web/guest/normativa-di-riferimento}.
 
 \bibitem{appdiffs}
 portalpirate GeeksforGeeks.
 \newblock Difference between native apps and web apps, March 2021.
 \newblock
-  \url{https://www.geeksforgeeks.org/difference-between-native-apps-and-web-apps/#:~:text=Web%20apps%20function%20in%2Dbrowser,build%20than%20native%20mobile%20apps.}
+  \newline\url{https://www.geeksforgeeks.org/difference-between-native-apps-and-web-apps/#:~:text=Web%20apps%20function%20in%2Dbrowser,build%20than%20native%20mobile%20apps.}
+
+\bibitem{snowman}
+Francis Preve.
+\newblock Six serum secret handshakes, January 2021.
+\newblock \newline\url{https://www.francispreve.com/blog/tag/Xfer+Serum}.
+
+\bibitem{serum}
+Xfer Records.
+\newblock {\em Serum}, October 2014.
+\newblock
+  \newline\url{https://s3.amazonaws.com/decembercymatics/Serum_Manual.pdf}.
 
 \bibitem{enveloper}
 Martin Russ.
@@ -131,12 +169,41 @@ Martin Russ.
 Asif Shaik.
 \newblock Amplitude modulation.
 \newblock
-  \url{https://www.physics-and-radio-electronics.com/blog/amplitude-modulation/}.
+  \newline\url{https://www.physics-and-radio-electronics.com/blog/amplitude-modulation/}.
 
 \bibitem{pianoroll_img}
 Image-Line Software.
-\newblock Fl studio reference manual, July 2018.
+\newblock {\em FL Studio Reference Manual}, July 2018.
 \newblock
-  \url{https://www.image-line.com/fl-studio-learning/fl-studio-online-manual/html/pianoroll.htm}.
+  \newline\url{https://www.image-line.com/fl-studio-learning/fl-studio-online-manual/html/pianoroll.htm}.
+
+\bibitem{la_mincrometrologia}
+Roberto Sozzi.
+\newblock La minicrometrologia e la dispersione degli inquinanti in aria, 2003.
+\newblock
+  \newline\url{https://www.isprambiente.gov.it/files/aria/micrometeorologiadispersioneinquinanti.pdf}.
+
+\bibitem{bitcoin}
+Rohith Teja.
+\newblock I created music from data using python!, august 2022.
+\newblock
+  \newline\url{https://towardsdatascience.com/i-created-music-from-data-using-python-adfc349f55f1}.
+
+\bibitem{sonification_model}
+John G.~Neuhoff Thomas~Hermann, Andy~Hunt.
+\newblock {\em The sonification Handbook}.
+\newblock Logos Publishing House, Berlin, Germany, 2011.
+
+\bibitem{arpa_veneto}
+ARPA Veneto.
+\newblock Cosa dice la normativa sulla qualità dell'aria?, october 2022.
+\newblock
+  \newline\url{https://www.arpa.veneto.it/temi-ambientali/aria/cosa-dice-la-normativa#:~:text=con%20il%20D.-,Lgs.,e%20inferiore%20a%2050%20MW%22.}
+
+\bibitem{nasa}
+Tracy Vogel.
+\newblock Explore - from space to sound, June 2022.
+\newblock
+  \newline\url{https://www.nasa.gov/content/explore-from-space-to-sound}.
 
 \end{thebibliography}

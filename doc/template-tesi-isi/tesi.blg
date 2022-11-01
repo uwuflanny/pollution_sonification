@@ -6,108 +6,94 @@ Database file #1: backMatter/biblio.bib
 Warning--entry type for "population_and_enviroment" isn't style-file defined
 --line 10 of file backMatter/biblio.bib
 Warning--entry type for "la_mincrometrologia" isn't style-file defined
---line 16 of file backMatter/biblio.bib
+--line 19 of file backMatter/biblio.bib
+Warning--entry type for "pmrisk" isn't style-file defined
+--line 27 of file backMatter/biblio.bib
 Warning--entry type for "arpa_veneto" isn't style-file defined
---line 22 of file backMatter/biblio.bib
-Warning--entry type for "data_visualization" isn't style-file defined
---line 28 of file backMatter/biblio.bib
+--line 36 of file backMatter/biblio.bib
+Warning--entry type for "soni_temporal" isn't style-file defined
+--line 45 of file backMatter/biblio.bib
+Warning--entry type for "aqimap" isn't style-file defined
+--line 54 of file backMatter/biblio.bib
+Warning--entry type for "disadvantages" isn't style-file defined
+--line 63 of file backMatter/biblio.bib
 Warning--entry type for "color_symbolism" isn't style-file defined
---line 34 of file backMatter/biblio.bib
-Warning--entry type for "hermann" isn't style-file defined
---line 40 of file backMatter/biblio.bib
+--line 96 of file backMatter/biblio.bib
 Warning--entry type for "audiovideo" isn't style-file defined
---line 46 of file backMatter/biblio.bib
+--line 115 of file backMatter/biblio.bib
 Warning--entry type for "accessibility" isn't style-file defined
---line 52 of file backMatter/biblio.bib
-Warning--entry type for "sonification_model" isn't style-file defined
---line 58 of file backMatter/biblio.bib
-Warning--entry type for "bitcoin" isn't style-file defined
---line 64 of file backMatter/biblio.bib
-Warning--entry type for "nasa" isn't style-file defined
---line 70 of file backMatter/biblio.bib
-Warning--entry type for "serum" isn't style-file defined
---line 76 of file backMatter/biblio.bib
-Warning--entry type for "aqibasics" isn't style-file defined
---line 82 of file backMatter/biblio.bib
-Warning--entry type for "polluter_pays" isn't style-file defined
---line 88 of file backMatter/biblio.bib
-Warning--entry type for "appdiffs" isn't style-file defined
---line 97 of file backMatter/biblio.bib
-Warning--entry type for "izotope" isn't style-file defined
---line 106 of file backMatter/biblio.bib
-Warning--entry type for "midi" isn't style-file defined
 --line 124 of file backMatter/biblio.bib
-Warning--entry type for "env_img" isn't style-file defined
---line 133 of file backMatter/biblio.bib
-Warning--entry type for "lfo_img" isn't style-file defined
+Warning--entry type for "bitcoin" isn't style-file defined
 --line 140 of file backMatter/biblio.bib
-Warning--entry type for "pianoroll_img" isn't style-file defined
---line 147 of file backMatter/biblio.bib
-Warning--entry type for "api" isn't style-file defined
---line 156 of file backMatter/biblio.bib
-Warning--entry type for "residue" isn't style-file defined
---line 165 of file backMatter/biblio.bib
-Warning--entry type for "dissonance" isn't style-file defined
---line 174 of file backMatter/biblio.bib
-Warning--entry type for "vst3" isn't style-file defined
+Warning--entry type for "nasa" isn't style-file defined
+--line 149 of file backMatter/biblio.bib
+Warning--entry type for "snowman" isn't style-file defined
+--line 167 of file backMatter/biblio.bib
+Warning--entry type for "aqibasics" isn't style-file defined
+--line 176 of file backMatter/biblio.bib
+Warning--entry type for "polluter_pays" isn't style-file defined
 --line 183 of file backMatter/biblio.bib
-Warning--entry type for "subbass" isn't style-file defined
---line 192 of file backMatter/biblio.bib
-Warning--entry type for "requisiti" isn't style-file defined
+Warning--entry type for "appdiffs" isn't style-file defined
 --line 201 of file backMatter/biblio.bib
-Warning--to sort, need author or key in la_mincrometrologia
-Warning--to sort, need author or key in population_and_enviroment
-Warning--to sort, need author or key in arpa_veneto
-Warning--to sort, need author or key in polluter_pays
-Warning--to sort, need author or key in aqibasics
-Warning--to sort, need author or key in data_visualization
-Warning--to sort, need author or key in color_symbolism
-Warning--to sort, need author or key in hermann
-Warning--to sort, need author or key in audiovideo
-Warning--to sort, need author or key in accessibility
-Warning--to sort, need author or key in sonification_model
-Warning--to sort, need author or key in bitcoin
-Warning--to sort, need author or key in serum
-Warning--to sort, need author or key in nasa
-You've used 27 entries,
+Warning--entry type for "izotope" isn't style-file defined
+--line 210 of file backMatter/biblio.bib
+Warning--entry type for "midi" isn't style-file defined
+--line 228 of file backMatter/biblio.bib
+Warning--entry type for "env_img" isn't style-file defined
+--line 237 of file backMatter/biblio.bib
+Warning--entry type for "lfo_img" isn't style-file defined
+--line 244 of file backMatter/biblio.bib
+Warning--entry type for "api" isn't style-file defined
+--line 260 of file backMatter/biblio.bib
+Warning--entry type for "residue" isn't style-file defined
+--line 269 of file backMatter/biblio.bib
+Warning--entry type for "dissonance" isn't style-file defined
+--line 278 of file backMatter/biblio.bib
+Warning--entry type for "vst3" isn't style-file defined
+--line 287 of file backMatter/biblio.bib
+Warning--entry type for "subbass" isn't style-file defined
+--line 296 of file backMatter/biblio.bib
+Warning--entry type for "requisiti" isn't style-file defined
+--line 305 of file backMatter/biblio.bib
+You've used 35 entries,
             2118 wiz_defined-function locations,
-            597 strings with 7736 characters,
-and the built_in function-call counts, 4927 in all, are:
-= -- 442
-> -- 105
+            660 strings with 9604 characters,
+and the built_in function-call counts, 7301 in all, are:
+= -- 674
+> -- 245
 < -- 0
-+ -- 55
-- -- 26
-* -- 171
-:= -- 680
-add.period$ -- 67
-call.type$ -- 27
-change.case$ -- 93
++ -- 107
+- -- 70
+* -- 270
+:= -- 1236
+add.period$ -- 108
+call.type$ -- 35
+change.case$ -- 136
 chr.to.int$ -- 0
-cite$ -- 41
-duplicate$ -- 194
-empty$ -- 609
-format.name$ -- 26
-if$ -- 1132
+cite$ -- 35
+duplicate$ -- 271
+empty$ -- 748
+format.name$ -- 70
+if$ -- 1560
 int.to.chr$ -- 0
-int.to.str$ -- 27
-missing$ -- 2
-newline$ -- 124
-num.names$ -- 26
-pop$ -- 273
+int.to.str$ -- 35
+missing$ -- 6
+newline$ -- 181
+num.names$ -- 70
+pop$ -- 290
 preamble$ -- 1
-purify$ -- 67
+purify$ -- 105
 quote$ -- 0
-skip$ -- 171
+skip$ -- 235
 stack$ -- 0
-substring$ -- 137
-swap$ -- 27
+substring$ -- 177
+swap$ -- 36
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 106
-warning$ -- 14
-while$ -- 26
-width$ -- 29
-write$ -- 229
-(There were 40 warnings)
+type$ -- 136
+warning$ -- 0
+while$ -- 70
+width$ -- 37
+write$ -- 357
+(There were 26 warnings)

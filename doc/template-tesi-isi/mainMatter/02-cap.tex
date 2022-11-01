@@ -51,7 +51,7 @@ Per realizzare i mockups ho utilizzato la piattaforma online draw.io.
     \item \textbf{Screen 4}: Alla pressione del bottone Sonifica, viene mostrata la view relativa a (Screen 4), nella quale è presente un grafico che, tramite cambiamenti in tempo reale, accompagna la traccia audio generata a partire dai dati.
 \end{itemize}
 
-I mockup per la visualizzazione desktop non differiscono molto da quelli mobile, la mappa occupa l'intera pagina e le impostazioni per la sonificazione sono mostrate in un menu laterale a scomparsa \ref{fig:desktopmockup}.
+I mockup per la visualizzazione desktop non differiscono molto da quelli mobile, la mappa occupa l'intera pagina e le impostazioni per la sonificazione sono mostrate in un menu laterale a scomparsa (Figura \ref{fig:desktopmockup}).
 \begin{figure}[H]
     \includegraphics[width=\linewidth]{img/desktopmockup.PNG}
     \caption{I mockup iniziali per la visualizzazione desktop.}
@@ -98,14 +98,14 @@ la posizione di elementi quali la mappa e il player video multimediale.
 Plotly è una libreria Javascript gratuita per la creazione di grafici.
 Ho utilizzato questa libreria per creare i grafici che mostrano l'andamento dell'inquinamento nell'intervallo di tempo selezionato dall'utente.
 Nonostante la libreria offra moltissimi stili di grafici, ho preferito utilizzare il grafico a barre, in quanto ritengo sia il più adatto per rappresentare questo tipo di dati.
-Lo stile che ho deciso di applicare al grafico riprende i colori selezionati per lo standard AQI \ref{tab:aqi}. Ogni rilevazione viene colorata in base al livello di inquinamento.
+Lo stile che ho deciso di applicare al grafico riprende i colori selezionati per lo standard AQI (visibili in tabella \ref{tab:aqi}). Ogni rilevazione viene colorata in base al livello di inquinamento.
 
 \subsection{Leaflet - OpenStreetMap}
 Ho utilizzato questi moduli per inserire una mappa interattiva all'interno della pagina web.
 Leaflet è una libreria JavaScript open source per la gestione di mappe, facilmente estendibile e con una sintassi ad eventi simile a JQuery.
 Per quanto riguarda invece l'aspetto della mappa ho applicato un layout vettoriale fornito da OpenStreetMap: un progetto open source sulla rappresentazione cartografica della superficie terrestre.
 Tramite queste due componenti, l'utente può ingrandire la mappa e posizionare marker a proprio piacimento.
-Siccome i colori utilizzati da EPA per l'AQI \ref{aqi} sono particolarmente chiari, ho applicato lo stile scuro, per aggiungere un contrasto maggiore.
+Siccome i colori utilizzati da EPA per l'AQI (tabella \ref{tab:aqi}) sono particolarmente chiari, ho applicato lo stile scuro, per aggiungere un contrasto maggiore.
 
 \subsection{Esri Leaflet}
 Al fine di permettere all'utente di eseguire ricerche per indirizzo e località, e reperire le informazioni di qualsiasi luogo alla pressione sulla mappa, ho utilizzato la libreria Esri Leaflet.
@@ -192,7 +192,7 @@ I principali eventi sono:
     \item \textbf{Meta Event}: indica un evento generale, può essere un messaggio di testo o un cambio di tempo.
 \end{itemize}
 Una sequenza MIDI può essere creata da uno strumento munito di tastiera, o da una Digital Audio Workstation: un software di produzione musicale; in particolare, queste ultime, presentano un'interfaccia sempre più incentrata sull'utilizzo di questo standard.
-Lo strumento digitale più adatto alla composizione del MIDI è il piano roll: un editor che permette di visualizzare le note in un piano virtuale \ref{fig:pianoroll}. 
+Lo strumento digitale più adatto alla composizione del MIDI è il piano roll: un editor che permette di visualizzare le note in un piano virtuale, mostrato in Figura \ref{fig:pianoroll}. 
 Nel piano roll, ogni nota è rappresentata da una casella, la sua posizione orizzontale indica il tempo in cui inizia, mentre la sua posizione verticale indica la tonalità.
 \begin{figure}[H]
     \includegraphics[width=\linewidth,scale=0.2]{img/pianoroll.png}
@@ -248,7 +248,7 @@ Questi suoni sgradevoli sono causati suonando onde discontinue: quando lo speake
 Per evitare questo problema, ho utilizzato un Enveloper: un filtro che permette di gestire il volume in modo graduale.
 L'enveloper è stato introdotto dall'ingegnere Robert Moog nel 1964, data la necessità di articolare il volume in maniera differente dai soli stati on/off.
 I primi prototipi sviluppati di questo filtro caricavano e scaricavano lentamente dei condensatori attenuando il volume di conseguenza \cite{enveloper}.
-Ad oggi, ogni sintetizzatore hardware e software mette a disposizione gli enveloper, la formula più comune è ADSR \ref{fig:asdr}, questo filtro gestisce l'andamento del volume in quattro stadi:
+Ad oggi, ogni sintetizzatore hardware e software mette a disposizione gli enveloper, la formula più comune è ADSR (Figura \ref{fig:asdr}), questo filtro gestisce l'andamento del volume in quattro stadi:
 \begin{itemize}
     \item \textbf{Attack}: fase di crescita del volume, quando la nota viene premuta;
     \item \textbf{Decay}: fase di diminuzione del volume, la nota è ancora premuta, ma il volume diminuisce;
