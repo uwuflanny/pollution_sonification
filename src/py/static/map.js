@@ -9,6 +9,15 @@ var colors = [
     '#000000'  // 301 - 500  HAZARDOUS
 ];
 
+var names = [
+    'Good',
+    'Moderate',
+    'Severe',
+    'Unhealthy',
+    'Very Unhealthy',
+    'Hazardous'
+];
+
 var emojis = [
     "😍",
     "😃",
@@ -114,6 +123,22 @@ async function init_map() {
         'Data by <a href="http://openweathermap.org">OpenWeatherMap</a>, <a href="http://aqicn.org">AQICN</a>',
     }).addTo(map);
 
+    layerGroup = L.layerGroup().addTo(map);
+
+    // add legend
+    var legend = L.control({position: 'topright'});  
+    legend.onAdd = function (map) {
+        var div = L.DomUtil.create('div', 'info legend');
+
+        for(let i = 0; i < colors.length; i++) 
+            div.innerHTML += `<div class="legend-entry" style="background-color:${colors[i]}; color:${get_text_color((i+1) * 50)}">${names[i]}</div>`;
+
+        div.style.backgroundColor = 'rgba(255, 255, 255, 0.5)';
+        div.style.padding = '10px';
+        return div;
+    };
+    legend.addTo(map);
+
     // custom marker extension
     aqiMarker = L.Marker.extend({
         options: {
@@ -203,7 +228,7 @@ async function create_marker(lat, lng, location) {
             lat: lat,
             lng: lng,
     
-        }).addTo(map).on('click', load_offcanvas).on('contextmenu', function(e) { map.removeLayer(this); });
+        }).addTo(layerGroup).on('click', load_offcanvas).on('contextmenu', function(e) { map.removeLayer(this); });
     
         create_small_graph(aqis, time, id);
 

@@ -2,7 +2,6 @@
 <html>
 <head>
 
-
 <!-- jquery         --> <script type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <!-- jquery ui      --> <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <!-- leaflet css    --> <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin=""/>
@@ -24,20 +23,24 @@
 <script type="text/javascript"  src="./static/aqi_api.js"></script>
 <script type="text/javascript"  src="./static/graphs.js"></script>
 <script type="text/javascript"  src="./static/map.js"></script>
+<script type="text/javascript"  src="./static/tutorial.js"></script>
 
 <script>  
 var map;
 var geocodeService;
 var sonification_data;
+var layerGropu;
 $(document).ready(()=>{
 
     // init map
     init_map();
     
+    $("#offcanvas_btn_sonify").click(sonify);               // sonify button clicked
     $("#offcanvas_start_date").change(load_index);          // start date changed index    
     $("#offcanvas_end_date").change(load_index);            // end date changed index
     $("#offcanvas_index").change(load_index);               // sonification index changed
-    $("#offcanvas_btn_sonify").click(sonify);               // sonify button clicked
+
+    propose_tutorial();
     
 });
 </script>
@@ -48,7 +51,7 @@ $(document).ready(()=>{
 <meta content="width=device-width, initial-scale=1" name="viewport" />
 
 <div id="map" class="position-absolute top-0 start-0 w-100 h-100"></div>
-
+    
 <div id="mySidebar" class="sidebar" style="z-index: 8000;">
     <a href="javascript:void(0)" class="closebtn" onclick="hide_offcanvas()">×</a>
     <h5 id="offcanvas_location" style="text-align:center;">Offcanvas</h5>

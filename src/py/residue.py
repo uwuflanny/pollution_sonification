@@ -74,18 +74,14 @@ def arpeggiate(residue, voicing):
                 # find the end of the rising slope
                 target_idx  = get_rising_end(idx)
                 target_res  = residue[target_idx]
-                
-                # initial arpeggio (calculated from slope height and width), do not rise if idx == 0
-                if target_idx == 0:
-                    init_done   = True
-                else:
-                    arp_len     = map_value_int(target_res, 0, max_res, 0, len(voicing)-1)      # arpeggio lenght
-                    init_start  = map_value_int(last_res,   0, max_res, 0, len(voicing) - 1)    # initial note index (mapped residue to len(voicing))
-                    init_notes  = math.ceil(target_idx - idx + 1) * 4                           # actual number of notes (in pows of 4)
-                    init_idxs   = np.linspace(init_start, arp_len, init_notes, dtype=int)       # indexes of notes of initial arp (not actual notes)
-                    init_arp    = [voicing[pos] for pos in init_idxs]                           # broadcasting indexes to notes
-                    init_done   = False
-                    init_ptr    = 0
+
+                arp_len     = map_value_int(target_res, 0, max_res, 0, len(voicing)-1)  # arpeggio lenght
+                init_start  = map_value_int(res, 0, max_res, 0, len(voicing) - 1)       # initial note index (mapped residue to len(voicing))
+                init_notes  = math.ceil(target_idx - idx + 1) * 4                       # actual number of notes (in pows of 4)
+                init_idxs   = np.linspace(init_start, arp_len, init_notes, dtype=int)   # indexes of notes of initial arp (not actual notes)
+                init_arp    = [voicing[pos] for pos in init_idxs]                       # broadcasting indexes to notes
+                init_done   = False
+                init_ptr    = 0
 
         # get dissonation
         dissonation = 0

@@ -56,19 +56,18 @@ class SonifyRequest(BaseModel):
 @app.post("/sonify")
 def sonify(request: SonifyRequest):
 
-    # request parameters
-    idx = '"' + request.idx + '"'
     dir = str(int(round(time.time() * 1000)))
-    days = ['"'+str(d)+'"' for d in request.days]
+    payload = json.dumps({
+        '"dir"': '"' + dir + '"',
+        '"index"': '"' + request.idx + '"',
+        '"data"': request.data,
+        '"days"': ['"'+str(d)+'"' for d in request.days]
+    })
 
-    json_data = {'"dir"': '"'+dir+'"', '"index"': idx, '"data"': request.data, '"days"': days}
-    json_data_str = json.dumps(json_data)
+    subprocess.run("python sonify.py " + '"' + payload +'"', shell=True)
 
-    subprocess.run("python sonify.py " + '"' + json_data_str +'"', shell=True)
-    with open(dir + "/final.mp4", "rb") as f:
-        data = f.read()
-    subprocess.run("rd /s /q " + dir, shell=True)
-    return StreamingResponse(io.BytesIO(data), media_type="video/mp4")
-
-
-
+    filename = dir + "/final.mp4"
+    if os.path.exists(filename):
+        return StreamingResponse(io.open(filename, mode="rb"), media_type="video/mp4")
+    else:
+        raise HTTPException(status_code=404, detail="File not found")

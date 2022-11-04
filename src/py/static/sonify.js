@@ -29,7 +29,11 @@ async function load_index(){
     let index       = $("#offcanvas_index").val();
     
     // check data validity
-    let check = start_date == "" || end_date == "" || lat == "" || lng == "" || index == "" || start_date >= end_date;
+    let start = new Date(start_date);
+    let end = new Date(end_date);
+    let diff = Math.abs(end - start);
+    let days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+    let check = start_date == "" || end_date == "" || lat == "" || lng == "" || index == "" || start_date >= end_date || days > 2;
     $("#offcanvas_btn_sonify").prop("disabled", check);
     if(check) return;
 
@@ -50,48 +54,55 @@ async function load_index(){
     
 }
 
+async function get_sonification_toast(location, status, aqi, extra = {}){
+    return Toastify({
+        text: location + " - " + status,
+        duration: -1,
+        close: true,
+        gravity: "bottom",
+        position: "right",
+        style: {
+            background: get_color(aqi),
+            color: get_text_color(aqi)
+        },
+        ...extra
+    });
+}
+
 async function sonify(){
 
     let payload = JSON.stringify(sonification_data);
     let leastest_aqi = sonification_data.data[sonification_data.data.length - 1];
     let location = sonification_data.location;
 
-    let toast = Toastify({
-        text: location + " - Sonification started!",
-        duration: -1,
-        close: true,
-        gravity: "bottom",
-        position: "right",
-        style: {
-            background: get_color(leastest_aqi),
-            color: get_text_color(leastest_aqi)
-        }
-    });
-    toast.showToast();
+    let start_toast = await get_sonification_toast(location, "Sonificatio started", leastest_aqi);
+    start_toast.showToast();
 
-    let response = await fetch('/sonify', {
+    await fetch('/sonify', {
+
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: payload
-    });
 
-    // get video
-    let blob = await response.blob();
-    let url = await window.URL.createObjectURL(blob);
+    }).then(async function(response) {
     
-    toast.hideToast();
-    Toastify({
-        text: location + " - Sonification done!",
-        destination: url,
-        duration: -1,
-        newWindow: true,
-        close: true,
-        gravity: "bottom",
-        position: "right",
-        style: {
-            background: get_color(leastest_aqi),
-            color: get_text_color(leastest_aqi)
-        }
-    }).showToast();
+        if (!response.ok) throw Error(response.statusText);
+
+        let blob = await response.blob();
+        let url = await window.URL.createObjectURL(blob);
+        let success_toast = await get_sonification_toast(location, "Click to play", leastest_aqi, {destination: url, newWindow: true});
+        success_toast.showToast();
+
+    }).catch(async function(error) {
+
+        let error_toast = await get_sonification_toast(location, "Sonification failed", leastest_aqi);
+        error_toast.showToast();
+        console.log(error);
+
+    }).finally(async function() {
+
+        start_toast.hideToast();
+
+    });
 
 }
