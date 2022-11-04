@@ -4,11 +4,11 @@
   color: white;
 }
 
-.toast-close {
-  color: white !important;
-  opacity: 1 !important;
-}
 
+/* rule for tags with property "disabled" */
+.disabled {
+  color: #999;
+}
 
 
 /* legend entry */

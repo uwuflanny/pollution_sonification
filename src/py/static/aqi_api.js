@@ -20,6 +20,7 @@ History.prototype.load = async function() {
     let request = `https://api.weatherbit.io/v2.0/history/airquality?lat=${this.lat}&lon=${this.lng}&start_date=${this.start_date}&end_date=${this.end_date}&tz=local&key=${weatherbit_key}`;
     let response = await fetch(request);
     let resp_data = await response.json();
+    if (!response.ok) throw Error("api error (are dates too old?)");
     this.data = resp_data.data;
 }
 
@@ -46,8 +47,19 @@ async function get_today_history(lat, lng) {
     return history;
 }
 
-async function get_history(lat, lng, start_date, end_date) {
+async function get_history(lat, lng, start_date, end_date, index) {
+
+    // form validation
+    let start = new Date(start_date);
+    let end = new Date(end_date);
+    let diff = Math.abs(end - start);
+    let days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+    let form_error = start_date == "" || end_date == "" || lat == "" || lng == "" || index == "" || start_date >= end_date || days > 2;
+    if (form_error) throw Error("form compilation error");
+
+    // get history
     let history = new History(lat, lng, start_date, end_date);
     await history.load();
     return history;
+    
 }

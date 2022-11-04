@@ -1,5 +1,7 @@
 
-function get_tutorial_toast(text){
+// i'm sorry for your eyes
+
+function get_tutorial_toast(text, extra = {}){
     return Toastify({
         text: text,
         duration: -1,
@@ -8,7 +10,8 @@ function get_tutorial_toast(text){
         position: "right",
         style: {
             maxWidth: "33%",
-        }
+        },
+        ...extra
     });
 }
 
@@ -25,7 +28,14 @@ async function propose_tutorial(){
             toast.hideToast();
         }
     }).showToast();
-    
+
+    let handler = function(){
+        toast.hideToast();
+        $("#offcanvas_btn_sonify").off('click', handler);
+    }
+
+    $("#offcanvas_btn_sonify").click(handler);
+  
 }
 
 async function start_tutorial() {
@@ -69,7 +79,7 @@ async function tutorial_2(){
 
 async function tutorial_3(){
 
-    let finaltoast = get_tutorial_toast("Here you can choose your sonification parameters, when you are ready, click the sonify button to start the sonification.");
+    let finaltoast = get_tutorial_toast("Here you can choose your sonification parameters, when you are ready, click the sonify button to start the sonification.", {close: true});
     finaltoast.showToast();
 
     let handler = function(){

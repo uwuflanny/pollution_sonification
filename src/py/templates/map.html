@@ -32,13 +32,13 @@ var sonification_data;
 var layerGropu;
 $(document).ready(()=>{
 
-    // init map
     init_map();
     
-    $("#offcanvas_btn_sonify").click(sonify);               // sonify button clicked
-    $("#offcanvas_start_date").change(load_index);          // start date changed index    
-    $("#offcanvas_end_date").change(load_index);            // end date changed index
-    $("#offcanvas_index").change(load_index);               // sonification index changed
+    $("#offcanvas_btn_sonify").click(sonify);           // sonify button clicked
+    $("#offcanvas_start_date").change(load_index);      // start date changed index    
+    $("#offcanvas_end_date").change(load_index);        // end date changed index
+    $("#offcanvas_index").change(load_index);           // sonification index changed
+    window.addEventListener("resize", width_change);    // on window resize, change width of sidebar
 
     propose_tutorial();
     
@@ -70,7 +70,7 @@ $(document).ready(()=>{
     <br>
     <img id="offcanvas_plot" src=""/>
     <br>
-    <button type="button" id="offcanvas_btn_sonify" disabled>Sonify</button>
+    <button type="button" id="offcanvas_btn_sonify">Sonify</button>
     <br>
     <br>
 </div>

@@ -1,6 +1,17 @@
 
-function show_offcanvas() { document.getElementById("mySidebar").style.width = screen.width <= 500 ? "100%" : (screen.width <= 1000 ? "50%" : "25%"); }
-function hide_offcanvas() { document.getElementById("mySidebar").style.width = "0"; }
+function show_offcanvas() {
+    let sidebar = $("#mySidebar");
+    sidebar.prop("enabled", true);
+    sidebar.css("width", screen.width <= 500 ? "100%" : screen.width <= 1000 ? "50%" : "25%");
+}
+function hide_offcanvas() { 
+    let sidebar = $("#mySidebar");
+    sidebar.prop("enabled", false);
+    sidebar.css("width", "0px");
+}
+function width_change() { 
+    if($("#mySidebar").prop("enabled")) show_offcanvas();
+} 
 
 async function load_offcanvas() {
 
@@ -28,20 +39,12 @@ async function load_index(){
     let lng         = $("#offcanvas_aqi").attr("data-lng");
     let index       = $("#offcanvas_index").val();
     
-    // check data validity
-    let start = new Date(start_date);
-    let end = new Date(end_date);
-    let diff = Math.abs(end - start);
-    let days = Math.ceil(diff / (1000 * 60 * 60 * 24));
-    let check = start_date == "" || end_date == "" || lat == "" || lng == "" || index == "" || start_date >= end_date || days > 2;
-    $("#offcanvas_btn_sonify").prop("disabled", check);
-    if(check) return;
-
-    get_history(lat, lng, start_date, end_date).then(async (history) => {
+    get_history(lat, lng, start_date, end_date, index).then(async (history) => {
 
         let aqis = await history.get_index(index);
         let time = await history.get_index('timestamp_local');
         create_graph_image(aqis, time, "offcanvas_plot", `${index} from ${start_date} to ${end_date}`);
+        $("#offcanvas_btn_sonify").show();
 
         sonification_data = {
             idx: index,
@@ -49,6 +52,12 @@ async function load_index(){
             days: time,
             location: $("#offcanvas_location").text()
         }
+
+    }).catch(async (error) => {
+        
+        $("#offcanvas_btn_sonify").hide();
+        $("#offcanvas_plot").attr("src", "");
+        console.log(error);
 
     });
     
@@ -75,7 +84,7 @@ async function sonify(){
     let leastest_aqi = sonification_data.data[sonification_data.data.length - 1];
     let location = sonification_data.location;
 
-    let start_toast = await get_sonification_toast(location, "Sonificatio started", leastest_aqi);
+    let start_toast = await get_sonification_toast(location, "Sonification started", leastest_aqi);
     start_toast.showToast();
 
     await fetch('/sonify', {
