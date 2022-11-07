@@ -4,6 +4,7 @@ import numpy as np
 from midiutil.MidiFile import MIDIFile
 from pedalboard.io import AudioFile
 from pydub import AudioSegment
+from measures import SAMPLE_RATE    
 
 
 def merge_and_save(filename, *tracks):
@@ -14,7 +15,7 @@ def merge_and_save(filename, *tracks):
     final   = np.sum(padded, axis=0)
 
     # export to wav
-    with AudioFile(filename, 'w', 44100, final.shape[0]) as f:
+    with AudioFile(filename, 'w', SAMPLE_RATE, final.shape[0]) as f:
         f.write(final)
 
 
@@ -49,7 +50,7 @@ class TrackExporter:
             midi.writeFile(output_file)
 
         # convert midi to wav, preserve silence is important
-        os.system('timidity ' + midi_filename + ' -Ow --preserve-silence -t 120')
+        os.system('timidity ' + midi_filename + ' -Ow --preserve-silence -t 120 --sampling-freq='+str(SAMPLE_RATE))
 
         # apply vsts
         with AudioFile(wav_filename, 'r') as f:

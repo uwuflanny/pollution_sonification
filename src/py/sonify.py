@@ -8,6 +8,7 @@ from vsthost import get_vsts
 from trackExporter import TrackExporter, merge_and_save
 from animator import animate_data, merge_video
 from sub import get_sub
+import subprocess
 from measures import convert, BPM, SIGN_DEN, SIGN_NUM
 
 
@@ -44,6 +45,6 @@ sub         = get_sub(data)
 
 # merge tracks, create animation, merge both
 merge_and_save("final.wav", arp, lead, prog, sub)
-animate_data(index, data, days, res, "animation.gif")
-merge_video("animation.gif", "final.wav", "final.mp4")
+animate_data(index, data, days, res, "animation.mp4")
+merge_video("animation.mp4", "final.wav", "final.mp4")
 

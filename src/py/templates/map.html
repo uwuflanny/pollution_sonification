@@ -2,7 +2,7 @@
 <html>
 <head>
 
-<!-- jquery         --> <script type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<!-- jquery         --> <script type="text/javascript"  src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <!-- jquery ui      --> <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <!-- leaflet css    --> <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin=""/>
 <!-- leaflet js     --> <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js" integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="./static/sidebar.css">
 
 <!-- scripts -->
+<script type="text/javascript"  src="./static/toasts.js"></script>
 <script type="text/javascript"  src="./static/sonify.js"></script>
 <script type="text/javascript"  src="./static/aqi_api.js"></script>
 <script type="text/javascript"  src="./static/graphs.js"></script>
@@ -32,6 +33,8 @@ var sonification_data;
 var layerGropu;
 $(document).ready(()=>{
 
+    // le chiavi sono belle in chiaro, buon divertimento
+
     init_map();
     
     $("#offcanvas_btn_sonify").click(sonify);           // sonify button clicked
@@ -40,13 +43,49 @@ $(document).ready(()=>{
     $("#offcanvas_index").change(load_index);           // sonification index changed
     window.addEventListener("resize", width_change);    // on window resize, change width of sidebar
 
-    propose_tutorial();
+    // show modal
+    var myModal = new bootstrap.Modal(document.getElementById("exampleModal"), {});
+        document.onreadystatechange = function () {
+        myModal.show();
+    };
+
+    // on modal close, propose_tutorial
+    $("#exampleModal").on("hidden.bs.modal", function () {
+        propose_tutorial();
+    });
     
 });
 </script>
 
 </head>
 <body>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <h3>Benvenuto!</h3>
+          <p style="font-size: 15px;">
+            Questa pagina permette di ispezionare lo stato attuale dell'inquinamento atmosferico in ogni parte del mondo, fornendone una rappresentazione visiva e sonora tramite <strong>sonificazione</strong>.
+            <br>La sonificazione è il processo tramite il quale un dato di qualsiasi natura viene trasformato in un suono.
+            <br>La traccia audio generata accompagnerà poi l'andamento progressivo del livello di inquinamento, mostrato tramite un grafico animato.
+            <br>I dati visualizzati seguono la formula <strong>AQI (Air Quality Index)</strong>, un indice che valuta la qualità dell'aria in base ad un numero compreso tra 0 (ottimo) e 500 (altamente inquinato).
+            <br><br>Per semplificare la navigazione sulla mappa, la pagina presenta una legenda con riportati i colori associati ad ogni valore dell'indice AQI.
+            <br>Le zone colorate rappresentano raggruppamenti di stazioni di monitoraggio. Per raggiungere una località precisa, è sufficiente spostarsi sulla mappa e cliccare sulla posizione desiderata, o in alternativa, utilizzare la ricerca.
+            <br>Per rimuovere un pin, è sufficiente cliccare con il tasto destro da pc e tenere premuto per qualche secondo su dispositivi mobili.
+            <br><br>A causa di limitazioni momentanee; è possibile sonificare solamente intervalli da una o due giornate e, siccome la pagina è ancora in sviluppo, alcune funzionalità potrebbero non funzionare correttamente.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK!</button>
+        </div>
+      </div>
+    </div>
+</div>
+
 
 <meta content="width=device-width, initial-scale=1" name="viewport" />
 

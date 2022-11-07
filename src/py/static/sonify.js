@@ -63,21 +63,6 @@ async function load_index(){
     
 }
 
-async function get_sonification_toast(location, status, aqi, extra = {}){
-    return Toastify({
-        text: location + " - " + status,
-        duration: -1,
-        close: true,
-        gravity: "bottom",
-        position: "right",
-        style: {
-            background: get_color(aqi),
-            color: get_text_color(aqi)
-        },
-        ...extra
-    });
-}
-
 async function sonify(){
 
     let payload = JSON.stringify(sonification_data);
@@ -97,9 +82,10 @@ async function sonify(){
     
         if (!response.ok) throw Error(response.statusText);
 
+        // save the response as a blob
         let blob = await response.blob();
-        let url = await window.URL.createObjectURL(blob);
-        let success_toast = await get_sonification_toast(location, "Click to play", leastest_aqi, {destination: url, newWindow: true});
+        let url = URL.createObjectURL(blob);
+        let success_toast = await get_sonification_toast(location, "Click to play", leastest_aqi, {destination: `/video?src=${url}`, newWindow: true});
         success_toast.showToast();
 
     }).catch(async function(error) {

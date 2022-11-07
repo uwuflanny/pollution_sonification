@@ -1,20 +1,4 @@
 
-// i'm sorry for your eyes
-
-function get_tutorial_toast(text, extra = {}){
-    return Toastify({
-        text: text,
-        duration: -1,
-        close: false,
-        gravity: "bottom",
-        position: "right",
-        style: {
-            maxWidth: "33%",
-        },
-        ...extra
-    });
-}
-
 async function propose_tutorial(){
     
     let toast = Toastify({

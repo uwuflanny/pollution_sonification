@@ -16,7 +16,7 @@ RES_DECADENCE   = 1.8
 
 # audio generation
 WAVETABLE_SIZE  = 8192
-SAMPLE_RATE     = 44100
+SAMPLE_RATE     = 48000
 BPM             = 120
 SIGN_NUM        = 4
 SIGN_DEN        = 4

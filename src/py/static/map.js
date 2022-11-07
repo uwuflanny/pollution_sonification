@@ -10,12 +10,12 @@ var colors = [
 ];
 
 var names = [
-    'Good',
-    'Moderate',
-    'Severe',
-    'Unhealthy',
-    'Very Unhealthy',
-    'Hazardous'
+    '0-50 Good',
+    '51-100 Moderate',
+    '101-150 Severe',
+    '151-200 Unhealthy',
+    '201-300 Very Unhealthy',
+    '301+ Hazardous'
 ];
 
 var emojis = [
@@ -110,10 +110,10 @@ async function load_circles(data) {
 async function init_map() {
 
     // load map and layout
-    map = L.map('map').setView([15, 21], 3);
+    map = L.map('map').setView([15, 11], 3);
     map.doubleClickZoom.disable();
     document.querySelector('.leaflet-bottom.leaflet-right').remove();
-    L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
+    L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png?api_key='+stadia_key, {
         maxZoom: 18,
         minZoom: 3,
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' + ' <a href='
@@ -121,7 +121,9 @@ async function init_map() {
         + '<a href="https://openmaptiles.org/">OpenMapTiles</a> &mdash; Map tiles by <a href="https://stadiamaps.com/">Stadia Maps</a>, ' +
         '<a href="https://openmaptiles.org/">OpenMapTiles</a> &mdash; ' +
         'Data by <a href="http://openweathermap.org">OpenWeatherMap</a>, <a href="http://aqicn.org">AQICN</a>',
+        // noWrap: true,
     }).addTo(map);
+
 
     layerGroup = L.layerGroup().addTo(map);
 
@@ -153,21 +155,19 @@ async function init_map() {
     var searchControl = L.esri.Geocoding.geosearch({
         placeholder: 'Enter an address or place e.g. 1 York St',
         useMapBounds: false,
-        providers: [L.esri.Geocoding.arcgisOnlineProvider({apikey: "AAPK150e6843de69411582a2fb7010285854YRNW0bRLWXXr9R5W35IlgRQAuGpVWg3jVIXeg1vOm3SUViRtqj5AeCNpe-qMQXS4", nearby: {lat: -33.8688, lng: 151.2093}})]
+        providers: [L.esri.Geocoding.arcgisOnlineProvider({apikey: esri_key, nearby: {lat: -33.8688, lng: 151.2093}})]
     }).addTo(map);
 
     // geocoder action
     var results = L.layerGroup().addTo(map);
     searchControl.on('results', function(data){
         results.clearLayers();
-        for (var i = data.results.length - 1; i >= 0; i--) {
-            map_inspect(data.results[i]);
-        }
+        data.results.forEach(map_inspect);
     });
 
     // reverse geocode
     geocodeService = L.esri.Geocoding.geocodeService({
-        apikey: "AAPK150e6843de69411582a2fb7010285854YRNW0bRLWXXr9R5W35IlgRQAuGpVWg3jVIXeg1vOm3SUViRtqj5AeCNpe-qMQXS4"
+        apikey: esri_key
     });
 
     // actions

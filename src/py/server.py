@@ -39,6 +39,9 @@ templates = Jinja2Templates(directory="templates")
 async def favicon():
     return FileResponse('favicon.ico')
 
+@app.get("/video", response_class=HTMLResponse)
+async def read_items(request: Request):
+    return templates.TemplateResponse("video.html", {"request": request, })
 
 @app.get("/", response_class=HTMLResponse)
 async def read_items(request: Request):
@@ -68,6 +71,10 @@ def sonify(request: SonifyRequest):
 
     filename = dir + "/final.mp4"
     if os.path.exists(filename):
-        return StreamingResponse(io.open(filename, mode="rb"), media_type="video/mp4")
+        with open(filename, "rb") as f:
+            data = f.read()
+        subprocess.run("rd /s /q " + dir, shell=True)
+        return StreamingResponse(io.BytesIO(data), media_type="video/mp4")
     else:
+        subprocess.run("rd /s /q " + dir, shell=True)
         raise HTTPException(status_code=404, detail="File not found")

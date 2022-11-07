@@ -2,13 +2,15 @@ import matplotlib.animation as animation
 import matplotlib.pyplot as plt
 import moviepy.editor as mpe
 import math
+import ffmpeg
 from measures import BAD, MODERATE, SEVERE, UNHEALTHY, VERY_UNHEALTHY, HAZARDOUS, MIN_THRESH
+import subprocess
 
 def merge_video(video_name, audio_name, output_name, fps=30):
-    my_clip = mpe.VideoFileClip(video_name)
-    audio_background = mpe.AudioFileClip(audio_name)
-    final_clip = my_clip.set_audio(audio_background)
-    final_clip.write_videofile(output_name, fps)
+
+    # using ffmpeg, merge wav and gif into avi
+    cmd = 'ffmpeg -i '+video_name+' -i '+audio_name+' -c:v copy -c:a aac '+output_name
+    subprocess.call(cmd, shell=True)
 
 def animate_data(index, data, days, res, filename):
 
@@ -25,7 +27,7 @@ def animate_data(index, data, days, res, filename):
         elif aqi >= MODERATE:
             return 'orange'
         elif aqi >= BAD:
-            return 'yellow'
+            return '#f2e607'
         else:
             return 'green'
 
@@ -38,12 +40,12 @@ def animate_data(index, data, days, res, filename):
         ax1.set_ylabel('AQI')
 
         # color zones
-        plt.axhspan(0, BAD, facecolor='lightgreen', alpha=0.5)
-        plt.axhspan(BAD, MODERATE, facecolor='yellow', alpha=0.5)
-        plt.axhspan(MODERATE, SEVERE, facecolor='orange', alpha=0.5)
-        plt.axhspan(SEVERE, UNHEALTHY, facecolor='red', alpha=0.5)
-        plt.axhspan(UNHEALTHY, VERY_UNHEALTHY, facecolor='purple', alpha=0.5)
-        plt.axhspan(VERY_UNHEALTHY, HAZARDOUS, facecolor='black', alpha=0.5)   
+        plt.axhspan(0, BAD, facecolor='lightgreen', alpha=0.4)
+        plt.axhspan(BAD, MODERATE, facecolor='yellow', alpha=0.4)
+        plt.axhspan(MODERATE, SEVERE, facecolor='orange', alpha=0.4)
+        plt.axhspan(SEVERE, UNHEALTHY, facecolor='red', alpha=0.4)
+        plt.axhspan(UNHEALTHY, VERY_UNHEALTHY, facecolor='purple', alpha=0.4)
+        plt.axhspan(VERY_UNHEALTHY, HAZARDOUS, facecolor='black', alpha=0.4)   
 
         # plot residue
         ax1.plot(res[0:i+1], color='black')
