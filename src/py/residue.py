@@ -7,13 +7,13 @@ import math
 import scipy as sp
 import random
 import sys
-from measures import RES_DECADENCE, MIN_THRESH
+from measures import RES_DECADENCE, min_thresh
 from utility import map_value_int, map_value
 
 def decrement(list, unit):
     return [x - unit for x in list if x - unit > 0]
 
-def get_residue(data, res_threshold = MIN_THRESH):
+def get_residue(data, res_threshold = min_thresh):
 
     residue_data    = []
     res_history     = []
@@ -42,11 +42,11 @@ def arpeggiate(residue, voicing):
         return len(residue) - 1
 
     # guard
-    if not any(res >= MIN_THRESH for res in residue):
+    if not any(res >= min_thresh for res in residue):
         return []
 
     # find max value of residue
-    max_res     = math.ceil(max(residue) / MIN_THRESH) * MIN_THRESH
+    max_res     = math.ceil(max(residue) / min_thresh) * min_thresh
     duration    = 0.25
     notes       = []
     voicing     = [x + 12 for x in voicing] # pitch shift voicing by 2 octaves
@@ -69,7 +69,7 @@ def arpeggiate(residue, voicing):
             last_res = residue[idx-1] if idx > 0 else 0             # previous residue value, last_res if idx = 0 is always 0
 
             # detect rising slope
-            if res > last_res and res >= MIN_THRESH and idx > target_idx:
+            if res > last_res and res >= min_thresh and idx > target_idx:
 
                 # find the end of the rising slope
                 target_idx  = get_rising_end(idx)
@@ -99,7 +99,7 @@ def arpeggiate(residue, voicing):
                 init_ptr += 1
 
         # falling, note on 1,0,1,0
-        elif res >= MIN_THRESH and i % 2 == 0:
+        elif res >= min_thresh and i % 2 == 0:
             note_idx = map_value_int(res, 0, max_res, 0, len(voicing) - 1)
             notes.append({"note": voicing[note_idx] + dissonation, "time": duration * i, "duration": duration, "volume": vol })
 

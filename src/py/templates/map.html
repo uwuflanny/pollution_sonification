@@ -67,16 +67,18 @@ $(document).ready(()=>{
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-body">
-          <h3>Benvenuto!</h3>
+          <h3>Ciao!</h3>
           <p style="font-size: 15px;">
             Questa pagina permette di ispezionare lo stato attuale dell'inquinamento atmosferico in ogni parte del mondo, fornendone una rappresentazione visiva e sonora tramite <strong>sonificazione</strong>.
             <br>La sonificazione è il processo tramite il quale un dato di qualsiasi natura viene trasformato in un suono.
             <br>La traccia audio generata accompagnerà poi l'andamento progressivo del livello di inquinamento, mostrato tramite un grafico animato.
-            <br>I dati visualizzati seguono la formula <strong>AQI (Air Quality Index)</strong>, un indice che valuta la qualità dell'aria in base ad un numero compreso tra 0 (ottimo) e 500 (altamente inquinato).
+            <br>Nel video, oltre all'andamento dell'AQI, viene mostrato un residuo, che mostra come l'inquinamento si protrae nelle giornate in seguito a delle giornate particolarmente inquinate.
+            <br><br>I dati visualizzati seguono la formula <strong>AQI (Air Quality Index)</strong>, un indice che valuta la qualità dell'aria in base ad un numero compreso tra 0 (ottimo) e 500 (altamente inquinato).
+            <br>Ulteriodi indici di rilevazione sono il pm2.5 e il pm10, che misurano il livello di particolato aereodisperso nell'aria.
             <br><br>Per semplificare la navigazione sulla mappa, la pagina presenta una legenda con riportati i colori associati ad ogni valore dell'indice AQI.
             <br>Le zone colorate rappresentano raggruppamenti di stazioni di monitoraggio. Per raggiungere una località precisa, è sufficiente spostarsi sulla mappa e cliccare sulla posizione desiderata, o in alternativa, utilizzare la ricerca.
             <br>Per rimuovere un pin, è sufficiente cliccare con il tasto destro da pc e tenere premuto per qualche secondo su dispositivi mobili.
-            <br><br>A causa di limitazioni momentanee; è possibile sonificare solamente intervalli da una o due giornate e, siccome la pagina è ancora in sviluppo, alcune funzionalità potrebbero non funzionare correttamente.
+            <br><br>A causa di limitazioni momentanee, è possibile sonificare solamente intervalli da una o due giornate e, siccome la pagina è ancora in sviluppo, alcune feature potrebbero non funzionare correttamente.
           </p>
         </div>
         <div class="modal-footer">
@@ -104,7 +106,7 @@ $(document).ready(()=>{
     <select id="offcanvas_index" aria-label="Default select example">                
         <option value="aqi">AQI</option>
         <option value="pm25">pm 2.5</option>
-        <option value="pm10">pm 10</option>                
+        <option value="pm10">pm 10</option>
     </select>
     <br>
     <img id="offcanvas_plot" src=""/>

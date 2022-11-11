@@ -68,6 +68,7 @@ async function load_circles(data) {
 
     // load chunks
     for(let pin of data) {
+        // skip markers with no aqi
         if(pin.aqi == '-') continue;
         let lat = pin.lat;
         let lng = pin.lon;
@@ -123,7 +124,6 @@ async function init_map() {
         'Data by <a href="http://openweathermap.org">OpenWeatherMap</a>, <a href="http://aqicn.org">AQICN</a>',
         // noWrap: true,
     }).addTo(map);
-
 
     layerGroup = L.layerGroup().addTo(map);
 

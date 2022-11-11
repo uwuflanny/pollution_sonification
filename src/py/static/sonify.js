@@ -82,7 +82,6 @@ async function sonify(){
     
         if (!response.ok) throw Error(response.statusText);
 
-        // save the response as a blob
         let blob = await response.blob();
         let url = URL.createObjectURL(blob);
         let success_toast = await get_sonification_toast(location, "Click to play", leastest_aqi, {destination: `/video?src=${url}`, newWindow: true});

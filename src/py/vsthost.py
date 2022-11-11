@@ -37,7 +37,7 @@ def get_vsts():
         "amp_section_active": "Inactive",
         "cab_section_active": "Inactive",
         "rev_active": "Active",
-        "rev_dry_wet": 0.5,
+        "rev_dry_wet": 0.65,
         "rev_mode": "Shimmer"
     })
     return gojira_delay, gojira_shimmer

@@ -1,15 +1,16 @@
 
+
 # general
-MIN_THRESH      = 50
-MAX_THRESH      = 500
+min_thresh      = 50
+max_thresh      = 500
 
 # aqi
-BAD             = 50
-MODERATE        = 100
-SEVERE          = 150
-UNHEALTHY       = 200
-VERY_UNHEALTHY  = 300
-HAZARDOUS       = 500
+bad             = 50
+moderate        = 100
+severe          = 150
+unhealthy       = 200
+very_unhealthy  = 300
+hazardous       = 500
 
 # residue
 RES_DECADENCE   = 1.8
@@ -22,14 +23,27 @@ SIGN_NUM        = 4
 SIGN_DEN        = 4
 
 
-def convert(index):
+def convert(index, data):
 
-    if index == "pm25" or index == "pm10":
-        MIN_THRESH      = 12
-        MAX_THRESH      = 500
-        BAD             = 12
-        MODERATE        = 35
-        SEVERE          = 55
-        UNHEALTHY       = 150
-        VERY_UNHEALTHY  = 250
-        HAZARDOUS       = 500
+    global min_thresh, max_thresh, bad, moderate, severe, unhealthy, very_unhealthy, hazardous
+
+    cap = 500 if max(data) <= 500 else max(data)
+    max_thresh = cap
+    hazardous = cap
+    
+    if index == "pm25":
+        min_thresh      = 12
+        bad             = 12
+        moderate        = 35
+        severe          = 55
+        unhealthy       = 150
+        very_unhealthy  = 250
+
+    if index == "pm10":
+        min_thresh      = 54
+        bad             = 54
+        moderate        = 154
+        severe          = 254
+        unhealthy       = 355
+        very_unhealthy  = 424
+
