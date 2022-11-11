@@ -13,6 +13,13 @@
 \raggedright
 
 \bibliography{backMatter/biblio}{}
-\bibliographystyle{plain}
+
+% make so that the bibliography urls occupy same width as the text
+\makeatletter
+\def\@biblabel#1{\hskip\labelsep\hbox to\labelwidth{\hss\hfil\@biblabel#1\hfil\hss}}
+\makeatother
+
+\bibliographystyle{unsrt}
+
 \endgroup
 

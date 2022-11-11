@@ -5,16 +5,17 @@
 \contentsline {figure}{\numberline {1.2}{\ignorespaces Una mappa sul livello di particelle pm2.5 ~\cite {aqimap}.}}{9}{figure.1.2}%
 \contentsline {figure}{\numberline {1.3}{\ignorespaces Lo schema riassuntivo della sonificazione ~\cite {hermann}.}}{11}{figure.1.3}%
 \contentsline {figure}{\numberline {1.4}{\ignorespaces Una wavetable che ho generato a partire da dei dati sull'inquinamento. A sinistra, in rosso, sono raffigurate le rilevazioni dell'inquinamento. L'onda sonora periodica, mostrata a destra, è frutto dell'interpolazione, attenuazione e ripetizione di questi.}}{15}{figure.1.4}%
-\contentsline {figure}{\numberline {1.5}{\ignorespaces L'andamento del prezzo del bitcoin tra il 2015 e il 2022, rappresentato con un grafico azionario ~\cite {bitcoin}.}}{17}{figure.1.5}%
+\contentsline {figure}{\numberline {1.5}{\ignorespaces L'andamento del prezzo del bitcoin tra il 2015 e il 2022 ~\cite {bitcoin}.}}{17}{figure.1.5}%
 \contentsline {figure}{\numberline {1.6}{\ignorespaces La rappresentazione sonora di un'emoji \cite {snowman}.}}{18}{figure.1.6}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces I mockup iniziali per la visualizzazione mobile}}{23}{figure.2.1}%
 \contentsline {figure}{\numberline {2.2}{\ignorespaces I mockup iniziali per la visualizzazione desktop.}}{24}{figure.2.2}%
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Il piano roll di un software Digital Audio Workstation \cite {pianoroll_img}.}}{32}{figure.2.3}%
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Un esempio di modulazione di ampiezza \cite {lfo_img}. I testi dell'immagine sono stati modificati per adattarli al contesto.}}{35}{figure.2.4}%
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Lo schema riassuntivo di un Enveloper ADSR \cite {env_img}.}}{37}{figure.2.5}%
-\contentsline {figure}{\numberline {2.6}{\ignorespaces L'Architettura del sistema.}}{39}{figure.2.6}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Il piano roll di un software Digital Audio Workstation \cite {pianoroll_img}.}}{30}{figure.2.3}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Un esempio di modulazione di ampiezza \cite {lfo_img}. I testi dell'immagine sono stati modificati per adattarli al contesto.}}{33}{figure.2.4}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Lo schema riassuntivo di un Enveloper ADSR \cite {env_img}.}}{35}{figure.2.5}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Lo schema riassuntivo del sistema.}}{37}{figure.2.6}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces La schermata e le varie componenti}}{42}{figure.3.1}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Le fasi della generazione di una WaveTable.}}{48}{figure.3.2}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces L'andamento del residuo con delle possibili rilevazioni. TODO FIX SALIBRITA'}}{52}{figure.3.3}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces La schermata e le varie componenti}}{40}{figure.3.1}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces L'andamento del residuo con delle possibili rilevazioni.}}{53}{figure.3.2}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Le fasi della generazione di una WaveTable.}}{54}{figure.3.3}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Tabella con i punteggi SUS \cite {sus}.}}{61}{figure.3.4}%

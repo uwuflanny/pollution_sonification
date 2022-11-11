@@ -16,7 +16,7 @@ I requisiti individuati sono:
     \item[RF2]: L'applicativo deve permettere all'utente di navigare su una mappa, compresa di funzionalità di ricerca e zoom;
     \item[RF3]: L'utente deve essere in grado di ascoltare una simulazione audio relativa all'inquinamento di qualsiasi parte del mondo, in qualsiasi data;
     \item[RF4]: Molteplici sonificazioni degli stessi dati devono risultare nella medesima traccia audio;
-    \item[RF5]: Insieme allaf traccia audio sonificata deve essere mostrato un grafico progressivo raffigurante l'andamento dell'inquinamento;
+    \item[RF5]: Insieme alla traccia audio sonificata deve essere mostrato un grafico progressivo raffigurante l'andamento dell'inquinamento;
     \item[RF6]: Il sistema deve funzionare su qualsiasi dispositivo e sistema operativo.
 \end{itemize}
 
@@ -43,9 +43,9 @@ In seguito alla definizione dei requisiti, sono passato alla fase di progettazio
 \end{figure}
 
 In Figura \ref{fig:mockup} sono riportati i mockup iniziali per la visualizzazione mobile dell'applicazione.
-Per realizzare i mockups ho utilizzato la piattaforma online draw.io.
+Per realizzare i mockups ho utilizzato la piattaforma online draw.io \cite{drawio}.
 \begin{itemize}
-    \item \textbf{Screen 1}: modella la prima view che viene mostrata, ogni pin rappresenta una stazione di rilevazione e il relativo indice di inquinamento in tempo reale. Al tap della casella di testo in alto viene aperta la view relativa a (Screen 2);
+    \item \textbf{Screen 1}: modella la prima view che viene mostrata, ogni pin rappresenta una stazione di rilevazione e il relativo indice di inquinamento in tempo reale. Al tap della casella di testo in alto viene aperta la view relativa (Screen 2);
     \item \textbf{Screen 2}: In questa schermata l’utente può personalizzare la ricerca, mostrando solamente pin con inquinamento in un certo range, e spostare la camera sulla località selezionata;
     \item \textbf{Screen 3}: Al tap di un pin sulla mappa presente in (Screen 1), viene aperta la view relativa a (Screen 3). In questa schermata l’utente potrà selezionare l’intervallo di date il cui inquinamento rilevato verrà sonificato. Una volta selezionate le date, nei grafici sottostanti viene mostrata un’ anteprima dell’andamento delle rilevazioni nei giorni;
     \item \textbf{Screen 4}: Alla pressione del bottone Sonifica, viene mostrata la view relativa a (Screen 4), nella quale è presente un grafico che, tramite cambiamenti in tempo reale, accompagna la traccia audio generata a partire dai dati.
@@ -66,64 +66,64 @@ I mockup per la visualizzazione desktop non differiscono molto da quelli mobile,
 L'idea di questo progetto nasce dalla necessità di fornire una rappresentazione della qualità dell'aria che respiriamo differente da quella solamente grafica.
 Per questo fine ho deciso di sviluppare un'applicazione web: la risorsa informatica più facilmente accessibile ed utilizzabile.
 A differenza di un'applicazione nativa, infatti, le webapp sono fruibili tramite browser da qualsiasi dispositivo connesso ad internet, senza bisogno di download o installazione \cite{appdiffs}.
-Per comodità, ho suddiviso il programma in più parti: una parte di frontend, tramite la quale l'utente interagisce, e una parte di backend, che si occupa della sonificazione vera e propria.
+Per comodità, ho suddiviso il sistema in più parti: una parte di frontend, tramite la quale l'utente interagisce, e una parte di backend, che si occupa della sonificazione vera e propria.
 In questa sezione verranno approfondite le tecnologie utilizzate per lo sviluppo del front end.
 
 \subsection{HTML}
-La pagina fruibile dall'utente presenta una struttura base HTML (Hyper Text Markup Language), un linguaggio per la formattazione di pagine web.
+La pagina fruibile dall'utente presenta una struttura base HTML (Hyper Text Markup Language), un linguaggio per la formattazione di pagine web \cite{html}.
 HTML è un linguaggio di pubblico dominio, la cui sintassi è stabilita dal World Wide Web Consortium (W3C): un'associazione non governativa che si occupa di diffondere l'accessibilità della rete e di standardizzare le tecnologie web.
 La sintassi di HTML è composta da tag in cascata, i quali, letti dal browser, contengono le informazioni necessarie per l'impaginazione.
 
 \subsection{CSS}
 Il solo utilizzo di HTML non è sufficiente per ottenere un'interfaccia grafica gradevole e funzionale.
-Per questo motivo ho utilizzato CSS (Cascading Style Sheet), un linguaggio utilizzato per definire lo stile di una pagina web, anch'esso reso standard da W3C da un insieme di regole.
+Per questo motivo ho utilizzato CSS (Cascading Style Sheet), un linguaggio utilizzato per definire lo stile di una pagina web, anch'esso reso standard da W3C da un insieme di regole \cite{css}.
 CSS permette di attribuire stile grafico ai vari tag HTML, come ad esempio cambiare il colore di sfondo, la dimensione del testo e la posizione degli elementi.
 
 \subsection{JavaScript}
 Ho utilizzato Javascirpt per definire il comportamento della pagina in seguito alle interazioni dell'utente.
-Javascript è un linguaggio di programmazione orientato ad eventi, interpretato durante l'esecuzione da un browser.
+Javascript è un linguaggio di programmazione orientato ad eventi, interpretato durante l'esecuzione da un browser \cite{javascript}.
 Javascript è comunemente utilizzato per introdurre effetti dinamici e funzionali chiamati eventi, invocabili dall'utente interagendo con la pagina HTML.
 Ho scelto questo linguaggio per la sua semplicità nel gestire le richieste web, e per la sua ottima compatibilità con i vari browser.
 
 \subsection{Jquery}
 Spesso, collegare i tag HTML agli eventi definiti in Javasctipt, è un processo che, seppure non complicato, riempie il codice di debito tecnico.
-Per questo ho delegato le interazioni tra le due tecnologie a Jquery: una libreria Javascript reperibile gratuitamente online.
+Per questo ho delegato le interazioni tra le due tecnologie a Jquery: una libreria Javascript reperibile gratuitamente online \cite{jquery}.
 
 \subsection{Bootstrap}
-Bootstrap è una libreria di CSS disponibile gratuitamente, molto diffusa tra le applicazioni web.
+Bootstrap è una libreria di CSS disponibile gratuitamente, molto diffusa tra le applicazioni web \cite{bootstrap}.
 Seppure questo framework si presti ottimalmente alla creazione di grafiche moderne e accattivanti, ho preferito limitarmi ad utilizzarlo per semplificare la gestione del layout della pagina, in particolare,
 la posizione di elementi quali la mappa e il player video multimediale.
 
 \subsection{Plotly}
-Plotly è una libreria Javascript gratuita per la creazione di grafici.
+Plotly è una libreria Javascript gratuita per la creazione di grafici \cite{plotly}.
 Ho utilizzato questa libreria per creare i grafici che mostrano l'andamento dell'inquinamento nell'intervallo di tempo selezionato dall'utente.
 Nonostante la libreria offra moltissimi stili di grafici, ho preferito utilizzare il grafico a barre, in quanto ritengo sia il più adatto per rappresentare questo tipo di dati.
 Lo stile che ho deciso di applicare al grafico riprende i colori selezionati per lo standard AQI (visibili in tabella \ref{tab:aqi}). Ogni rilevazione viene colorata in base al livello di inquinamento.
 
 \subsection{Leaflet - OpenStreetMap}
 Ho utilizzato questi moduli per inserire una mappa interattiva all'interno della pagina web.
-Leaflet è una libreria JavaScript open source per la gestione di mappe, facilmente estendibile e con una sintassi ad eventi simile a JQuery.
-Per quanto riguarda invece l'aspetto della mappa ho applicato un layout vettoriale fornito da OpenStreetMap: un progetto open source sulla rappresentazione cartografica della superficie terrestre.
+Leaflet è una libreria JavaScript open source per la gestione di mappe, facilmente estendibile e con una sintassi ad eventi simile a JQuery \cite{leaflet}.
+Per quanto riguarda invece l'aspetto della mappa ho applicato un layout vettoriale fornito da OpenStreetMap: un progetto open source sulla rappresentazione cartografica della superficie terrestre \cite{osm}.
 Tramite queste due componenti, l'utente può ingrandire la mappa e posizionare marker a proprio piacimento.
 Siccome i colori utilizzati da EPA per l'AQI (tabella \ref{tab:aqi}) sono particolarmente chiari, ho applicato lo stile scuro, per aggiungere un contrasto maggiore.
 
 \subsection{Esri Leaflet}
-Al fine di permettere all'utente di eseguire ricerche per indirizzo e località, e reperire le informazioni di qualsiasi luogo alla pressione sulla mappa, ho utilizzato la libreria Esri Leaflet.
+Al fine di permettere all'utente di eseguire ricerche per indirizzo e località, e reperire le informazioni di qualsiasi luogo alla pressione sulla mappa, ho utilizzato la libreria Esri Leaflet \cite{esri}.
 Esri Leaflet è una libreria JavaScript open source per la gestione dei dati geografici distribuita da Esri, un'azienda specializzata in questo campo.
 Le funzionalità che ho utilizzato principalmente sono il geocoding e il reverse geocoding, ovvero la ricerca di coordinate geografiche a partire da un indirizzo e viceversa.
 
 \subsection{AQIcn API}
-Per ottenere i dati relativi alla qualità dell'aria da posizionare sulla mappa, ho utilizzato l'API di AQIcn.
+Per ottenere i dati relativi alla qualità dell'aria da posizionare sulla mappa, ho utilizzato l'API di AQIcn \cite{aqicn}.
 Una API (applicaztion program interface), è un insieme di funzioni e procedure che, fungendo da interfaccia, permettono di interagire con un software esterno \cite{api}.
 Questo servizio è stato messo a disposizione dal team del World Air Quality Index: un progetto no-profit che mira alla sensibilizzazione delle persone sulla tematica dell'inquinamento atmosferico.
 AQIcn è un'implementazione di questo progetto, che fornisce agli sviluppatori, o ai soli interessati, dati trasparenti e aggiornati sulla qualità dell'aria in tempo reale.
 
 \subsection{Weatherbit.io}
 Purtroppo, al momento della progettazione e scelta delle tecnologie, l'API di AQIcn non metteva a disposizione una funzione per ottenere lo storico dei dati.
-Per questo motivo, ho dovuto ricorrere ad una seconda API: Weatherbit.io.
+Per questo motivo, ho dovuto ricorrere ad una seconda API: Weatherbit.io \cite{weatherbitio}.
 
 \subsection{Javascript Fetch API}
-Per rendere comunicanti la parte di frontend, la parte di backend e le varie API, ho utilizzato la funzioni Fetch messa a disposizione da javascript.
+Per rendere comunicanti la parte di frontend, la parte di backend e le varie API, ho utilizzato la funzioni Fetch messa a disposizione da javascript \cite{javascript}.
 Tramite una chiamata Fetch, è possibile inviare una richiesta HTTP ad un server, e, se necessario, ricevere risposta.
 Una chiamata a aquesta funzione permette di personalizzare la richiesta in base alle esigenze e al protocollo utilizzato; specificando l'URL di destinazione, modificando l'header e il body della richiesta, e gestendo la risposta.
 Le chiamate a Fetch sono svolte in maniera asincrona; dove necessario ho utilizzato la caratteristica sintattica await per mantenere il flusso di esecuzione, aspettando il completamento della chiamata prima di proseguire.
@@ -131,7 +131,7 @@ Le chiamate a Fetch sono svolte in maniera asincrona; dove necessario ho utilizz
 \subsection{Python FastAPI}
 Il software di backend che si occupa di gestire le richieste HTTP e fornire loro risposta è realizzato in Python.
 Ho scelto questo linguaggio per la sua semplicità nella manipolazione di complesse strututre dati, e per l'enorme quantità di funzionalità matematiche offerte.
-La libreriea utilizzata per elaborare le richieste di rete è FastAPI.
+La libreriea utilizzata per elaborare le richieste di rete è FastAPI \cite{fastapi}.
 Tramite FastAPI è possibile creare un server web in maniera veloce, utilizzando parole chiave comuni nella sintassi di python.
 Il software prodotto è una Restful API: un programma che utilizza il protocollo HTTP per ricevere e fornire dei dati \cite{api}.
 Siccome il processo di sonificazione non è istantaneo, ogni richiesta viene gestita indipendentemente dalle altre, rendendo il server asincrono.
@@ -142,36 +142,9 @@ Siccome il processo di sonificazione non è istantaneo, ogni richiesta viene ges
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Tecnologie utilizzate per la sonificazione}
 
-La software componente che esegue la sonificazione vera e propria è realizzata in Python in uno script differente da quello del server.
-Il server, quando richiesto, esegue questo script passandogli come argomento tutti i dati necessari per produrre la traccia.
-I dati inviati sono sotto forma di JSON, un formato standardizzato perticolarmente adatto all'interscambio di dati in rete.
-I dati ricevuti dallo script di sonificazione sono: 
-\begin{itemize}
-    \item \textbf{data}: array di interi relativi alle varie rilevazioni;
-    \item \textbf{days}: array di DateTimes, variabili rappresentanti l'orario e la giornata di ogni rilevazione;
-    \item \textbf{index}: l'indice delle varie rilevazioni, può essere AQI, PM2.5 e PM10.
-\end{itemize}
-Questo programma svolge diversi compiti in successione, questi sono: ricevere i dati, creare le varie traccie, unirle in un'unico file wav, generare un'animazione in .gif, unire audio e video.
-
 \subsection{Strategia di sonificazione}
 Per sonificare i dati, ho utilizzato un approccio misto, sfruttando sia la sintesi audio che il design sonoro, approfonditi nel capitolo precedente.
-Prima di progettare il sistema sonificativo, ho individuato le caratteristiche dei dati che volevo rappresentare:
-le componenti di maggiore importanza sono l’andamento temporale dell'inquinamento e l'inquinamento residuo.
-\subsubsection{L'andamento dell'inquinamento}
-L'andamento temporale è rappresentato dalle varie rilevazioni nel tempo, siccome è un valore che tende a cambire rapidamente nel tempo, ha richiesto un approccio di sonificazione dinamico.
-La scelta delle note utilizzate per rappresentare questo dato è molto semplice: più il valore dell'inquinamento è alto, più la nota è grave.
-\subsubsection{L'inquinamento residuo}
-L'inquinamento residuo consiste nel valore di rischio per la salute che si protrae nel tempo in seguito ad una giornata particolarmente inquinata.
-A differenza della rilevazione AQI vera e propria, i cui valori possono variare drasticamente da un momento all'altro, l'accumulo di residuo si distingue in fasi di crescita e di diminuzione, in funzione a come si è comportato l'inquinamento nel corso della giornata \cite{residue}.
-Per le fasi di crescita ho usato delle note veloci che si alzano di tonalità, mentre per la fase di diminuzione le stesse note sono ripetute con meno frequenza, e tendono ad abbassarsi nel tempo.
-\subsubsection{Gestire il volume}
-Un aspetto molto rilevante che ho attribuito a queste due traccie sta nella miscela dei loro volumi: più il valore dell'inquinamento tende ad alzarsi, più il suo volume si abbassa per lasciare spazio alla traccia dell'inquinamento residuo, che invece tende a crescere.
-\subsubsection{L'applicazione della teoria musicale}
-Per accentuare l'effetto della crescita e della diminuzione dell'inquinamento residuo, le note della traccia seguono una scala: più l'inquinamento è alto più le note sono acute.
-Ho deciso di utilizzare una scala maggiore. Siccome le tonalità maggiori sono note per la loro positività, ho introdotto delle dissonanze in base al peggioramento della qualità dell'aria, volte a spezzare questa armonia.
-Una dissonanza è una nota “fuori contesto” rispetto alla scala o all'accordo che si sta suonando; se inserita all'interno di una scala maggiore, sempre positiva e armoniosa, la dissonanza crea un effetto improvviso di tensione \cite{dissonance}.
-Ho posto le dissonanze ad intervalli regolari nella scala in base al livello di inquinamento: più questo è alto, più le dissonanze sono frequenti e di maggior intensità.
-
+Di seguito vengono elencate e descritte le tecnologie utilizzate per la realizzazione del software sonificativo.
 
 \subsection{Design audio}
 \subsubsection{I file MIDI}
@@ -202,20 +175,20 @@ Nel piano roll, ogni nota è rappresentata da una casella, la sua posizione oriz
 Lo standard MIDI, infine, comprende GeneralMidi: un'enumerazione di strumenti ed effetti audio.
 Questa caratteristica mi ha permesso di concentrarmi solamente sulla scelta degli strumenti General MIDI e sulla generazione della sequenza di note, delegando la sintesi vera e propria ad un software terzo.
 Per la creazione di file MIDI ho utilizzato MidiUtils, una libreria per Python che permette di creare un file MIDI specificandone i vari eventi.
-Per la sintesi del file MIDI, invece, ho utilizzato Timidity++, un software open source che permette di sintetizzare un file MIDI in un file wav.
+Per la sintesi del file MIDI, invece, ho utilizzato Timidity++, un software open source che permette di sintetizzare un file MIDI in un file wav \cite{timidity}.
 \subsubsection{Effetti audio VST3}
-Per aggiungere spessore alle traccie midi sintetizzate, ho deciso di applicarvi degli effetti audio.
+Per aggiungere spessore alle tracce midi sintetizzate, ho deciso di applicarvi degli effetti audio.
 Scrivere effetti audio con risultati di qualità è un processo complesso, che richiede una conoscenza approfondita della propagazione del suono.
 Per questo motivo, ho importato nel programma degli effetti audio sviluppati da professionisti.
 La tecnologia che ho scelto è VST3 (Virtual Studio Technology 3), un formato che standardizza l'interfaccia tra il plugin e il software che lo utilizza.
 Il formato VST è stato introdotto da Steinberg nel 1996 nel suo software Digital Audio Workstation Cubase \cite{vst3}. Insieme allo standard è stato inoltre sviluppato un SDK (Software development kit), ciò ha permesso a molti programmatori
 di avvicinarsi al mondo della programmazione di effetti audio ed audio processing, donando notorietà al formato.
-Per caricare un plugin VST3 in un software diverso da una Digital Audio Workstation ho utilizzato Pedalboard: una libreria per Python sviluppata da Spotify che internamente utilizza JUCE, un framework scritto in c++ per il processing audio.
+Per caricare un plugin VST3 in un software diverso da una Digital Audio Workstation ho utilizzato Pedalboard: una libreria per Python sviluppata da Spotify che internamente utilizza JUCE, un framework scritto in c++ per il processing audio \cite{juce}.
 Tramite un array contenente coppie chiave valore, è possibile impostare i parametri dell'effetto, e di seguito applicare questo ad un array di campioni audio da 32 bit.
 \subsubsection{Archetype Gojira}
 Gli effetti audio che ho scelto sono presenti nel Software Archetype Gojira: un plugin VST3 sviluppato da NeuralDSP insieme a Gojira, una band metal francese.
 Seppure questo plugin sia stato sviluppato per simulare in tempo reale un amplificatore per chitarra, ho deciso di utilizzarlo solamente per gli effetti audio che mette a disposizione.
-Gli effetti audio che ho applicato alle traccie sono i seguenti:
+Gli effetti audio che ho applicato alle tracce sono i seguenti:
 \begin{itemize}
     \item \textbf{Delay}: un effetto che, suonando più volte lo stesso input ad intervalli regolari, dona al suono un effetto di eco. Ho usato il delay per accentuare la persistenza del residuo di inquinamento nell'aria;
     \item \textbf{Reverb}: un effetto in grado di simulare i rimbalzi delle onde sonore in una stanza;
@@ -223,12 +196,10 @@ Gli effetti audio che ho applicato alle traccie sono i seguenti:
 \end{itemize}
 
 \subsection{Sintesi audio}
-La sintesi audio è stata utilizzata per sonificare la forma del grafico, negli intervalli nei quali il livello di inquinamento supera la soglia di totale salubrità.
-La traccia che ho assegnato alla sintesi audio è il Sub-bass, ovvero dei toni profondi le cui frequenze scendono sotto i 70 Hz; in questo range di frequenze, l'orecchio umano è solitamente meno sensibile, ragione per la quale il Sub-bass viene percepito piuttosto che ascoltato \cite{subbass}.
+La sintesi audio è stata scelta per sonificare la forma del grafico negli intervalli nei quali il livello di inquinamento supera la soglia di totale salubrità.
+La traccia che ho assegnato alla sintesi audio è il Sub-bass, ovvero dei toni profondi le cui frequenze scendono sotto i 70 Hz; in questo range , l'orecchio umano è solitamente meno sensibile, ragione per la quale il Sub-bass viene percepito piuttosto che ascoltato \cite{subbass}.
 Per rappresentare un grafico sotto forma di audio, ho usato le wavetable, introdotte nel primo capitolo.
 Le wavetable che ho composto hanno lunghezza fissa di 8192 campioni float da 32 bit ciascuno.
-La forma dell'onda sonora risultante è strettamente legata alla forma del grafico, tramite questa strategia sono riuscito ad ottentere distinzione tra timbri nella traccia.
-I campioni da riprodurre vengono scritti in un buffer che verrà in seguito unito alla traccia audio finale.
 \subsubsection{Librerie utilizzate}
 Lo script fa ampiamente uso delle librerie Numpy e Scipy, per la semplicità di utilizzo e la velocità di esecuzione.
 In particolare, ho utilizzato Numpy per semplificare la manipolazione di array rappresentanti i campioni audio, e Scipy per la funzionalità di interpolazione periodica.
@@ -236,7 +207,7 @@ In particolare, ho utilizzato Numpy per semplificare la manipolazione di array r
 Per aggiungere più significato alla traccia sintetizzata ho assegnato al volume di questa un LFO (low frequency oscillator).
 L'LFO consiste in un oscillatore a bassissima frequenza (sotto i 20 Hz). L'oscillatore è il componente base per la sintesi audio, viene usato per generare un'onda periodica con una certa ampiezza, frequenza e forma, solitamente sinusoidale, quadrata o triangolare \cite{izotope}.
 L'onda creata dall'LFO non rappresenta una nota da ascoltare ma un segnale tramite il quale un'altra onda viene modulata.
-In questo caso specifico, l'onda modifica il volume della traccia di Sub-bass in modo da creare delle variazioni oscillanti di ampiezza nel tempo, come mostrato in Figura \ref{fig:lfo}.
+In figura \ref{fig:lfo} è possibile vedere un esempio di applicazione di un LFO per creare delle variazioni oscillanti di ampiezza nel tempo.
 \begin{figure}[H]
     \includegraphics[width=\linewidth]{img/lfo.png}
     \caption{Un esempio di modulazione di ampiezza \cite{lfo_img}. I testi dell'immagine sono stati modificati per adattarli al contesto.}
@@ -245,7 +216,7 @@ In questo caso specifico, l'onda modifica il volume della traccia di Sub-bass in
 \subsubsection{Enveloper}
 La sintesi audio porta con sè diversi problemi e complicazioni, la più comune tra queste è la presenza di un suono simile ad un “pop” durante la riproduzione.
 Questi suoni sgradevoli sono causati suonando onde discontinue: quando lo speaker che riproduce l'audio, passando da una nota all'altra, percorre distanze troppo grandi in un tempo troppo breve.
-Per evitare questo problema, ho utilizzato un Enveloper: un filtro che permette di gestire il volume in modo graduale.
+Per evitare questo problema, vengono utilizzati gli Enveloper: dei filtri che permettono di gestire il volume in modo graduale.
 L'enveloper è stato introdotto dall'ingegnere Robert Moog nel 1964, data la necessità di articolare il volume in maniera differente dai soli stati on/off.
 I primi prototipi sviluppati di questo filtro caricavano e scaricavano lentamente dei condensatori attenuando il volume di conseguenza \cite{enveloper}.
 Ad oggi, ogni sintetizzatore hardware e software mette a disposizione gli enveloper, la formula più comune è ADSR (Figura \ref{fig:asdr}), questo filtro gestisce l'andamento del volume in quattro stadi:
@@ -255,8 +226,8 @@ Ad oggi, ogni sintetizzatore hardware e software mette a disposizione gli envelo
     \item \textbf{Sustain}: fase di mantenimento del volume, la nota è ancora premuta, il volume rimane stabile;
     \item \textbf{Release}: fase di diminuzione del volume, la nota viene rilasciata, il volume diminuisce.  
 \end{itemize}
-Siccome nel processo di sonificazione non vengono premuti effettivamente dei tasti, ho deciso di rimuovere le fasi di decay e sustain;
-lo scopo dell'enveloper è stato quello di evitare il suono sgradevole citato precedentemente, aumentando e diminuendo il volume ad inizio e fine di una nota.
+Siccome nel processo di sonificazione non vengono premuti effettivamente dei tasti, vengono rimosse le fasi di decay e sustain;
+lo scopo dell'enveloper è solamente quello di evitare il suono sgradevole citato precedentemente, aumentando e diminuendo il volume ad inizio e fine di una nota.
 \begin{figure}[H]
     \includegraphics[width=\linewidth,scale=0.2]{img/adsr.PNG}
     \caption{Lo schema riassuntivo di un Enveloper ADSR \cite{env_img}.}
@@ -264,12 +235,12 @@ lo scopo dell'enveloper è stato quello di evitare il suono sgradevole citato pr
 \end{figure}
 
 \subsection{Creazione del video}
-Per la generazione dell'animazione ho utilizzato matplotlib, una libreria di Data Visualization che permette di creare grafici.
+Per la generazione dell'animazione ho utilizzato matplotlib, una libreria di Data Visualization che permette di creare grafici \cite{matplotlib}.
 In particolare, tramite \texttt{FuncAnimation} è possibile creare un'animazione a partire da una funzione che restituisce un grafico;
 ogni rilevazione viene rappresentata da un frame, i quali vengono poi uniti in un unico file .gif ad intervalli di 0.5 secondi ciascuno.
 
 \subsection{Unire Audio e Video}
-L'aggiunta della traccia audio al file di animazione è stata possibile grazie a moviepy.
+L'aggiunta della traccia audio al file di animazione è stata possibile grazie a moviepy \cite{moviepy}.
 Moviepy è una libreria python per la manipolazione di video di diversi formati.
 Per la funzionalità che ho utilizzato, moviepy richiama ffmpeg: una suite software cross platform per creare, tagliare, unire video.
 
@@ -278,7 +249,7 @@ Per la funzionalità che ho utilizzato, moviepy richiama ffmpeg: una suite softw
 Ableton è una Digital Audio Workstation (DAW) che permette di registrare, modificare e riprodurre audio.
 Ho utilizzato questo software in fase di prototipazione per comporre dei possibili risultati della sonificazione, applicare loro degli strumenti General MIDI e degli effetti audio.
 Per la selezione delle note, ho utilizzato una tastiera compatibile con lo standard MIDI.
-Durante la fase di testing, ho inoltre utilizzato Ableton per importare le traccie MIDI e gli audio sonificati, al fine di verificarne la correttezza.
+Durante la fase di testing, ho inoltre utilizzato Ableton per importare le tracce MIDI e gli audio sonificati, al fine di verificarne la correttezza.
 \subsubsection{Audacity}
 Audacity è un software open source per la manipolazione dell'audio.
 Ho utilizzato questo software per analizzare in maniera più approfondita i campioni in fase di testing al fine di scoprire l'origine dei suoni sgradevoli.
@@ -292,9 +263,9 @@ Ho utilizzato questo client in fase di test per comprendere la struttura delle r
 
 \newpage
 \section{Architettura del sistema schematizzata}
-In Figura \ref{fig:uml} viene presentata una schematizzazione dell'architettura del sistema.
+Di seguito viene presentata una schematizzazione del sistema \ref{fig:arch}.
 \begin{figure}[H]
-    \includegraphics[width=\linewidth]{img/uml.png}
-    \caption{L'Architettura del sistema.}
-    \label{fig:uml}
+    \includegraphics[width=\linewidth,scale=0.2]{img/bigarch.png}
+    \caption{Lo schema riassuntivo del sistema.}
+    \label{fig:arch}
 \end{figure}

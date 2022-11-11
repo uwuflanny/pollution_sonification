@@ -1,7 +1,7 @@
 This is BibTeX, Version 0.99d (TeX Live 2022)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: tesi.aux
-The style file: plain.bst
+The style file: unsrt.bst
 Database file #1: backMatter/biblio.bib
 Warning--entry type for "population_and_enviroment" isn't style-file defined
 --line 10 of file backMatter/biblio.bib
@@ -55,45 +55,85 @@ Warning--entry type for "subbass" isn't style-file defined
 --line 296 of file backMatter/biblio.bib
 Warning--entry type for "requisiti" isn't style-file defined
 --line 305 of file backMatter/biblio.bib
-You've used 35 entries,
-            2118 wiz_defined-function locations,
-            660 strings with 9604 characters,
-and the built_in function-call counts, 7301 in all, are:
-= -- 674
-> -- 245
+Warning--entry type for "sus" isn't style-file defined
+--line 316 of file backMatter/biblio.bib
+Warning--entry type for "html" isn't style-file defined
+--line 327 of file backMatter/biblio.bib
+Warning--entry type for "css" isn't style-file defined
+--line 336 of file backMatter/biblio.bib
+Warning--entry type for "javascript" isn't style-file defined
+--line 344 of file backMatter/biblio.bib
+Warning--entry type for "jquery" isn't style-file defined
+--line 353 of file backMatter/biblio.bib
+Warning--entry type for "bootstrap" isn't style-file defined
+--line 362 of file backMatter/biblio.bib
+Warning--entry type for "plotly" isn't style-file defined
+--line 371 of file backMatter/biblio.bib
+Warning--entry type for "leaflet" isn't style-file defined
+--line 380 of file backMatter/biblio.bib
+Warning--entry type for "osm" isn't style-file defined
+--line 389 of file backMatter/biblio.bib
+Warning--entry type for "esri" isn't style-file defined
+--line 398 of file backMatter/biblio.bib
+Warning--entry type for "aqicn" isn't style-file defined
+--line 405 of file backMatter/biblio.bib
+Warning--entry type for "weatherbitio" isn't style-file defined
+--line 412 of file backMatter/biblio.bib
+Warning--entry type for "fastapi" isn't style-file defined
+--line 419 of file backMatter/biblio.bib
+Warning--entry type for "matplotlib" isn't style-file defined
+--line 426 of file backMatter/biblio.bib
+Warning--entry type for "moviepy" isn't style-file defined
+--line 433 of file backMatter/biblio.bib
+Warning--entry type for "juce" isn't style-file defined
+--line 440 of file backMatter/biblio.bib
+Warning--entry type for "json" isn't style-file defined
+--line 447 of file backMatter/biblio.bib
+Warning--entry type for "drawio" isn't style-file defined
+--line 454 of file backMatter/biblio.bib
+Warning--entry type for "sussurvey" isn't style-file defined
+--line 461 of file backMatter/biblio.bib
+Warning--entry type for "timidity" isn't style-file defined
+--line 468 of file backMatter/biblio.bib
+You've used 55 entries,
+            1791 wiz_defined-function locations,
+            684 strings with 10620 characters,
+and the built_in function-call counts, 7088 in all, are:
+= -- 552
+> -- 220
 < -- 0
-+ -- 107
-- -- 70
-* -- 270
-:= -- 1236
-add.period$ -- 108
-call.type$ -- 35
-change.case$ -- 136
++ -- 110
+- -- 55
+* -- 120
+:= -- 1080
+add.period$ -- 168
+call.type$ -- 55
+change.case$ -- 51
 chr.to.int$ -- 0
-cite$ -- 35
-duplicate$ -- 271
-empty$ -- 748
-format.name$ -- 70
-if$ -- 1560
+cite$ -- 55
+duplicate$ -- 301
+empty$ -- 976
+format.name$ -- 55
+if$ -- 1644
 int.to.chr$ -- 0
-int.to.str$ -- 35
+int.to.str$ -- 55
 missing$ -- 6
-newline$ -- 181
-num.names$ -- 70
-pop$ -- 290
+newline$ -- 281
+num.names$ -- 55
+pop$ -- 374
 preamble$ -- 1
-purify$ -- 105
+purify$ -- 0
 quote$ -- 0
-skip$ -- 235
+skip$ -- 160
 stack$ -- 0
-substring$ -- 177
-swap$ -- 36
+substring$ -- 0
+swap$ -- 56
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 136
+type$ -- 0
 warning$ -- 0
-while$ -- 70
-width$ -- 37
-write$ -- 357
-(There were 26 warnings)
+while$ -- 55
+width$ -- 57
+write$ -- 546
+(There were 46 warnings)

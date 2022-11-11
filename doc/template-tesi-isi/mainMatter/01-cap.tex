@@ -129,7 +129,7 @@ I grafici sono utili per spiegare l'andamento di una serie di dati, come ad esem
 Gli stili di grafico più comuni per questo scopo sono i grafici a barre, per rappresentare dati discreti, e i grafici a linee, per rappresentare le varie rilevazioni di un dato nel tempo.
 \\ 
 Le mappe interattive vengono utilizzate per spiegare ad un utente la relazione tra un dato e il territorio sul quale questo è stato registrato, mettendo a disposizione funzioni come lo zoom e la ricerca per località.
-Le mappe interattive offrono un ottimo contesto e geografico e, arricchite dall'utilizzo dei colori giusti, sono uno strumento efficacissimo per la comunicazione (esempio in Figura \ref{fig:pollution_map}).
+Le mappe interattive offrono un ottimo contesto geografico e, arricchite dall'utilizzo dei colori giusti, sono uno strumento efficacissimo per la comunicazione (esempio in Figura \ref{fig:pollution_map}).
 La mappa si presta per essere riempita con qualsiasi tipo di dato: possiamo attribuire ad ogni zona un colore differente, disegnare delle linee o dei poligoni, o ancora aggiungere dei marker interattivi.
 Utilizzando simultaneamente più metodi di visualizzazione differenti, possiamo comunicare all'utente più informazioni in un'unica schermata, fornendo anche la possibilità di comprendere le relazioni tra questi; queste mappe vengono comunemente chiamate mappe multilayer o multistrato.
 \begin{figure}[H]
@@ -205,7 +205,7 @@ Solitamente, le persone con disabilità visiva, per poter comprendere delle info
 Questi software incontrano sempre grandi difficoltà nel leggere qualsiasi tipo di immagina, e quindi, anche i grafici.
 La sonificazione risolve questo problema, permettendo al persona non vedente di comprendere le informazioni tramite la percezione uditiva, se affiancata ad una descrizione testuale leggibile da un screen reader ~\cite{accessibility}.
 \\
-La rappresentazione uditiva di è inoltre molto utile per le persone affette da daltonismo.
+La rappresentazione uditiva è inoltre molto utile per le persone affette da daltonismo.
 Alcune forme di data visualization utilizzano unicamente la simbologia dei colori per trasmettere informazioni; un possibile esempio legato al discorso dell'inquinamento consiste in una mappa dove ogni stato stato è colorato in base alla qualità dell'aria.
 Affiancare ad ogni paese un determinato suono, oltre che un colore, rende la rappresentazione molto più comprensibile a persone affette da questa disabilità.
 
@@ -261,13 +261,11 @@ Un esempio di modello di sonificazione è il theremin: uno strumento musicale el
 Il primo impiego effettivo della sonificazione risale al 1908. Lo studioso Hans Geiger si pose il problema di dare una rappresentazione immediata e di facile interpretazione della quantità di raggi gamma e particelle beta presenti nell’aria.
 Inventò così il contatore Geiger: un dispositivo in grado di fornire un feedback sonoro in tempo reale sul livello di radiazione presente in un’area.
 Il principio di sonificazione utilizzato nel contatore Geiger è molto semplice: lo strumento suona dei “click” ad intervalli regolari; più la concentrazione di radioattività è alta più il tempo di attesa tra i vari click si riduce ~\cite{soni_temporal}.
-\\\\
-Con il passare del tempo, il concetto di sonificazione si è adattato a rappresentare dati di ogni natura, e non solo quelli legati a proprietà fisiche, diventando a tutti gli effetti una alternativa alla visualizzazione grafica.
 
 \subsubsection{Sonificare il prezzo di Bitcoin}
 \begin{figure}[H]
   \includegraphics[width=\linewidth]{img/btc.PNG}
-  \caption{L'andamento del prezzo del bitcoin tra il 2015 e il 2022, rappresentato con un grafico azionario  ~\cite{bitcoin}.}
+  \caption{L'andamento del prezzo del bitcoin tra il 2015 e il 2022 ~\cite{bitcoin}.}
   \label{fig:btc}
 \end{figure}
 Il grafico in Figura \ref{fig:btc}, è stato sonificato dal data scientist Rohith Teja  ~\cite{bitcoin}.
@@ -281,18 +279,20 @@ E' stato utilizzato un insieme di note molto armonioso data la positività dei d
 
 
 \subsubsection{Trasformare un'immagine in campioni audio}
-Vediamo invece un esempio che utilizza la sintesi audio.
 \begin{figure}[H]
   \includegraphics[width=\linewidth]{img/snowman.png}
   \caption{La rappresentazione sonora di un'emoji \cite{snowman}.}
   \label{fig:emoji_wavetable}
 \end{figure}
 
+Vediamo invece un esempio che utilizza la sintesi audio.
 Nell'immagine \ref{fig:emoji_wavetable}, viene mostrata una delle funzioni messe a disposizione dall'Xfer Serum, un sintetizzatore virtuale ~\cite{serum}.
 Questa feature permette di sonificare qualsiasi immagine importata nel programma secondo vari criteri.
 Il criterio più semplice consiste per prima cosa nel convertire l'immagine in scala di grigi, e di ridimensionarla in un quadrato di dimensioni prefissate.
 A partire da ogni riga dell'immagine viene poi generata una sequenza di campioni, ognuno dei quali mappato sul livello di luminosità del singolo pixel.
 Tramite questo processo è possibile dare una rappresentazione sonora ad immagini come radiografie, fotografie di satelliti o rilevazioni di sensori.
+
+\newpage
 
 \subsubsection{Sonificare la volta celeste}
 Durante la ricerca, le sonificazioni che più ho apprezzato riguardano la rappresentazione sonora dello spazio.

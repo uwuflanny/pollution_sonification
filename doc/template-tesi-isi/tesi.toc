@@ -45,48 +45,59 @@
 \contentsline {subsection}{\numberline {2.3.11}Javascript Fetch API}{28}{subsection.2.3.11}%
 \contentsline {subsection}{\numberline {2.3.12}Python FastAPI}{28}{subsection.2.3.12}%
 \contentsline {section}{\numberline {2.4}Tecnologie utilizzate per la sonificazione}{28}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}Strategia di sonificazione}{29}{subsection.2.4.1}%
-\contentsline {subsubsection}{L'andamento dell'inquinamento}{29}{section*.15}%
-\contentsline {subsubsection}{L'inquinamento residuo}{29}{section*.16}%
-\contentsline {subsubsection}{Gestire il volume}{30}{section*.17}%
-\contentsline {subsubsection}{L'applicazione della teoria musicale}{30}{section*.18}%
-\contentsline {subsection}{\numberline {2.4.2}Design audio}{30}{subsection.2.4.2}%
-\contentsline {subsubsection}{I file MIDI}{30}{section*.19}%
-\contentsline {subsubsection}{Effetti audio VST3}{32}{section*.20}%
-\contentsline {subsubsection}{Archetype Gojira}{33}{section*.21}%
-\contentsline {subsection}{\numberline {2.4.3}Sintesi audio}{34}{subsection.2.4.3}%
-\contentsline {subsubsection}{Librerie utilizzate}{34}{section*.22}%
-\contentsline {subsubsection}{LFO}{34}{section*.23}%
-\contentsline {subsubsection}{Enveloper}{36}{section*.24}%
-\contentsline {subsection}{\numberline {2.4.4}Creazione del video}{37}{subsection.2.4.4}%
-\contentsline {subsection}{\numberline {2.4.5}Unire Audio e Video}{37}{subsection.2.4.5}%
-\contentsline {subsection}{\numberline {2.4.6}Altri software e hardware utilizzati}{38}{subsection.2.4.6}%
-\contentsline {subsubsection}{Ableton Live 10 Lite}{38}{section*.25}%
-\contentsline {subsubsection}{Audacity}{38}{section*.26}%
-\contentsline {subsubsection}{Visual Studio Code}{38}{section*.27}%
-\contentsline {subsubsection}{Insomnia}{38}{section*.28}%
-\contentsline {section}{\numberline {2.5}Architettura del sistema schematizzata}{39}{section.2.5}%
-\contentsline {chapter}{\numberline {3}Implementazione}{41}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Realizzazione della Mappa}{41}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}Differenze con i mockup}{41}{subsection.3.1.1}%
-\contentsline {subsection}{\numberline {3.1.2}Dettagli implementativi}{42}{subsection.3.1.2}%
-\contentsline {subsubsection}{La generazione dei cerchi}{42}{section*.29}%
-\contentsline {subsubsection}{Implementazione dei marker personalizzati}{43}{section*.30}%
-\contentsline {subsubsection}{Personalizzare la sonificazione}{44}{section*.31}%
-\contentsline {subsubsection}{Gestire lo storico}{45}{section*.32}%
-\contentsline {section}{\numberline {3.2}Realizzazione del server}{46}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Creazione del suono}{46}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Generazione Sub Bass}{46}{subsection.3.3.1}%
-\contentsline {subsubsection}{Scopo della traccia}{46}{section*.33}%
-\contentsline {subsubsection}{Suddivisione dei dati in intervalli}{47}{section*.34}%
-\contentsline {subsubsection}{Generazione delle WaveTable}{47}{section*.35}%
-\contentsline {subsubsection}{Preparazione dei modificatori di volume - LFO}{47}{section*.36}%
-\contentsline {subsubsection}{Sintesi}{48}{section*.37}%
-\contentsline {subsection}{\numberline {3.3.2}Esportare una traccia audio}{49}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}Traccia principale e accordi - Lead}{50}{subsection.3.3.3}%
-\contentsline {subsection}{\numberline {3.3.4}Creazione del residuo}{51}{subsection.3.3.4}%
-\contentsline {subsubsection}{Individuare i picchi di residuo}{51}{section*.38}%
-\contentsline {subsubsection}{Generazione delle note}{51}{section*.39}%
-\contentsline {chapter}{Conclusioni}{53}{chapter*.40}%
-\contentsline {chapter}{Bibliografia}{57}{chapter*.40}%
-\contentsline {chapter}{Ringraziamenti}{61}{chapter*.41}%
+\contentsline {subsection}{\numberline {2.4.1}Strategia di sonificazione}{28}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Design audio}{29}{subsection.2.4.2}%
+\contentsline {subsubsection}{I file MIDI}{29}{section*.15}%
+\contentsline {subsubsection}{Effetti audio VST3}{31}{section*.16}%
+\contentsline {subsubsection}{Archetype Gojira}{31}{section*.17}%
+\contentsline {subsection}{\numberline {2.4.3}Sintesi audio}{32}{subsection.2.4.3}%
+\contentsline {subsubsection}{Librerie utilizzate}{32}{section*.18}%
+\contentsline {subsubsection}{LFO}{32}{section*.19}%
+\contentsline {subsubsection}{Enveloper}{34}{section*.20}%
+\contentsline {subsection}{\numberline {2.4.4}Creazione del video}{35}{subsection.2.4.4}%
+\contentsline {subsection}{\numberline {2.4.5}Unire Audio e Video}{35}{subsection.2.4.5}%
+\contentsline {subsection}{\numberline {2.4.6}Altri software e hardware utilizzati}{36}{subsection.2.4.6}%
+\contentsline {subsubsection}{Ableton Live 10 Lite}{36}{section*.21}%
+\contentsline {subsubsection}{Audacity}{36}{section*.22}%
+\contentsline {subsubsection}{Visual Studio Code}{36}{section*.23}%
+\contentsline {subsubsection}{Insomnia}{36}{section*.24}%
+\contentsline {section}{\numberline {2.5}Architettura del sistema schematizzata}{37}{section.2.5}%
+\contentsline {chapter}{\numberline {3}Implementazione}{39}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Realizzazione della Mappa}{39}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Differenze con i mockup}{39}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Dettagli implementativi}{40}{subsection.3.1.2}%
+\contentsline {subsubsection}{Generazione dei cerchi}{40}{section*.25}%
+\contentsline {subsubsection}{Implementazione dei marker personalizzati}{41}{section*.26}%
+\contentsline {subsubsection}{Utilizzare il geocoding}{43}{section*.27}%
+\contentsline {subsubsection}{Personalizzare la sonificazione}{44}{section*.28}%
+\contentsline {subsubsection}{Gestire lo storico}{45}{section*.29}%
+\contentsline {subsubsection}{Tutorial}{46}{section*.30}%
+\contentsline {section}{\numberline {3.2}Implementazione del server}{46}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Sonificazione}{47}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Aspetti dell'inquinamento Sonificati}{47}{subsection.3.3.1}%
+\contentsline {subsubsection}{L'andamento dell'inquinamento}{47}{section*.31}%
+\contentsline {subsubsection}{L'inquinamento residuo}{47}{section*.32}%
+\contentsline {subsubsection}{Gestire il volume}{48}{section*.33}%
+\contentsline {subsubsection}{L'applicazione della teoria musicale}{48}{section*.34}%
+\contentsline {subsection}{\numberline {3.3.2}Esportare una traccia audio}{48}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Traccia principale e accordi - Lead}{49}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.4}Sonificazione del residuo}{51}{subsection.3.3.4}%
+\contentsline {subsubsection}{Individuare i picchi di residuo}{51}{section*.35}%
+\contentsline {subsubsection}{Generazione delle note}{51}{section*.36}%
+\contentsline {subsection}{\numberline {3.3.5}Generazione del Sub Bass di sottofondo}{53}{subsection.3.3.5}%
+\contentsline {subsubsection}{Suddivisione dei dati in intervalli}{53}{section*.37}%
+\contentsline {subsubsection}{Generazione delle WaveTable}{54}{section*.38}%
+\contentsline {subsubsection}{Preparazione dei modificatori di volume: LFO, Enveloper}{55}{section*.39}%
+\contentsline {subsubsection}{Sintesi}{56}{section*.40}%
+\contentsline {section}{\numberline {3.4}Merging delle tracce}{58}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Generazione del video}{58}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Testing}{59}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Test su dispositivi}{59}{subsection.3.6.1}%
+\contentsline {subsubsection}{Problemi riscontrati}{59}{section*.41}%
+\contentsline {subsection}{\numberline {3.6.2}Questionario SUS}{59}{subsection.3.6.2}%
+\contentsline {subsubsection}{Domande del questionario}{60}{section*.42}%
+\contentsline {subsubsection}{Calcolo del punteggio}{60}{section*.43}%
+\contentsline {subsubsection}{Punteggio totalizzato}{61}{section*.44}%
+\contentsline {subsubsection}{Sviluppi futuri}{63}{section*.46}%
+\contentsline {chapter}{Bibliografia}{65}{section*.46}%
+\contentsline {chapter}{Ringraziamenti}{71}{chapter*.47}%
