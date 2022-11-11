@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import moviepy.editor as mpe
 import math
 import ffmpeg
-from measures import bad, moderate, severe, unhealthy, very_unhealthy, hazardous, min_thresh
+from measures import bad, moderate, severe, unhealthy, very_unhealthy, hazardous, min_thresh, max_thresh
 import subprocess
 
 def merge_video(video_name, audio_name, output_name, fps=30):
@@ -61,7 +61,7 @@ def animate_data(index, data, days, res, filename):
 
 
         # set plot limits
-        top_y = 500 if max(data) > 450 else math.ceil(max(data) / min_thresh) * min_thresh
+        top_y = max_thresh if max(data) > max_thresh-50 else math.ceil(max(data) / min_thresh) * min_thresh
         plt.xticks(fontsize=8)
         plt.ylim(bottom=0, top=top_y)
         plt.xlim(left=-0.5, right=len(data)-0.5)

@@ -1,9 +1,4 @@
 
-class measures:
-
-    def init(self, index, data):
-        
-        pass
 
 # general
 min_thresh      = 50
