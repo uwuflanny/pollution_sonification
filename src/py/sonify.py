@@ -8,7 +8,6 @@ from vsthost import get_vsts
 from trackExporter import TrackExporter, merge_and_save
 from animator import animate_data, merge_video
 from sub import get_sub
-import subprocess
 from measures import convert, BPM, SIGN_DEN, SIGN_NUM
 
 
@@ -29,7 +28,7 @@ exporter    = TrackExporter(BPM, SIGN_NUM, SIGN_DEN)
 gojira_delay, gojira_shimmer = get_vsts()
 
 # convert index values
-convert(index)
+convert(index, data)
 
 # midi content (get midi notes)
 voicing     = get_harmonization(data)

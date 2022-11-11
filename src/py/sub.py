@@ -7,7 +7,7 @@ import math
 import numpy as np
 from scipy.optimize import fmin
 from utility import map_value_int, map_value
-from measures import WAVETABLE_SIZE, SAMPLE_RATE, BPM, MIN_THRESH, MAX_THRESH
+from measures import WAVETABLE_SIZE, SAMPLE_RATE, BPM, min_thresh, max_thresh
 
 
 
@@ -21,11 +21,11 @@ def get_intervals(data):
 
         val = data[i]
         
-        if val >= MIN_THRESH and goin == False:
+        if val >= min_thresh and goin == False:
             goin = True
             start = i
 
-        if val < MIN_THRESH and goin == True:
+        if val < min_thresh and goin == True:
             goin = False
             intervals.append((start, i))
 
@@ -48,7 +48,7 @@ def get_wavetables(data, intervals):
             interval = [interval[0], interval[0]]
 
         avg         = sum(interval) / len(interval)
-        quantize    = map_value_int(avg, MIN_THRESH, MAX_THRESH, 1, 100)
+        quantize    = map_value_int(avg, min_thresh, max_thresh, 1, 100)
         wavetable   = WaveBuffer(interval).mirror_extend().interpolate(WAVETABLE_SIZE).amplify().quantize(quantize).get_buffer()
         wavetables.append(wavetable)
 
@@ -102,8 +102,8 @@ def get_wav(data, intervals, wavetables, B):
         for data_idx in range(start, end):
 
             aqi = data[data_idx]
-            vol = map_value(aqi, MIN_THRESH, MAX_THRESH, 0, 0.05) # TODO REMOVE MAGIC NUMBERS
-            dur = map_value_int(aqi, MIN_THRESH, MAX_THRESH, SAMPS_PER_N // 4, SAMPS_PER_N)
+            vol = map_value(aqi, min_thresh, max_thresh, 0, 0.05) # TODO REMOVE MAGIC NUMBERS
+            dur = map_value_int(aqi, min_thresh, max_thresh, SAMPS_PER_N // 4, SAMPS_PER_N)
 
             for note_idx in range(NOTES_PER_B):
 

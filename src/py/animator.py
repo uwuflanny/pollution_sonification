@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import moviepy.editor as mpe
 import math
 import ffmpeg
-from measures import BAD, MODERATE, SEVERE, UNHEALTHY, VERY_UNHEALTHY, HAZARDOUS, MIN_THRESH
+from measures import bad, moderate, severe, unhealthy, very_unhealthy, hazardous, min_thresh
 import subprocess
 
 def merge_video(video_name, audio_name, output_name, fps=30):
@@ -16,17 +16,18 @@ def animate_data(index, data, days, res, filename):
 
     fig = plt.figure()
     ax1 = fig.add_subplot(1,1,1)
+    days_only = [day.split('T')[0] for day in days]
 
     def get_color(aqi):
-        if aqi >= VERY_UNHEALTHY:
+        if aqi >= very_unhealthy:
             return 'black'
-        elif aqi >= UNHEALTHY:
+        elif aqi >= unhealthy:
             return 'purple'
-        elif aqi >= SEVERE:
+        elif aqi >= severe:
             return 'red'
-        elif aqi >= MODERATE:
+        elif aqi >= moderate:
             return 'orange'
-        elif aqi >= BAD:
+        elif aqi >= bad:
             return '#f2e607'
         else:
             return 'green'
@@ -35,17 +36,16 @@ def animate_data(index, data, days, res, filename):
 
         # prepare plot
         ax1.clear()
-        ax1.set_title(index + ' - ' + days[i].replace('T', ' '))
-        ax1.set_xlabel('Time')
-        ax1.set_ylabel('AQI')
+        ax1.set_title(index.upper() + ' - ' + days[i].replace('T', ' '))
+        ax1.set_ylabel(index.upper())
 
         # color zones
-        plt.axhspan(0, BAD, facecolor='lightgreen', alpha=0.4)
-        plt.axhspan(BAD, MODERATE, facecolor='yellow', alpha=0.4)
-        plt.axhspan(MODERATE, SEVERE, facecolor='orange', alpha=0.4)
-        plt.axhspan(SEVERE, UNHEALTHY, facecolor='red', alpha=0.4)
-        plt.axhspan(UNHEALTHY, VERY_UNHEALTHY, facecolor='purple', alpha=0.4)
-        plt.axhspan(VERY_UNHEALTHY, HAZARDOUS, facecolor='black', alpha=0.4)   
+        plt.axhspan(0, bad, facecolor='lightgreen', alpha=0.4)
+        plt.axhspan(bad, moderate, facecolor='yellow', alpha=0.4)
+        plt.axhspan(moderate, severe, facecolor='orange', alpha=0.4)
+        plt.axhspan(severe, unhealthy, facecolor='red', alpha=0.4)
+        plt.axhspan(unhealthy, very_unhealthy, facecolor='purple', alpha=0.4)
+        plt.axhspan(very_unhealthy, hazardous, facecolor='black', alpha=0.4)   
 
         # plot residue
         ax1.plot(res[0:i+1], color='black')
@@ -54,9 +54,15 @@ def animate_data(index, data, days, res, filename):
         sub = data[0:i+1]
         for i in range(len(sub)):
             ax1.bar(i, sub[i], color=get_color(sub[i]))
+        # set xticks to days_only without repetitions
+        ax1.set_xticks(range(0, len(days_only), 24))
+        ax1.set_xticklabels(days_only[::24])
+
+
 
         # set plot limits
-        top_y = 500 if max(data) > 450 else math.ceil(max(data) / MIN_THRESH) * MIN_THRESH
+        top_y = 500 if max(data) > 450 else math.ceil(max(data) / min_thresh) * min_thresh
+        plt.xticks(fontsize=8)
         plt.ylim(bottom=0, top=top_y)
         plt.xlim(left=-0.5, right=len(data)-0.5)
 

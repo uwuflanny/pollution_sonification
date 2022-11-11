@@ -63,7 +63,7 @@ async function tutorial_2(){
 
 async function tutorial_3(){
 
-    let finaltoast = get_tutorial_toast("Here you can choose your sonification parameters, when you are ready, click the sonify button to start the sonification.", {close: true});
+    let finaltoast = get_tutorial_toast("Here you can choose your simulation parameters, when you are ready, click the sonify button to start the sonification.", {close: true});
     finaltoast.showToast();
 
     let handler = function(){
