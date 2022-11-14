@@ -49,12 +49,10 @@ I colori utilizzati per i grafici, i cerchi e le notifiche riprendono quelli sta
 La preparazione della schermata avviene in diverse fase consecutive.
 Per prima cosa, tramite la libreria Leaflet, la mappa viene creata e visualizzata nella pagina.
 Immediatamente dopo, tramite una chiamata all'API di AQIcn, vengono scaricati i dati relativi a tutte le stazioni di rilevazione presenti.
-La visualizzazione delle zone circolari è affidata alla funzione load circles (src ~\ref{lst:loadCircles}), che prende come unico parametro un oggetto JSON \cite{json}, contenente i dati delle stazioni.
+La visualizzazione delle zone circolari è affidata alla funzione load circles (listato ~\ref{lst:loadCircles}), che prende come unico parametro un oggetto JSON \cite{json}, contenente i dati delle stazioni.
 La funzione divide il mondo in un totale di 4900 zone, 70 in altezza e 70 in larghezza, ognuna identificata da un indice univoco.
 Per ogni stazione di ricerca, viene calcolato l'indice della zona a cui appartiene e viene inserita in un'apposita struttura dati.
-\lstset{caption={Suddivisione in zone delle stazioni.}}
-\label{lst:loadCircles}
-\begin{lstlisting}[language=Javascript]
+\begin{lstlisting}[language=Javascript,caption={Suddivisione in zone delle stazioni.},label={lst:loadCircles}]
 // get chunk unique index based on lat, lng
 function get_chunk_idx(lat, lng, chunks_per_dim) {
     let lat_chunk = Math.floor((lat + 90) / 180 * chunks_per_dim);
@@ -84,16 +82,14 @@ in base a queste informazioni, viene disegnato un cerchio di colore e grandezza 
 
 
 \subsubsection{Implementazione dei marker personalizzati}
-Cliccando sulla mappa, viene eseguita la funzione map inspect (src ~\ref{lst:mapInspect}).
+Cliccando sulla mappa, viene eseguita la funzione map inspect (listato ~\ref{lst:mapInspect}).
 Per prima cosa la funzione ottiene la latitudine e la longitudine del punto cliccato e, tramite reverse geocoding, ottiene il nome della località.
-L'esecuzione passa in seguito alla funzione create marker che, da un set di coordinate e un nome, crea un marker personalizzato (src ~\ref{lst:createMarker}).
+L'esecuzione passa in seguito alla funzione create marker che, da un set di coordinate e un nome, crea un marker personalizzato (listato ~\ref{lst:createMarker}).
 La funzione si occupa, inoltre, di ottenere lo storico delle ultime rilevazioni AQI della zona, eseguendo una chiamata all'API di weatherbit.io, questi dati
 vengono utilizzati in seguito per creare il grafico che compare nel pin.
 Per rimuovere un pin, è sufficiente cliccare con il tasto destro del mouse, o effettuare una pressione prolungata se da mobile.
-La struttura di un marker è un'estensione di quella default offerta da leaflet, sono state aggiunte le informazioni relative alla posizione geografica e all'ultima rilevazione AQI avvenuta, al fine di semplificare la gestione dei dati (src ~\ref{lst:markerextension}).
-\lstset{caption={La struttura di un marker personalizzato.}}
-\label{lst:markerextension}
-\begin{lstlisting}[language=Javascript]
+La struttura di un marker è un'estensione di quella default offerta da leaflet, sono state aggiunte le informazioni relative alla posizione geografica e all'ultima rilevazione AQI avvenuta, al fine di semplificare la gestione dei dati (listato ~\ref{lst:markerextension}).
+\begin{lstlisting}[language=Javascript,caption={La struttura di un marker personalizzato.},label={lst:markerextension}]
 // custom marker extension, values are placeholders
 myAqiMarker = L.Marker.extend({
     options: {
@@ -105,9 +101,7 @@ myAqiMarker = L.Marker.extend({
 });
 \end{lstlisting}
 
-\lstset{caption={La funzione map inspect, chiamata qualvolta l'utente clicca sulla mappa.}}
-\label{lst:mapInspect}
-\begin{lstlisting}[language=Javascript]
+\begin{lstlisting}[language=Javascript,caption={La funzione map inspect.},label={lst:mapInspect}]
 async function map_inspect(event) {
 
   // event consiste nelle informazioni relative all'evento di pressione sulla mappa
@@ -129,9 +123,7 @@ async function map_inspect(event) {
 \end{lstlisting}
 
 
-\lstset{caption={La funzione create marker.}}
-\label{lst:createMarker}
-\begin{lstlisting}[language=Javascript]
+\begin{lstlisting}[language=Javascript,caption={La funzione create marker.},label={lst:createMarker}]
 async function create_marker(lat, lng, location) {
     
     // load history
@@ -194,14 +186,12 @@ Al click di uno di questi, dall'evento, viene estratto il nome del luogo, la lat
 }
 
 \subsubsection{Personalizzare la sonificazione}
-Al click del marker, viene mostrato un menù a scomparsa che permette di personalizzare la sonificazione.
+Al click del marker, viene mostrato un menù a scomparsa che permette di personalizzare la sonificazione \ref{fig:schermata}.
 I dati, quale il nome della località, l'intervallo di date iniziale e l'ultima rilevazione AQI effettuata, sono caricati direttamente a partire dal marker che ha chiamato la funzione.
-Al cambiamento di ogni elemento presente nel form di personalizzazione è associato una funzione che valida i dati inseriti e, in caso di successo abilita il pulsante di conferma e aggiorna il grafico di anteprima (src ~\ref{lst:formChange}).
+Al cambiamento di ogni elemento presente nel form di personalizzazione è associato una funzione che valida i dati inseriti e, in caso di successo abilita il pulsante di conferma e aggiorna il grafico di anteprima (listato ~\ref{lst:formChange}).
 In aggiunta, in caso di dati validi, le informazioni riguardanti la sonificazione vengono caricati in una struttura dati denominata sonification data, che verrà usata come payload della richiesta di sonificazione.
 
-\lstset{caption={La funzione che gestisce il cambiamento di un elemento del form.}}
-\label{lst:formChange}
-\begin{lstlisting}[language=Javascript]
+\begin{lstlisting}[language=Javascript,caption={La funzione che gestisce il cambiamento di un elemento del form.},label={lst:formChange}]
 async function load_index(){
 
   // load useful data from form
@@ -239,11 +229,9 @@ async function load_index(){
 
 \subsubsection{Gestire lo storico}
 Lo storico delle rilevazioni AQI è gestito nel file aqi api.js.
-Per ottenere lo storico, è necessario creare una nuova istanza della classe History, passando come parametri la latitudine e la longitudine della zona di interesse e l'intervallo di date (src ~\ref{lst:history}).
+Per ottenere lo storico, è necessario creare una nuova istanza della classe History, passando come parametri la latitudine e la longitudine della zona di interesse e l'intervallo di date (listato ~\ref{lst:history}).
 Una volta ottenuto l'oggetto, tramite la funzione get index, è possibile ottenere un array contenente i valori di un indice di interesse, quali il PM10, il PM2.5, l'O3, ecc.
-\lstset{caption={La classe History.}}
-\label{lst:history}
-\begin{lstlisting}[language=Javascript]
+\begin{lstlisting}[language=Javascript,caption={La classe History.},label={lst:history}]
 function History(lat, lng, start_date, end_date) {
     this.lat = lat;
     this.lng = lng;
@@ -275,12 +263,11 @@ Solo seguendo il tutorial, l'utente può effettuare la prima sonificazione.
 \section{Implementazione del server}
 Il server è in grado di ricevere richieste di tre tipi, in base al percorso di questa.
 Per ottenere la pagina web interagibile, è possibile effettuare una richiesta GET al percorso / (root del server), da qualsiasi browser web.
-Una volta selezionata la località, l'indice da sonificare, e l'intervallo di date, tramite il bottone sonifica viene eseguita una richiesta POST al percorso /sonify; i dati citati precedentemente sono inviati in formato JSON (src ~\ref{lst:sonify}).
+Una volta selezionata la località, l'indice da sonificare, e l'intervallo di date, tramite il bottone sonifica viene eseguita una richiesta POST al percorso /sonify; i dati citati precedentemente sono inviati in formato JSON (listato ~\ref{lst:sonify}).
 Questa richiesta richiama, in un processo secondario, lo script sonify.py; al suo completamento, il server legge i byte del file video generato e li restituisce al client.
 Cliccando sulla notifica di avvenuta sonificazione, il client effettua una richiesta GET al percorso /video, che apre, in una nuova scheda, una schermata con il video riproducibile.
-\lstset{caption={I parametri che riceve la richiesta /sonify come parametro.}}
-\label{lst:sonify}
-\begin{lstlisting}[language=Python]
+
+\begin{lstlisting}[language=Python,caption={La funzione che gestisce la richiesta /sonify.},label={lst:sonify}]
 class SonifyRequest(BaseModel):
   # data array
   data:   list = Field(..., example=[121, 140, 150, 51, 67, 18])
@@ -294,10 +281,9 @@ class SonifyRequest(BaseModel):
 
 \section{Sonificazione}
 Di seguito vengono approfondite le scelte implementative per quanto riguarda la realizzazione della sonificazione vera e propria.
-Le sezioni di codice successive fanno ampimente uso di due funzioni di utility, in grado di cambiare un valore da un intervallo di valori ad un altro (src ~\ref{lst:utils}).
-\lstset{caption={Funzioni utility.}}
-\label{lst:utils}
-\begin{lstlisting}[language=Python]
+Le sezioni di codice successive fanno ampimente uso di due funzioni di utility, in grado di cambiare un valore da un intervallo di valori ad un altro (listato ~\ref{lst:utils}).
+
+\begin{lstlisting}[language=Python,caption={Funzioni utility.},label={lst:utils}]
 def map_value(value, in_min, in_max, out_min, out_max):
   # handles rare case where minium AQI and maximum AQI are the same
   if in_min == in_max:
@@ -315,7 +301,7 @@ Prima di progettare il sistema sonificativo, ho individuato le caratteristiche d
 le componenti di maggiore importanza sono l’andamento temporale dell'inquinamento e l'inquinamento residuo.
 Queste due tracce sono accompagnate da un sottofondo sonoro, che audifica la forma del grafico AQI.
 \subsubsection{L'andamento dell'inquinamento}
-L'andamento temporale è rappresentato dalle varie rilevazioni nel tempo, siccome è un valore che tende a cambire rapidamente nel tempo, ha richiesto un approccio di sonificazione dinamico.
+L'andamento temporale è rappresentato dalle varie rilevazioni nel tempo, siccome è un valore che tende a cambiare rapidamente nel tempo, ha richiesto un approccio di sonificazione dinamico.
 La scelta delle note utilizzate per rappresentare questo dato è molto semplice: più il valore dell'inquinamento è alto, più la nota è grave.
 \subsubsection{L'inquinamento residuo}
 L'inquinamento residuo consiste nel valore di rischio per la salute che si protrae nel tempo in seguito ad una giornata particolarmente inquinata.
@@ -337,10 +323,9 @@ Prima di analizzare la logica secondo la quale ogni traccia viene creata, è imp
 L'esportazione e la sintesi delle traccie audio MIDI avviene tramite la classe AudioExporter.
 La classe prende come parametri di costruzione le metriche di pentagramma per la traccia, quali il bpm e la suddivisione del tempo.
 La funzione di classe volta alla sintesi vera e propria accetta come argomenti una lista di note, un nome per la traccia, l'indice di uno strumento General MIDI e una lista di effetti audio VST3 da applicare.
-Le note sono delle strutture dati che contengono le informazioni necessarie per descrivere un evento MIDI (src ~\ref{lst:note}).
-\lstset{caption={Composizione di una nota.}}
-\label{lst:note}
-\begin{lstlisting}[language=Python]
+Le note sono delle strutture dati che contengono le informazioni necessarie per descrivere un evento MIDI (listato ~\ref{lst:note}).
+
+\begin{lstlisting}[language=Python,caption={Composizione di una nota.},label={lst:note}]
 note = {"note": 44,           # indice della nota
         "time": start_time,   # il tempo di inizio, in battiti 
         "duration": duration, # la durata, in quarti di battito
@@ -357,11 +342,10 @@ Questa traccia si basa su una scala maggiore ed è caratterizzata da una nota pe
 La traccia è principalemente presente negli istanti nei quali la qualità dell'aria è ottimale, quando questa peggiora,
 il suo volume tende ad abbassarsi lasciando spazio alla traccia di residuo.
 Ogni nota è caratterizzata da una tonalità ed un volume che dipendono dalla gravità dell'AQI rispetto al valore maggiore e minore registrato.
-Alle note del Lead vengono affiancati degli accordi ripetuti ad ogni battuta, l'ottava di ognuno di questi è determinata dalla media di quattro rilevazioni consecutive. In (src ~\ref{lst:lead} viene mostrala la generazione del lead e dei relativi accordi).
+Alle note del Lead vengono affiancati degli accordi ripetuti ad ogni battuta, l'ottava di ognuno di questi è determinata dalla media di quattro rilevazioni consecutive. In (listato ~\ref{lst:lead} viene mostrala la generazione del lead e dei relativi accordi).
 \newpage
-\lstset{caption={Generazione della traccia principale e accordi.}}
-\label{lst:lead}
-\begin{lstlisting}[language=Python]
+
+\begin{lstlisting}[language=Python,caption={Generazione della traccia principale e accordi.},label={lst:lead}]
 def get_lead(data, voicing):
 
   voicing = voicing[::-1]
@@ -412,13 +396,11 @@ La frequenza è di quattro note per rilevazione, e le tonalità sono uniformemen
 Alla fase della crescita segue un'eventuale fase di diminuzione, caratterizzata da un arpeggio di note di tonalità e volume discendenti con frequenza di due note a rilevazione. La fase
 di discesa si protrae fino alla completa risanazione dell'aria o fino all'inizio di un nuovo intervallo di crescita.
 Tramite questa strategia, sono riuscito a differenziare gli arpeggi tra le crescite improvvise di inquinamento e quelle più progressive.
-Durante le fasi di crescita e diminuzione del residuo, sono posizionate delle dissonanze in base alla gravità del valore (src ~\ref{lst:residue}).
+Durante le fasi di crescita e diminuzione del residuo, sono posizionate delle dissonanze in base alla gravità del valore (listato ~\ref{lst:residue}).
 
 \newpage
 
-\lstset{caption={Implementazione dell'algoritmo di residuo.}}
-\label{lst:residue}
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python,caption={Implementazione dell'algoritmo di residuo.},label={lst:residue}]
   # iterate len(residue) *4 times
   # each value in residue is a beat, each beat has 4 notes
   for i in range(len(residue) * 4):
@@ -489,7 +471,7 @@ Il primo passo che questo sottosistema svolge è quello di dividere tutte le ril
 Per ogni sottointervallo, ne viene indicato l'indice di inizio e quello di fine.
 \subsubsection{Generazione delle WaveTable}
 In seguito alla suddivisione, per ogni intervallo viene generata una WaveTable.
-Per prima cosa viene prelevato il sub-array di dati relativo all'intervallo, in segutio, tramite la classe specificata in wavebuffer.py (src ~\ref{lst:wavebuffer}), viene creato l'array di campioni wavetable.
+Per prima cosa viene prelevato il sub-array di dati relativo all'intervallo, in segutio, tramite la classe specificata in wavebuffer.py (listato ~\ref{lst:wavebuffer}), viene creato l'array di campioni wavetable.
 Partendo dai dati grezzi, ovvero le sole rilevazioni AQI, il primo passo che la classe svolge è quello di aggiungere all'array una sua copia negativa, in modo da rispettare l'ampiezza massima e minima di un segnale audio.
 In seguito vengono aggiunti, tramite interpolazione periodica, tanti punti quanti sono i campioni che la WaveTable deve contenere, nel mio caso, 8192.
 Ho scelto l'interpolazione periodica per fare combaciare sempre il primo campione con l'ultimo, rendendo l'onda effettivamente continua.
@@ -505,9 +487,7 @@ L'intervallo di campionamento per il Sample n Hold è stabilito dall'AQI medio, 
 
 \newpage
 
-\lstset{caption={La classe che si occupa della generazione di WaveTable.}}
-\label{lst:wavebuffer}
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python,caption={La classe che si occupa della generazione di WaveTable.},label={lst:wavebuffer}]
 class WaveBuffer(object):
 
   def __init__(self, buffer):
@@ -548,10 +528,9 @@ class WaveBuffer(object):
 Prima di passare alla sintesi vera e propria, il sottosistema definisce gli elementi necessari per l'andamento dinamico del volume.
 Gli elementi sono l'LFO e l'Enveloper.
 In questa sonificazione, l'LFO appare come una funzione sinusoidale periodica che oscilla tra 0.5 e 1.5, i valori che andranno a moltiplicarsi al volume.
-L'LFO viene restituito sotto forma di lambda dalla seguente funzione (src ~\ref{lst:lfo}).
-\lstset{caption={Generazione dell'LFO.}}
-\label{lst:lfo}
-\begin{lstlisting}[language=Python]
+L'LFO viene restituito sotto forma di lambda dalla seguente funzione (listato ~\ref{lst:lfo}).
+
+\begin{lstlisting}[language=Python,caption={Generazione dell'LFO.},label={lst:lfo}]
 def compute_LFO(min, max, samp_period): 
     # samp_period = distanza in campioni tra i picchi della funzione
     freq = 1 / (samp_period / SAMPLE_RATE)
@@ -559,10 +538,9 @@ def compute_LFO(min, max, samp_period):
     half = (max - min) / 2
     return lambda x: math.sin(2.0 * math.pi * (x) / period) * half + half + min
 \end{lstlisting}
-L'enveloper appare come una semplice funzione che, preso come parametro un array di campioni, ne attenua l'inizio e la fine (src ~\ref{lst:enveloper}).
-\lstset{caption={La funzione Enveloper.}}
-\label{lst:enveloper}
-\begin{lstlisting}[language=Python]
+L'enveloper appare come una semplice funzione che, preso come parametro un array di campioni, ne attenua l'inizio e la fine (listato ~\ref{lst:enveloper}).
+
+\begin{lstlisting}[language=Python,caption={La funzione Enveloper.},label={lst:enveloper}]
 def envelope_buffer(buffer):
 
   nsamples    = len(buffer)
@@ -579,7 +557,7 @@ def envelope_buffer(buffer):
 \end{lstlisting}
 
 \subsubsection{Sintesi}
-Si può passare alla funzione di sintesi vera e propria (src ~\ref{lst:audio_buffer}).
+Si può passare alla funzione di sintesi vera e propria (listato ~\ref{lst:audio_buffer}).
 La prima cosa svolta dalla funzione è definire le metriche della traccia, quali il tempo, il numero di note per intervallo, la frequenza di campionamento e la tonalità che si vuole rappresentare.
 Per ogni intervallo viene generato un buffer audio, questi verranno poi concatenati in un unico array.
 Ogni intervallo è composto da più rilevazioni, ognuna delle quali verrà sonificata con quattro note; il volume e la durata di ogni nota è definita dalla gravità dell'AQI della rilevazione.
@@ -587,9 +565,8 @@ I campioni inseriti nel buffer vengono presi dalla WaveTable relativa all'interv
 Il valore di ogni campione viene moltiplicato per il volume e per il relativo valore della funzione LFO.
 Al fine nascondere le discontinuità delle onde nelle note suonate, il buffer di ognuna di queste viene processato dalla fuzione Enveloper, che attenua i primi e gli ultimi campioni.
 
-\lstset{caption={Generazione del buffer audio.}}
-\label{lst:audio_buffer}
-\begin{lstlisting}[language=Python]
+
+\begin{lstlisting}[language=Python,caption={Generazione del buffer audio.},label={lst:audio_buffer}]
 def get_wav(data, intervals, wavetables, B):
 
   B_PER_SEC   = BPM / 60                  # beats per second
@@ -633,10 +610,9 @@ def get_wav(data, intervals, wavetables, B):
 
 \section{Merging delle tracce}
 Una volta pronti gli array di tutte le traccie audio, questi vengono uniti in un'unica lista, che viene salvata su un file .wav.
-Per evitare errori, ad ogni array viene aggiunto un padding di campioni nulli per rendere tutti i buffer della stessa lunghezza (src ~\ref{lst:padding}).
-\lstset{caption={Aggiunta del padding.}}
-\label{lst:padding}
-\begin{lstlisting}[language=Python]
+Per evitare errori, ad ogni array viene aggiunto un padding di campioni nulli per rendere tutti i buffer della stessa lunghezza (listato ~\ref{lst:padding}).
+
+\begin{lstlisting}[language=Python,caption={Aggiunta del padding.},label={lst:padding}]
 def merge_and_save(*tracks):
   # find max number of samples of track with max num of samples
   # then add padding and merge by sum
@@ -664,6 +640,14 @@ In Figura \ref{fig:video} viene mostrato un possibile frame della simulazione.
 In seguito allo sviluppo, l'applicativo è stato testato su diversi browser installati su diversi dispositivi.
 I browser utilizzati sono stati Chrome, Opera, Safari e Brave, utilizzati su dispositivi Android, iOS, Windows e Linux.
 Sono stati effettuati test da personal computer, smartphone e tablet di diverse risoluzioni.
+In Figura \ref{fig:mobile} viene mostrata la schermata responsiva mobile su IPhone SE.
+
+\begin{figure}[h]
+  \includegraphics[width=\linewidth]{img/mobile.png}
+  \label{fig:mobile}
+  \caption{La schermata principale su IPhone SE.}
+\end{figure}
+
 \subsubsection{Problemi riscontrati}
 Durante il test su dispositivi iOS, ho riscontrato dei problemi riguardanti la riproduzione del video.
 In particolare, nonostante questo fosse visualizzato correttamente, era privo di suono.
@@ -675,8 +659,6 @@ Un secondo problema riscontrato riguardava sempre l'assenza dell'audio sul brows
 SUS (System Usability Scale) è un questionario di valutazione, sviluppato da John Brooke nel 1986 \cite{sussurvey}.
 Grazie alla sua semplicità ed efficacia, è stato nominato standard internazionale per la valutazione dell'usabilità di sistemi informatici.
 La formula SUS è composta da 10 domande, i cui punteggi vanno da 1 a 5; le domande riguardano principalmente la facilità d'uso, la comprensione e la soddisfazione dell'utente.
-
-\newpage
 
 \subsubsection{Domande del questionario}
 Il questionario alterna domande positive e negative, per differenziare il feedback dell'utente.
@@ -710,6 +692,15 @@ Per avere un riscontro immediato sul punteggio ottenuto, è possibile consultare
 \end{figure}
 
 \subsubsection{Punteggio totalizzato}
-Il sondaggio è stato compilato da 12 individui, dopo avere utilizzato l'applicativo.
+Dopo avere utilizzato l'applicativo per un periodo di tempo, il questionario è stato compilato da 12 utenti.
+Questi sono 6 compagni di corso, 4 studenti di un altro corso di studio e 2 conoscenti non particolarmente pratici di sistemi informatici.
+L'età media degli utenti è di 22 anni, 10 sono maschi e 2 femmine.
 Il punteggio ottenuto è stato di 89.5, somalente un campione ha riportato un punteggio inferiore a 80.
+La fase di open beta ha permesso di raccogliere feedback e suggerimenti da parte degli utenti, sottolineando eventiali aspetti da migliorare.
+I risultati ottenuti sono riportati in Figura \ref{fig:result}, le colonne rappresentano le risposte medie alle domande, i cui indici sono gli stessi riportati precedentemente; le domande positive sono colorate di blu, mentre quelle negative di rosso.
 
+\begin{figure}[h]
+  \includegraphics[width=\linewidth]{img/media.png}
+  \caption{I risultati del sondaggio.}
+  \label{fig:result}
+\end{figure}

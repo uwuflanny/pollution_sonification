@@ -1,14 +1,14 @@
 # Fdb version 3
-["bibtex tesi"] 1668094546 "tesi.aux" "tesi.bbl" "tesi" 1668094553
+["bibtex tesi"] 1668461715 "tesi.aux" "tesi.bbl" "tesi" 1668463245
   "backMatter/biblio.bib" 1668086954 13431 631e45930fb309f36903a2d635451630 ""
   "d:/texlive/2022/texmf-dist/bibtex/bst/base/unsrt.bst" 1665394551 18030 1376b4b231b50c66211e47e42eda2875 ""
-  "tesi.aux" 1668094552 26255 10c670d4c8767324ba7731a11e8e7237 "pdflatex"
+  "tesi.aux" 1668463244 27018 fa75d1fa17d1586a430708d777ee5c0f "pdflatex"
   (generated)
   "tesi.bbl"
   "tesi.blg"
-["pdflatex"] 1668094547 "c:/Users/39339/Desktop/pollution_sonification/doc/template-tesi-isi/tesi.tex" "tesi.pdf" "tesi" 1668094553
+["pdflatex"] 1668463236 "c:/Users/39339/Desktop/pollution_sonification/doc/template-tesi-isi/tesi.tex" "tesi.pdf" "tesi" 1668463245
   "backMatter/bibliografia.tex" 1668088125 696 f9e39397dc28e38ee61a69375ba05eba ""
-  "backMatter/conclusioni.tex" 1668077306 1987 7c08178f10c9939f3654e23fa17f2a7e ""
+  "backMatter/conclusioni.tex" 1668463235 2124 a0742a02c42fef9ab3523efc4484c61e ""
   "backMatter/ringraziamenti.tex" 1666040441 528 60fb53b55af616330b5bf0cc4a4c13ee ""
   "c:/Users/39339/Desktop/pollution_sonification/doc/template-tesi-isi/tesi.tex" 1668088011 5874 f87c650a7da9cec5f3889499e55a531d ""
   "d:/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1665395044 2900 1537cc8184ad1792082cd229ecc269f4 ""
@@ -173,7 +173,7 @@
   "d:/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt" 1665401963 3058730 1e1fe00225c57f042b738c25132a89d9 ""
   "d:/texlive/2022/texmf.cnf" 1665401764 713 e69b156964470283e0530f5060668171 ""
   "frontMatter/00-dedication.tex" 1666040441 1202 cc28f2c14bf96f8185bd7c4889eac375 ""
-  "frontMatter/00-introduction.tex" 1668074529 1628 88bf1931f47da6e9d7a75ccfca7d7de7 ""
+  "frontMatter/00-introduction.tex" 1668458380 4307 c6ab002c8e34ecd271c56c4bb55b7c32 ""
   "frontMatter/frontespizio.tex" 1667998343 1232 a79c1f0918414d5aad24d86454c3cb0b ""
   "img/adsr.png" 1666615260 34607 67b677302d8e8c04bd23ccefafff3904 ""
   "img/bigarch.png" 1668002742 320396 b6d8552e2818689e46abeb9a242d9359 ""
@@ -183,6 +183,8 @@
   "img/lfo.png" 1666613099 85731 f30cc427ecf7911ef145d0ef50e2791b ""
   "img/livelli.png" 1665759746 43215 3f89d65baa44bf83a302ec0254e15579 ""
   "img/mappapm.png" 1665756100 444395 9247d5f09f68cd264cea982ec0d7733b ""
+  "img/media.png" 1668459895 13840 7db82a56823ce50c6533df7db956f10a ""
+  "img/mobile.png" 1668461434 216466 f73dafea7164ed6488dfb8cd736e2970 ""
   "img/mockup.PNG" 1666080341 82725 e80799bd9646ee08628583d6a7efd30b ""
   "img/pianoroll.png" 1666969351 42129 612682a6457de6b117246cb0b4ec039b ""
   "img/residue.png" 1667832331 34951 27d143dce0b7c093cf69959b94725fe8 ""
@@ -194,14 +196,14 @@
   "img/waves.png" 1667402949 91612 d0e402fadb40ebd3debe721f26d5b593 ""
   "mainMatter/01-cap.tex" 1668088619 30565 6b25509f05897899c4b99e811bef457b ""
   "mainMatter/02-cap.tex" 1668094530 24481 517c9f476ec498cba56acbf47f1466fe ""
-  "mainMatter/03-cap.tex" 1668094039 37592 28227b52e6b3d29105c71aa3cfa3ea4b ""
-  "tesi.aux" 1668094552 26255 10c670d4c8767324ba7731a11e8e7237 "pdflatex"
-  "tesi.bbl" 1668094547 9873 5ee191285220886cdec4078aca087076 "bibtex tesi"
-  "tesi.lof" 1668094552 2484 fa857e39aec86773538a25af40631a81 "pdflatex"
-  "tesi.lot" 1668094552 253 0b3ba85a816639314ea80b898cb413c0 "pdflatex"
-  "tesi.out" 1668094552 9999 16c396ed7370f4dd38b0769f3dbc6c29 "pdflatex"
+  "mainMatter/03-cap.tex" 1668461777 38483 42d387587e42356479c496b8918c2705 ""
+  "tesi.aux" 1668463244 27018 fa75d1fa17d1586a430708d777ee5c0f "pdflatex"
+  "tesi.bbl" 1668461716 9873 5ee191285220886cdec4078aca087076 "bibtex tesi"
+  "tesi.lof" 1668463244 2697 d6db579f3dd594bbb9feef57bd9ee889 "pdflatex"
+  "tesi.lot" 1668463244 253 0b3ba85a816639314ea80b898cb413c0 "pdflatex"
+  "tesi.out" 1668463244 9999 d77b2e727bed211fb4021eee025f175c "pdflatex"
   "tesi.tex" 1668088011 5874 f87c650a7da9cec5f3889499e55a531d ""
-  "tesi.toc" 1668094552 8267 16b1596283ae7814a58dfbea239483ba "pdflatex"
+  "tesi.toc" 1668463244 8473 1ec61bd7335eac119b93b778b3e25449 "pdflatex"
   (generated)
   "tesi.aux"
   "tesi.lof"
