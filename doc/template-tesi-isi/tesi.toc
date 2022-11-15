@@ -76,15 +76,15 @@
 \contentsline {subsubsection}{Personalizzare la sonificazione}{44}{section*.32}%
 \contentsline {subsubsection}{Gestire lo storico}{45}{section*.33}%
 \contentsline {subsubsection}{Tutorial}{46}{section*.34}%
-\contentsline {section}{\numberline {3.2}Implementazione del server}{46}{section.3.2}%
+\contentsline {section}{\numberline {3.2}Implementazione del server}{47}{section.3.2}%
 \contentsline {section}{\numberline {3.3}Sonificazione}{47}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Aspetti dell'inquinamento Sonificati}{47}{subsection.3.3.1}%
-\contentsline {subsubsection}{L'andamento dell'inquinamento}{47}{section*.35}%
-\contentsline {subsubsection}{L'inquinamento residuo}{47}{section*.36}%
+\contentsline {subsection}{\numberline {3.3.1}Aspetti dell'inquinamento Sonificati}{48}{subsection.3.3.1}%
+\contentsline {subsubsection}{L'andamento dell'inquinamento}{48}{section*.35}%
+\contentsline {subsubsection}{L'inquinamento residuo}{48}{section*.36}%
 \contentsline {subsubsection}{Gestire il volume}{48}{section*.37}%
-\contentsline {subsubsection}{L'applicazione della teoria musicale}{48}{section*.38}%
-\contentsline {subsection}{\numberline {3.3.2}Esportare una traccia audio}{48}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}Traccia principale e accordi - Lead}{49}{subsection.3.3.3}%
+\contentsline {subsubsection}{L'applicazione della teoria musicale}{49}{section*.38}%
+\contentsline {subsection}{\numberline {3.3.2}Esportare una traccia audio}{49}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Traccia principale e accordi - Lead}{50}{subsection.3.3.3}%
 \contentsline {subsection}{\numberline {3.3.4}Sonificazione del residuo}{51}{subsection.3.3.4}%
 \contentsline {subsubsection}{Individuare i picchi di residuo}{51}{section*.39}%
 \contentsline {subsubsection}{Generazione delle note}{51}{section*.40}%

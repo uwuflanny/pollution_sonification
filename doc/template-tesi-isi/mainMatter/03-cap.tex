@@ -254,10 +254,18 @@ History.prototype.get_index = async function(index) {
 
 \subsubsection{Tutorial}
 Al fine di migliorare la user experience, ho inserito un semplice tutorial che spiega come utilizzare l'applicazione.
-Il tutorial consiste in dei messaggi che vengono mostrati nella parte inferiore dello schermo.
+Il tutorial consiste in dei messaggi che vengono mostrati nella parte inferiore dello schermo (Figura \ref{fig:tutorial}).
 Ogni messaggio rimane in attesa del completamento di una determinata azione, al compimento di questa, il messaggio viene nascosto e viene mostrato il successivo.
 Solo seguendo il tutorial, l'utente può effettuare la prima sonificazione.
 
+
+\begin{figure}[h]
+  \includegraphics[width=\linewidth]{img/tutorial.png}
+  \caption{Due fasi del tutorial, in particolare, quelle che richiedono all'utente di aggiungere e cliccare un marker.}
+  \label{fig:tutorial}
+\end{figure}
+
+\newpage
 
 
 \section{Implementazione del server}
@@ -269,12 +277,9 @@ Cliccando sulla notifica di avvenuta sonificazione, il client effettua una richi
 
 \begin{lstlisting}[language=Python,caption={La funzione che gestisce la richiesta /sonify.},label={lst:sonify}]
 class SonifyRequest(BaseModel):
-  # data array
   data:   list = Field(..., example=[121, 140, 150, 51, 67, 18])
-  # dateTimes array
   days:   list = Field(..., example=["2021-01-01T00:00:00", "2021-01-01T00:00:01"])
-  # data index (AQI, PM2.5, PM10)
-  idx:    str 
+  idx:    str # (AQI, PM25, PM10...)
 \end{lstlisting}
 
 
@@ -342,10 +347,9 @@ Questa traccia si basa su una scala maggiore ed è caratterizzata da una nota pe
 La traccia è principalemente presente negli istanti nei quali la qualità dell'aria è ottimale, quando questa peggiora,
 il suo volume tende ad abbassarsi lasciando spazio alla traccia di residuo.
 Ogni nota è caratterizzata da una tonalità ed un volume che dipendono dalla gravità dell'AQI rispetto al valore maggiore e minore registrato.
-Alle note del Lead vengono affiancati degli accordi ripetuti ad ogni battuta, l'ottava di ognuno di questi è determinata dalla media di quattro rilevazioni consecutive. In (listato ~\ref{lst:lead} viene mostrala la generazione del lead e dei relativi accordi).
-\newpage
+Alle note del Lead vengono affiancati degli accordi ripetuti ad ogni battuta, l'ottava di ognuno di questi è determinata dalla media di quattro rilevazioni consecutive. In (listato ~\ref{lst:lead}) viene mostrala la generazione del lead.
 
-\begin{lstlisting}[language=Python,caption={Generazione della traccia principale e accordi.},label={lst:lead}]
+\begin{lstlisting}[language=Python,caption={Generazione della traccia principale.},label={lst:lead}]
 def get_lead(data, voicing):
 
   voicing = voicing[::-1]
@@ -362,22 +366,6 @@ def get_lead(data, voicing):
 
   return notes
 
-def get_chords(data, voicing):
-
-  # group data by averages of 4 consecutive elements
-  chord   = voicing[0:5:2]
-  avgs    = [sum(data[i:i+4]) / 4 for i in range(0, len(data), 4)]
-  best    = min(avgs)
-  worst   = max(avgs)
-  notes   = []
-  
-  for i in range(len(avgs)):
-      aqi = avgs[i]
-      oct = map_value_int(aqi, best, worst, 2, 0) * 12
-      vol = map_value_int(aqi, best, worst, 60, 20)
-      notes += [{"note": note + oct, "time": i * 4, "duration": 4, "volume": vol} for note in chord]
-
-  return notes
 \end{lstlisting}
 
 \newpage
@@ -663,7 +651,7 @@ La formula SUS è composta da 10 domande, i cui punteggi vanno da 1 a 5; le doma
 \subsubsection{Domande del questionario}
 Il questionario alterna domande positive e negative, per differenziare il feedback dell'utente.
 Di seguito, vengono riportate le domande del questionario, tradotte in italiano.
-\begin{itemize}
+\begin{enumerate}
   \item Penso che mi piacerebbe utilizzare questo sistema più frequentemente;
   \item Ho trovato il sistema troppo complesso senza che ce ne fosse il bisogno;
   \item Ho trovato il sistema semplice da utilizzare;
@@ -674,7 +662,7 @@ Di seguito, vengono riportate le domande del questionario, tradotte in italiano.
   \item Ho trovato il sistema macchinoso da utilizzare;
   \item Ho provato confidenza nell'utilizzo del sistema;
   \item Dovrei imparare troppe cose prima di utilizzare il sistema al meglio.
-\end{itemize}
+\end{enumerate}
 
 \subsubsection{Calcolo del punteggio}
 I passi per il calcolo del punteggio SUS sono i seguenti:
@@ -692,9 +680,9 @@ Per avere un riscontro immediato sul punteggio ottenuto, è possibile consultare
 \end{figure}
 
 \subsubsection{Punteggio totalizzato}
-Dopo avere utilizzato l'applicativo per un periodo di tempo, il questionario è stato compilato da 12 utenti.
+Dopo avere utilizzato l'applicativo per un breve periodo di tempo, il questionario è stato compilato da 12 utenti.
 Questi sono 6 compagni di corso, 4 studenti di un altro corso di studio e 2 conoscenti non particolarmente pratici di sistemi informatici.
-L'età media degli utenti è di 22 anni, 10 sono maschi e 2 femmine.
+L'età media degli utenti è di 22 anni, 10 sono di sesso maschile e 2 di sesso femminile.
 Il punteggio ottenuto è stato di 89.5, somalente un campione ha riportato un punteggio inferiore a 80.
 La fase di open beta ha permesso di raccogliere feedback e suggerimenti da parte degli utenti, sottolineando eventiali aspetti da migliorare.
 I risultati ottenuti sono riportati in Figura \ref{fig:result}, le colonne rappresentano le risposte medie alle domande, i cui indici sono gli stessi riportati precedentemente; le domande positive sono colorate di blu, mentre quelle negative di rosso.
