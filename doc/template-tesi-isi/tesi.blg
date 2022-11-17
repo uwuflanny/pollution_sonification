@@ -13,127 +13,133 @@ Warning--entry type for "arpa_veneto" isn't style-file defined
 --line 36 of file backMatter/biblio.bib
 Warning--entry type for "soni_temporal" isn't style-file defined
 --line 45 of file backMatter/biblio.bib
-Warning--entry type for "aqimap" isn't style-file defined
+Warning--entry type for "midiutil" isn't style-file defined
 --line 54 of file backMatter/biblio.bib
-Warning--entry type for "disadvantages" isn't style-file defined
+Warning--entry type for "numpy" isn't style-file defined
 --line 63 of file backMatter/biblio.bib
+Warning--entry type for "pedalboard" isn't style-file defined
+--line 72 of file backMatter/biblio.bib
+Warning--entry type for "aqimap" isn't style-file defined
+--line 81 of file backMatter/biblio.bib
+Warning--entry type for "disadvantages" isn't style-file defined
+--line 90 of file backMatter/biblio.bib
 Warning--entry type for "color_symbolism" isn't style-file defined
---line 96 of file backMatter/biblio.bib
+--line 123 of file backMatter/biblio.bib
 Warning--entry type for "audiovideo" isn't style-file defined
---line 115 of file backMatter/biblio.bib
+--line 142 of file backMatter/biblio.bib
 Warning--entry type for "accessibility" isn't style-file defined
---line 124 of file backMatter/biblio.bib
+--line 151 of file backMatter/biblio.bib
 Warning--entry type for "bitcoin" isn't style-file defined
---line 140 of file backMatter/biblio.bib
-Warning--entry type for "nasa" isn't style-file defined
---line 149 of file backMatter/biblio.bib
-Warning--entry type for "snowman" isn't style-file defined
 --line 167 of file backMatter/biblio.bib
-Warning--entry type for "aqibasics" isn't style-file defined
+Warning--entry type for "nasa" isn't style-file defined
 --line 176 of file backMatter/biblio.bib
+Warning--entry type for "snowman" isn't style-file defined
+--line 194 of file backMatter/biblio.bib
+Warning--entry type for "aqibasics" isn't style-file defined
+--line 203 of file backMatter/biblio.bib
 Warning--entry type for "polluter_pays" isn't style-file defined
---line 183 of file backMatter/biblio.bib
-Warning--entry type for "appdiffs" isn't style-file defined
---line 201 of file backMatter/biblio.bib
-Warning--entry type for "izotope" isn't style-file defined
 --line 210 of file backMatter/biblio.bib
-Warning--entry type for "midi" isn't style-file defined
+Warning--entry type for "appdiffs" isn't style-file defined
 --line 228 of file backMatter/biblio.bib
-Warning--entry type for "env_img" isn't style-file defined
+Warning--entry type for "izotope" isn't style-file defined
 --line 237 of file backMatter/biblio.bib
+Warning--entry type for "midi" isn't style-file defined
+--line 255 of file backMatter/biblio.bib
+Warning--entry type for "env_img" isn't style-file defined
+--line 264 of file backMatter/biblio.bib
 Warning--entry type for "lfo_img" isn't style-file defined
---line 244 of file backMatter/biblio.bib
+--line 271 of file backMatter/biblio.bib
 Warning--entry type for "api" isn't style-file defined
---line 260 of file backMatter/biblio.bib
-Warning--entry type for "residue" isn't style-file defined
---line 269 of file backMatter/biblio.bib
-Warning--entry type for "dissonance" isn't style-file defined
---line 278 of file backMatter/biblio.bib
-Warning--entry type for "vst3" isn't style-file defined
 --line 287 of file backMatter/biblio.bib
-Warning--entry type for "subbass" isn't style-file defined
+Warning--entry type for "residue" isn't style-file defined
 --line 296 of file backMatter/biblio.bib
-Warning--entry type for "requisiti" isn't style-file defined
+Warning--entry type for "dissonance" isn't style-file defined
 --line 305 of file backMatter/biblio.bib
+Warning--entry type for "vst3" isn't style-file defined
+--line 314 of file backMatter/biblio.bib
+Warning--entry type for "subbass" isn't style-file defined
+--line 323 of file backMatter/biblio.bib
+Warning--entry type for "requisiti" isn't style-file defined
+--line 332 of file backMatter/biblio.bib
 Warning--entry type for "sus" isn't style-file defined
---line 316 of file backMatter/biblio.bib
+--line 343 of file backMatter/biblio.bib
 Warning--entry type for "html" isn't style-file defined
---line 327 of file backMatter/biblio.bib
+--line 354 of file backMatter/biblio.bib
 Warning--entry type for "css" isn't style-file defined
---line 336 of file backMatter/biblio.bib
+--line 363 of file backMatter/biblio.bib
 Warning--entry type for "javascript" isn't style-file defined
---line 344 of file backMatter/biblio.bib
-Warning--entry type for "jquery" isn't style-file defined
---line 353 of file backMatter/biblio.bib
-Warning--entry type for "bootstrap" isn't style-file defined
---line 362 of file backMatter/biblio.bib
-Warning--entry type for "plotly" isn't style-file defined
 --line 371 of file backMatter/biblio.bib
-Warning--entry type for "leaflet" isn't style-file defined
+Warning--entry type for "jquery" isn't style-file defined
 --line 380 of file backMatter/biblio.bib
-Warning--entry type for "osm" isn't style-file defined
+Warning--entry type for "bootstrap" isn't style-file defined
 --line 389 of file backMatter/biblio.bib
-Warning--entry type for "esri" isn't style-file defined
+Warning--entry type for "plotly" isn't style-file defined
 --line 398 of file backMatter/biblio.bib
+Warning--entry type for "leaflet" isn't style-file defined
+--line 407 of file backMatter/biblio.bib
+Warning--entry type for "osm" isn't style-file defined
+--line 416 of file backMatter/biblio.bib
+Warning--entry type for "esri" isn't style-file defined
+--line 425 of file backMatter/biblio.bib
 Warning--entry type for "aqicn" isn't style-file defined
---line 405 of file backMatter/biblio.bib
+--line 432 of file backMatter/biblio.bib
 Warning--entry type for "weatherbitio" isn't style-file defined
---line 412 of file backMatter/biblio.bib
+--line 439 of file backMatter/biblio.bib
 Warning--entry type for "fastapi" isn't style-file defined
---line 419 of file backMatter/biblio.bib
+--line 446 of file backMatter/biblio.bib
 Warning--entry type for "matplotlib" isn't style-file defined
---line 426 of file backMatter/biblio.bib
+--line 453 of file backMatter/biblio.bib
 Warning--entry type for "moviepy" isn't style-file defined
---line 433 of file backMatter/biblio.bib
+--line 460 of file backMatter/biblio.bib
 Warning--entry type for "juce" isn't style-file defined
---line 440 of file backMatter/biblio.bib
+--line 467 of file backMatter/biblio.bib
 Warning--entry type for "json" isn't style-file defined
---line 447 of file backMatter/biblio.bib
+--line 474 of file backMatter/biblio.bib
 Warning--entry type for "drawio" isn't style-file defined
---line 454 of file backMatter/biblio.bib
+--line 481 of file backMatter/biblio.bib
 Warning--entry type for "sussurvey" isn't style-file defined
---line 461 of file backMatter/biblio.bib
+--line 488 of file backMatter/biblio.bib
 Warning--entry type for "timidity" isn't style-file defined
---line 468 of file backMatter/biblio.bib
-You've used 55 entries,
+--line 495 of file backMatter/biblio.bib
+You've used 58 entries,
             1791 wiz_defined-function locations,
-            684 strings with 10620 characters,
-and the built_in function-call counts, 7088 in all, are:
-= -- 552
-> -- 220
+            696 strings with 10846 characters,
+and the built_in function-call counts, 7475 in all, are:
+= -- 582
+> -- 232
 < -- 0
-+ -- 110
-- -- 55
-* -- 120
-:= -- 1080
-add.period$ -- 168
-call.type$ -- 55
-change.case$ -- 51
++ -- 116
+- -- 58
+* -- 129
+:= -- 1137
+add.period$ -- 177
+call.type$ -- 58
+change.case$ -- 54
 chr.to.int$ -- 0
-cite$ -- 55
-duplicate$ -- 301
-empty$ -- 976
-format.name$ -- 55
-if$ -- 1644
+cite$ -- 58
+duplicate$ -- 316
+empty$ -- 1030
+format.name$ -- 58
+if$ -- 1734
 int.to.chr$ -- 0
-int.to.str$ -- 55
+int.to.str$ -- 58
 missing$ -- 6
-newline$ -- 281
-num.names$ -- 55
-pop$ -- 374
+newline$ -- 296
+num.names$ -- 58
+pop$ -- 395
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 160
+skip$ -- 169
 stack$ -- 0
 substring$ -- 0
-swap$ -- 56
+swap$ -- 59
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 55
-width$ -- 57
-write$ -- 546
-(There were 46 warnings)
+while$ -- 58
+width$ -- 60
+write$ -- 576
+(There were 49 warnings)

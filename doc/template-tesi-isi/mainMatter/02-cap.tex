@@ -91,7 +91,7 @@ Per questo ho delegato le interazioni tra le due tecnologie a Jquery: una librer
 
 \subsection{Bootstrap}
 Bootstrap è una libreria di CSS disponibile gratuitamente, molto diffusa tra le applicazioni web \cite{bootstrap}.
-Seppure questo framework si presti ottimalmente alla creazione di grafiche moderne e accattivanti, ho preferito limitarmi ad utilizzarlo per semplificare la gestione del layout della pagina, in particolare,
+Seppure questo framework si presti ottimalmente alla creazione di grafiche moderne e accattivanti, ho preferito limitarmi ad utilizzarla per semplificare la gestione del layout della pagina, in particolare,
 la posizione di elementi quali la mappa e il player video multimediale.
 
 \subsection{Plotly}
@@ -154,7 +154,7 @@ Tramite questo protocollo, è possibile comunicare gli stessi dati sia a softwar
 La creazione, modifica ed esportazione di tracciati MIDI è molto semplice in quanto non richiede alcuna conoscenza di linguaggi di programmazione e funzionamento del suono a livello hardware e software.
 In aggiunta, la manipolazione della sequenza di note, è un processo incredibilmente più semplice e intuitivo rispetto alla modifica del segnale audio vero e proprio.
 Una sequenza MIDI è una sequenza di eventi che si differenziano per la loro funzione; un evento ha un tempo di inizio, un tempo di fine, un canale e un valore.
-Per misurare il tempo, i software musicali utilizzano vare metriche: battute di pentagramma, millisecondi, o tick MIDI.
+Per misurare il tempo, i software musicali utilizzano varie metriche: battute di pentagramma, millisecondi, o tick MIDI.
 Di default, un tick MIDI equivale a 1/960 di una battuta di pentagramma, il tempo è di 4/4 e la velocità è di 120 bpm \cite{midi}.
 I principali eventi sono:
 \begin{itemize}
@@ -174,7 +174,7 @@ Nel piano roll, ogni nota è rappresentata da una casella, la sua posizione oriz
 \end{figure}
 Lo standard MIDI, infine, comprende GeneralMidi: un'enumerazione di strumenti ed effetti audio.
 Questa caratteristica mi ha permesso di concentrarmi solamente sulla scelta degli strumenti General MIDI e sulla generazione della sequenza di note, delegando la sintesi vera e propria ad un software terzo.
-Per la creazione di file MIDI ho utilizzato MidiUtils, una libreria per Python che permette di creare un file MIDI specificandone i vari eventi.
+Per la creazione di file MIDI ho utilizzato MidiUtils, una libreria per Python che permette di creare un file MIDI specificandone i vari eventi \cite{midiutil}.
 Per la sintesi del file MIDI, invece, ho utilizzato Timidity++, un software open source che permette di sintetizzare un file MIDI in un file wav \cite{timidity}.
 \subsubsection{Effetti audio VST3}
 Per aggiungere spessore alle tracce midi sintetizzate, ho deciso di applicarvi degli effetti audio.
@@ -183,7 +183,7 @@ Per questo motivo, ho importato nel programma degli effetti audio sviluppati da 
 La tecnologia che ho scelto è VST3 (Virtual Studio Technology 3), un formato che standardizza l'interfaccia tra il plugin e il software che lo utilizza.
 Il formato VST è stato introdotto da Steinberg nel 1996 nel suo software Digital Audio Workstation Cubase \cite{vst3}. Insieme allo standard è stato inoltre sviluppato un SDK (Software development kit), ciò ha permesso a molti programmatori
 di avvicinarsi al mondo della programmazione di effetti audio ed audio processing, donando notorietà al formato.
-Per caricare un plugin VST3 in un software diverso da una Digital Audio Workstation ho utilizzato Pedalboard: una libreria per Python sviluppata da Spotify che internamente utilizza JUCE, un framework scritto in c++ per il processing audio \cite{juce}.
+Per caricare un plugin VST3 in un software diverso da una Digital Audio Workstation ho utilizzato Pedalboard \cite{pedalboard}: una libreria per Python sviluppata da Spotify che internamente utilizza JUCE, un framework scritto in c++ per il processing audio \cite{juce}.
 Tramite un array contenente coppie chiave valore, è possibile impostare i parametri dell'effetto, e di seguito applicare questo ad un array di campioni audio da 32 bit.
 \subsubsection{Archetype Gojira}
 Gli effetti audio che ho scelto sono presenti nel Software Archetype Gojira: un plugin VST3 sviluppato da NeuralDSP insieme a Gojira, una band metal francese.
@@ -201,11 +201,11 @@ La traccia che ho assegnato alla sintesi audio è il Sub-bass, ovvero dei toni p
 Per rappresentare un grafico sotto forma di audio, ho usato le wavetable, introdotte nel primo capitolo.
 Le wavetable che ho composto hanno lunghezza fissa di 8192 campioni float da 32 bit ciascuno.
 \subsubsection{Librerie utilizzate}
-Lo script fa ampiamente uso delle librerie Numpy e Scipy, per la semplicità di utilizzo e la velocità di esecuzione.
+Lo script fa ampiamente uso delle librerie Numpy e Scipy, per la semplicità di utilizzo e la velocità di esecuzione \cite{numpy}.
 In particolare, ho utilizzato Numpy per semplificare la manipolazione di array rappresentanti i campioni audio, e Scipy per la funzionalità di interpolazione periodica.
 \subsubsection{LFO}
 Per aggiungere più significato alla traccia sintetizzata ho assegnato al volume di questa un LFO (low frequency oscillator).
-L'LFO consiste in un oscillatore a bassissima frequenza (sotto i 20 Hz). L'oscillatore è il componente base per la sintesi audio, viene usato per generare un'onda periodica con una certa ampiezza, frequenza e forma, solitamente sinusoidale, quadrata o triangolare \cite{izotope}.
+L'LFO consiste in un oscillatore a bassissima frequenza (sotto i 20 Hz). L'oscillatore è la componente base per la sintesi audio, viene usato per generare un'onda periodica con una certa ampiezza, frequenza e forma, solitamente sinusoidale, quadrata o triangolare \cite{izotope}.
 L'onda creata dall'LFO non rappresenta una nota da ascoltare ma un segnale tramite il quale un'altra onda viene modulata.
 In figura \ref{fig:lfo} è possibile vedere un esempio di applicazione di un LFO per creare delle variazioni oscillanti di ampiezza nel tempo.
 \begin{figure}[H]

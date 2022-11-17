@@ -11,40 +11,35 @@ INTRODUZIONE}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%aggiunge la voce Introduzione
                                         %   nell'indice
 \addcontentsline{toc}{chapter}{Introduzione}
-Questo volume di tesi descrive la progettazione e la realizzazione di un sistema volto ad aumentare la consapevolezza sull'inquinamento atmosferico tramite la sonificazione dei dati sulla qualità dell'aria.
+
+Le problematiche relative al peggioramento della qualità dell'aria influenzano senza dubbio la qualità della vita delle persone.
+Vari processi antropici come l'industrializzazione e l'urbanizzazione hanno reso l'aria in varie zone del pianeta una risorsa sempre più degradata e addirittura pericolosa.
 \\\\
-La sonificazione è il processo con il quale un dato viene trasformato in un elemento sonoro, aumentandone così la capacità di comunicazione e il coinvolgimento tramite lo stimolo dell'udito.
+Seppure la sensibilizzazione dell'opinione pubblica sia cresciuta ultimamente, l'inquinamento è ancora un problema che non viene affrontato con la dovuta importanza, almeno da una parte troppo grande della popolazione.
+Analogamente a problematiche simili, la poca attenzione che viene dedicata al peggioramento della qualità dell'aria è dovuta al fatto che questo fenomeno non è immediatamente percepibile, e l'unico modo per verificarne l'esistenza è quello di effettuare misurazioni.
+La barriera che separa la popolazione dalla consapevolezza sul fenomeno consiste quindi nelle difficoltà di accesso e comprensione delle informazioni relative all'argomento.
 \\\\
-Siccome questo sistema dovrà essere utilizzabile da un pubblico non specializzato, verranno forniti alcuni concetti di base riguardanti l'inquinamento e le metriche utilizzate per la misurazione di questo.
-Saranno inoltre elencati i rischi per la salute che il peggioramento della qualità dell'aria comporta, e le principali tipologie di rappresentazione grafica dei dati ambienetali.
+Lo scopo di questo elaborato è quello di rendere più accessibili le informazioni relative all'inquinamento atmosferico, affiancando alla informazioni grafiche una rappresentazione uditiva, ottenuta tramite Sonificazione.
+La sonificazione è il processo con il quale un dato viene trasformato in un elemento sonoro che ne rispecchia le caratteristiche, aumentandone così la capacità di comunicazione e il coinvolgimento tramite lo stimolo dell'orecchio.
+Tramite una rappresentazione acustica, l'utente può avere un'idea più chiara e immediata della situazione, delegando la comprensione delle informazioni a un processo più naturale, soggettivo e interpretativo, caratteristico dell'udito.
+La tesi si pone quindi l'obbiettivo di sviluppare un applicativo che permetta di sonificare i dati relativi alla qualità dell'aria, minimizzando le nozioni necessarie all'utente per poter comprendere il contesto e astrattizzando ogni complessità tecnica.
 \\\\
-All'interno di questo testo saranno integrati concetti di produzione sonora e audio digitale, al fine di fornire una panoramica completa sul funzionamento del sistema sonificativo.
-Per comprendere il collegamento tra un dato e la sua rappresentazione sonora, saranno discusse le metodogie sonificative solitamente utilizzate, comprese di esempi pratici.
+Il volume di tesi è suddiviso in tre capitoli:
 
-\newpage
-
-\subsubsection{Suddivisione dei contenuti}
-Il volume di tesi è composto da tre capitoli principali, ognuno dei quali diviso in più sezioni.
-La spartizione dei contenuti è stata fatta in modo da raggruppare gli argomenti seguendo la logica delle fasi di sviluppo del progetto.
-
-\subsubsection{Primo Capitolo}
-Il primo capitolo è dedicato ad introdurre il lettore al contesto in cui il progetto si inserisce, e alle motivazioni che hanno portato alla sua realizzazione.
-Particolare attenzione è riservata a descrivere il problema dell'inquinamento atmosferico, le sue conseguenze e le tecniche tramite le quali questo viene rappresentato.
-Utilizzando un linguaggio non troppo tecnico sarà presentato il concetto di Sonificazione: l'argomento principale del progetto, per poi spiegarne le caratteristiche, le possibili applicazioni, le strategie di realizzazione e alcuni esempi reperibili in rete.
-Verranno inoltre introdotte alcune nozioni sulla produzione audio digitale, che verranno approfondite nei capitoli successivi.
-
-\subsubsection{Secondo Capitolo}
-Il secondo capitolo è dedicato alla descrizione delle scelte tecniche effettuate per la realizzazione del progetto.
-In seguito all'elenco dei requisiti, verranno mostrate alcune schermate relative all'interfaccia utente realizzate in fase di progettazione grafica, e verranno descritte le tecnologie utilizzate per la realizzazione del sistema, giustificandone le scelte.
-Il capitolo presta particolare attenzione a distinguere le tecnologie inarenti alla parte web rispetto a quelle utilizzate per la generazione dell'audio;
-al termine di questo, sarà possibile avere una panoramica completa dell'architettura del sistema.
-
-\subsubsection{Terzo Capitolo}
-Il terzo capitolo descrive in dettaglio le scelete implementative prese durante lo sviluppo del sistema.
-Verranno descritte le funzionalità in maniera approfondita: gli argomenti trattati principalmente in questa sottosezione riguardano la realizzazione e la struttura della parte di front-end, e la generazione dell'audio da un punto di vista sia tecnico che musicale.
-Infine, verrà discussa la fase di test effettuata a seguito del completamento del progetto: verrà introdotta la metrica adottata per misurare la qualità del sistema, verranno mostrati i risultati ottenuti saranno elencati i problemi riscontrati durante questa fase.
-
-
+\begin{itemize}
+    \item \textbf{Capitolo 1 - Background e Contesto}: introduce il lettore al contesto in cui il progetto si inserisce, e alle motivazioni che hanno portato alla sua realizzazione.
+    Particolare attenzione è riservata a descrivere il problema dell'inquinamento atmosferico, le sue conseguenze e le tecniche tramite le quali questo viene rappresentato.
+    Utilizzando un linguaggio non troppo tecnico sarà presentato il concetto di Sonificazione: l'argomento principale del progetto, per poi spiegarne le caratteristiche, le possibili applicazioni, le strategie di realizzazione e alcuni esempi reperibili in rete.
+    Verranno inoltre introdotte alcune nozioni sulla produzione audio digitale, che verranno approfondite nei capitoli successivi;
+    \item \textbf{Capitolo 2 - Design e Tecnologie}: descrive le scelte tecniche effettuate per la realizzazione del progetto.
+    In seguito all'elenco dei requisiti, verranno mostrate alcune schermate relative all'interfaccia utente realizzate in fase di progettazione grafica, e verranno descritte le tecnologie utilizzate per la realizzazione del sistema, giustificandone le scelte.
+    Il capitolo presta particolare attenzione a distinguere le tecnologie inarenti alla parte web rispetto a quelle utilizzate per la generazione dell'audio;
+    al termine di questo, sarà possibile avere una panoramica completa dell'architettura del sistema;
+    \newpage
+    \item \textbf{Capitolo 3 - Implementazione}: descrive in dettaglio le scelete implementative prese durante lo sviluppo del sistema.
+    Verranno descritte le funzionalità in maniera approfondita: gli argomenti trattati principalmente in questa sottosezione riguardano la realizzazione e la struttura della parte di front-end, e la generazione dell'audio da un punto di vista sia tecnico che musicale.
+    Infine, verrà discussa la fase di test effettuata a seguito del completamento del progetto: verrà introdotta la metrica adottata per misurare la qualità del sistema, verranno mostrati i risultati ottenuti e saranno elencati i problemi riscontrati durante questa fase.
+\end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%non numera l'ultima pagina sinistra
 \clearpage{\pagestyle{empty}\cleardoublepage}

@@ -256,6 +256,11 @@ Future~Music Magazine.
 \newblock
   \newline\url{https://www.musicradar.com/news/tech/30-years-of-midi-a-brief-history-568009}.
 
+\bibitem{midiutil}
+Mark~Conway Wirt.
+\newblock Midiutil, March 2018.
+\newblock \newline\url{https://pypi.org/project/MidiUtil/}.
+
 \bibitem{timidity}
 Masanao Izumo.
 \newblock Timidity++.
@@ -267,6 +272,11 @@ Alessandro~La Cava.
 \newblock
   \newline\url{https://alexlacava.com/plugin-audio-formati-e-differenze/}.
 
+\bibitem{pedalboard}
+Spotify developers.
+\newblock Pedalboard, October 2022.
+\newblock \newline\url{https://github.com/spotify/pedalboard}.
+
 \bibitem{juce}
 Julian Storer.
 \newblock Juce.
@@ -276,6 +286,11 @@ Julian Storer.
 Wikipedia contributors.
 \newblock Sub-bass, April 2022.
 \newblock \newline\url{https://en.wikipedia.org/wiki/Sub-bass}.
+
+\bibitem{numpy}
+Travis Oliphant.
+\newblock Numpy, July 2021.
+\newblock \newline\url{https://numpy.org/}.
 
 \bibitem{enveloper}
 Martin Russ.

@@ -922,13 +922,13 @@ INPUT frontMatter/00-dedication.tex
 INPUT ./frontMatter/00-dedication.tex
 INPUT frontMatter/00-dedication.tex
 INPUT d:/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmti12.tfm
-INPUT d:/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmcsc10.tfm
 INPUT ./frontMatter/00-introduction.tex
 INPUT frontMatter/00-introduction.tex
 INPUT ./frontMatter/00-introduction.tex
 INPUT frontMatter/00-introduction.tex
 INPUT d:/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmr17.tfm
 INPUT d:/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
+INPUT d:/texlive/2022/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm
 INPUT d:/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 INPUT ./tesi.toc
 INPUT tesi.toc
@@ -984,7 +984,6 @@ INPUT ./img/livelli.png
 INPUT img/livelli.png
 INPUT ./img/livelli.png
 INPUT ./img/livelli.png
-INPUT d:/texlive/2022/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm
 INPUT ./img/mappapm.png
 INPUT ./img/mappapm.png
 INPUT img/mappapm.png

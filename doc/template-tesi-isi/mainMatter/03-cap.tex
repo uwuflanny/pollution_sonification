@@ -186,7 +186,7 @@ Al click di uno di questi, dall'evento, viene estratto il nome del luogo, la lat
 }
 
 \subsubsection{Personalizzare la sonificazione}
-Al click del marker, viene mostrato un menù a scomparsa che permette di personalizzare la sonificazione \ref{fig:schermata}.
+Al click del marker, viene mostrato un menù a scomparsa che permette di personalizzare la sonificazione (Figura \ref{fig:schermata}).
 I dati, quale il nome della località, l'intervallo di date iniziale e l'ultima rilevazione AQI effettuata, sono caricati direttamente a partire dal marker che ha chiamato la funzione.
 Al cambiamento di ogni elemento presente nel form di personalizzazione è associato una funzione che valida i dati inseriti e, in caso di successo abilita il pulsante di conferma e aggiorna il grafico di anteprima (listato ~\ref{lst:formChange}).
 In aggiunta, in caso di dati validi, le informazioni riguardanti la sonificazione vengono caricati in una struttura dati denominata sonification data, che verrà usata come payload della richiesta di sonificazione.
@@ -325,7 +325,7 @@ Ho posto le dissonanze ad intervalli regolari nella scala in base al livello di 
 
 \subsection{Esportare una traccia audio}
 Prima di analizzare la logica secondo la quale ogni traccia viene creata, è importante capire come il sistema esporta gran parte di queste.
-L'esportazione e la sintesi delle traccie audio MIDI avviene tramite la classe AudioExporter.
+L'esportazione e la sintesi delle traccie audio MIDI avvengono tramite la classe AudioExporter.
 La classe prende come parametri di costruzione le metriche di pentagramma per la traccia, quali il bpm e la suddivisione del tempo.
 La funzione di classe volta alla sintesi vera e propria accetta come argomenti una lista di note, un nome per la traccia, l'indice di uno strumento General MIDI e una lista di effetti audio VST3 da applicare.
 Le note sono delle strutture dati che contengono le informazioni necessarie per descrivere un evento MIDI (listato ~\ref{lst:note}).
