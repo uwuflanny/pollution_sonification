@@ -33,22 +33,23 @@ var sonification_data;
 var layerGropu;
 $(document).ready(()=>{
 
-    // le chiavi sono belle in chiaro, buon divertimento
-
+    // from map.js
     init_map();
     
+    // from sonify.js
     $("#offcanvas_btn_sonify").click(sonify);           // sonify button clicked
     $("#offcanvas_start_date").change(load_index);      // start date changed index    
     $("#offcanvas_end_date").change(load_index);        // end date changed index
     $("#offcanvas_index").change(load_index);           // sonification index changed
     window.addEventListener("resize", width_change);    // on window resize, change width of sidebar
 
-    // show modal
+    // show modal on page load
     var myModal = new bootstrap.Modal(document.getElementById("exampleModal"), {});
         document.onreadystatechange = function () {
         myModal.show();
     };
 
+    // from tutorial.js
     // on modal close, propose_tutorial
     $("#exampleModal").on("hidden.bs.modal", function () {
         propose_tutorial();

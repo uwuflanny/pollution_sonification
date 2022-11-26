@@ -1,4 +1,4 @@
-var weatherbit_key  = 'fc97477c45744fbfb603cc525e8f5279';
+var weatherbit_key  = '33c7c1737d3443eca6b9b051e7b2954d';
 var aqicn_key       = 'd7997a4e2fa35a67576fa7e7e766f6f226cf59f5';
 var esri_key        = 'AAPK150e6843de69411582a2fb7010285854YRNW0bRLWXXr9R5W35IlgRQAuGpVWg3jVIXeg1vOm3SUViRtqj5AeCNpe-qMQXS4';
 var stadia_key      = '9757bff6-4e70-4b10-bc88-099be05eb2af';

@@ -27,7 +27,7 @@ var emojis = [
     "💀"
 ];
 
-// get color id, text color
+// get color id
 function get_color_idx(aqi) {
     if (aqi <= 50) return 0;
     else if (aqi <= 100) return 1;
