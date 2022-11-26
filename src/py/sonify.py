@@ -37,7 +37,7 @@ from sub import get_sub
 from vsthost import get_vsts
 
 # load audio effects
-gojira_delay, gojira_shimmer = get_vsts()
+# gojira_delay, gojira_shimmer = get_vsts()
 
 # midi content (get midi notes)
 voicing     = get_harmonization(data)
@@ -57,8 +57,8 @@ from trackExporter import TrackExporter, merge_and_save
 exporter    = TrackExporter(BPM, SIGN_NUM, SIGN_DEN)
 
 # generate tracks (get samples)
-lead        = exporter.create_track_samples("lead",  5, lead,  [gojira_shimmer], "lead")
-arp         = exporter.create_track_samples("arp",   11,  arp,   [gojira_delay], "arp")
+lead        = exporter.create_track_samples("lead",  5, lead,  [], "lead")
+arp         = exporter.create_track_samples("arp",   11,  arp,   [], "arp")
 prog        = exporter.create_track_samples("prog",  0,  prog,  [], "prog")
 sub         = get_sub(data)
 

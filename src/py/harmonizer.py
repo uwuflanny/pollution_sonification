@@ -1,20 +1,4 @@
 
-def note_to_midi(midstr):
-    notes = [["C"],["C#","Db"],["D"],["D#","Eb"],["E"],["F"],["F#","Gb"],["G"],["G#","Ab"],["A"],["A#","Bb"],["B"]]
-    answer = 0
-    i = 0
-    #Note
-    letter = midstr.split('-')[0].upper()
-    for note in notes:
-        for form in note:
-            if letter.upper() == form:
-                answer = i
-                break
-        i += 1
-    #Octave
-    answer += (int(midstr[-1]))*12
-    return answer
-
 def get_harmonization(data):
 
     # scales

@@ -31,7 +31,11 @@ def get_residue(data, res_threshold = min_thresh):
     return res_history
 
 def arpeggiate(residue, voicing):
-    
+
+    # guard, check if there is no residue to sonify
+    if not any(res >= min_thresh for res in residue):
+        return []
+
     # given an index, find the last index of rising residue
     def get_rising_end(start):
         if start == len(residue) - 1:
@@ -41,15 +45,18 @@ def arpeggiate(residue, voicing):
                 return i
         return len(residue) - 1
 
-    # guard
-    if not any(res >= min_thresh for res in residue):
-        return []
+    # pseudo-randomize dissontation factor to have same data result in same sonification
+    def randomize_dissonation(max,i1,i2,i3):
+        if max == 0:
+            return 0
+        m = ((i1+1) * (i2+1) * (i3+1)) % (max * 2 + 1)
+        return m - max
 
     # find max value of residue
     max_res     = math.ceil(max(residue) / min_thresh) * min_thresh
     duration    = 0.25
     notes       = []
-    voicing     = [x + 12 for x in voicing] # pitch shift voicing by 2 octaves
+    voicing     = [x + 12 for x in voicing] # pitch shift voicing by 1 octave
     last_res    = 0
 
     init_ptr    = 0
@@ -83,12 +90,12 @@ def arpeggiate(residue, voicing):
                 init_done   = False
                 init_ptr    = 0
 
-        # get dissonation
+        # apply dissonation
         dissonation = 0
         ratio = map_value_int(res, 0, max_res, 5, 2)
         value = map_value_int(res, 0, max_res, 2, 4)
         if i % ratio == 0:
-            dissonation = random.randint(-value,value)  # TODO remove randomness
+            dissonation = int(randomize_dissonation(value, res, i, ratio))
 
         # before falling, a full complete init arpeggio is always played
         if init_done == False:

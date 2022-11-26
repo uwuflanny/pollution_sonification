@@ -102,7 +102,7 @@ def get_wav(data, intervals, wavetables, B):
         for data_idx in range(start, end):
 
             aqi = data[data_idx]
-            vol = map_value(aqi, min_thresh, max_thresh, 0, 0.05) # TODO REMOVE MAGIC NUMBERS
+            vol = map_value(aqi, min_thresh, max_thresh, 0, 0.05)
             dur = map_value_int(aqi, min_thresh, max_thresh, SAMPS_PER_N // 4, SAMPS_PER_N)
 
             for note_idx in range(NOTES_PER_B):

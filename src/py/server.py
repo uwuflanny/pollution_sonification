@@ -50,7 +50,7 @@ async def read_items(request: Request):
 
 
 
-# /sonify, accepts an int array as request body
+# /sonify, accepts a json as request payload
 class SonifyRequest(BaseModel):
     data:   list = Field(..., example=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
     days:   list = Field(..., example=["2021-01-01T00:00:00", "2021-01-01T00:00:01", "2021-01-01T00:00:02"])
