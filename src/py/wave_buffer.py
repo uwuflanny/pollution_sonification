@@ -1,6 +1,5 @@
 import numpy as np
 import math
-import scipy as sp
 from scipy.interpolate import splev, splrep
 from measures import WAVETABLE_SIZE
 

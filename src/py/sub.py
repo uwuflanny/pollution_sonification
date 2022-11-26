@@ -1,11 +1,6 @@
-from code import interact
-from operator import index
-import wave
-import matplotlib.pyplot as plt
 from wave_buffer import WaveBuffer
 import math
 import numpy as np
-from scipy.optimize import fmin
 from utility import map_value_int, map_value
 from measures import WAVETABLE_SIZE, SAMPLE_RATE, BPM, min_thresh, max_thresh
 

@@ -1,8 +1,6 @@
 import matplotlib.animation as animation
 import matplotlib.pyplot as plt
-import moviepy.editor as mpe
 import math
-import ffmpeg
 from measures import bad, moderate, severe, unhealthy, very_unhealthy, hazardous, min_thresh, max_thresh
 import subprocess
 

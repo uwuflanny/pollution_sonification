@@ -1,6 +1,5 @@
 
 import math
-import numpy as np
 
 def map_value(value, in_min, in_max, out_min, out_max):
     if in_min == in_max:

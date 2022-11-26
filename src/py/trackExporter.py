@@ -1,9 +1,7 @@
 import os
-import sys
 import numpy as np
 from midiutil.MidiFile import MIDIFile
 from pedalboard.io import AudioFile
-from pydub import AudioSegment
 from measures import SAMPLE_RATE    
 
 

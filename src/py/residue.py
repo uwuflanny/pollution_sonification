@@ -1,12 +1,6 @@
 
-from http.client import BAD_GATEWAY
-from ssl import ALERT_DESCRIPTION_CLOSE_NOTIFY
-import matplotlib.pyplot as plt
 import numpy as np
 import math
-import scipy as sp
-import random
-import sys
 from measures import RES_DECADENCE, min_thresh
 from utility import map_value_int, map_value
 

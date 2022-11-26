@@ -1,6 +1,4 @@
-import os
 from pedalboard import Pedalboard, Reverb, load_plugin
-from pedalboard.io import AudioFile
 
 class VSTHost:
 

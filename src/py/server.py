@@ -1,6 +1,5 @@
 import time
 import io
-import uvicorn
 import os
 import json
 from fastapi import FastAPI, Request, HTTPException
@@ -11,7 +10,6 @@ from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from starlette.responses import StreamingResponse
 from fastapi.responses import FileResponse
-from starlette.concurrency import run_in_threadpool
 import subprocess
 
 
